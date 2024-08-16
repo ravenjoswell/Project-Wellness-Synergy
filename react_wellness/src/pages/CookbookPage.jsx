@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import CookbookRecipeCard from '../components/CookbookRecipeCard';
 
 const CookbookPage = () => {
     const [cookbookRecipes, setCookbookRecipes] = useState([]);
@@ -38,17 +39,13 @@ const CookbookPage = () => {
             {error && <p className="error">{error}</p>}
             <div className="cookbook-recipes">
                 {cookbookRecipes.map((recipe, index) => (
-                    <div key={index} className="recipe-card">
-                        <h2>{recipe.name}</h2>
-                        <img src={recipe.image} alt={recipe.name} />
-                        <p><strong>Diet Labels:</strong> {recipe.diet_labels}</p>
-                        <p><strong>Health Labels:</strong> {recipe.health_labels}</p>
-                        <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                        <p><strong>Instructions:</strong></p>
-                        <a href={recipe.instructions} target="_blank" rel="noopener noreferrer">
-                            View Full Recipe Instructions
-                        </a>
-                    </div>
+                    <CookbookRecipeCard 
+                        key={index} 
+                        recipe={recipe} 
+                        onRemoveFromCookbook={() => {/* handle remove from cookbook */}} 
+                        onAddToDiet={() => {/* handle add to diet */}}
+                        onRemoveFromDiet={() => {/* handle remove from diet */}}
+                    />
                 ))}
             </div>
         </div>
