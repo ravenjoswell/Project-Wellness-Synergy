@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
-const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet }) => {
+const CookbookRecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet }) => {
+    const [isInCookbook, setIsInCookbook] = useState(false);
     const [isInDiet, setIsInDiet] = useState(false);
     const [selectedMealTime, setSelectedMealTime] = useState('breakfast');
     const [open, setOpen] = useState(false);
+
+    const dietLabels = Array.isArray(recipe.diet_labels) ? recipe.diet_labels : recipe.diet_labels.split(', ');
+    const healthLabels = Array.isArray(recipe.health_labels) ? recipe.health_labels : recipe.health_labels.split(', ');
+
+    const handleCookbookClick = () => {
+        if (isInCookbook) {
+            onRemoveFromCookbook(recipe);
+        } else {
+            onAddToCookbook(recipe);
+        }
+        setIsInCookbook(!isInCookbook);
+    };
 
     const handleDietClick = () => {
         if (isInDiet) {
@@ -15,26 +28,33 @@ const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemov
         setIsInDiet(!isInDiet);
     };
 
-    const handleClickOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className="recipe-card">
             <h2>{recipe.name}</h2>
             <img src={recipe.image} alt={recipe.name} />
-            <p><strong>Diet Labels:</strong> {recipe.diet_labels}</p>
-            <p><strong>Health Labels:</strong> {recipe.health_labels}</p>
+            <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
+            <p><strong>Ingredients:</strong> {recipe.ingredients.map(ingredient => ingredient.text).join(', ')}</p>
+            <p><strong>Diet Labels:</strong> {dietLabels.join(', ')}</p>
+            <p><strong>Health Labels:</strong> {healthLabels.join(', ')}</p>
             <Button variant="contained" color="primary" onClick={handleClickOpen}>
                 View Details
             </Button>
             <div className="buttons">
-                <button onClick={() => onRemoveFromCookbook(recipe)}>
-                    Remove from Cookbook
+                <button onClick={handleCookbookClick}>
+                    {isInCookbook ? 'Remove from Cookbook' : 'Add to Cookbook'}
                 </button>
                 <div className="meal-time-select">
-                    <label htmlFor={`meal-time-${recipe.id}`}>Select Meal Time: </label>
+                    <label htmlFor={`meal-time-${recipe.uri}`}>Select Meal Time: </label>
                     <select
-                        id={`meal-time-${recipe.id}`}
+                        id={`meal-time-${recipe.uri}`}
                         value={selectedMealTime}
                         onChange={(e) => setSelectedMealTime(e.target.value)}
                     >
@@ -53,13 +73,18 @@ const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemov
                 <DialogTitle>{recipe.name}</DialogTitle>
                 <DialogContent>
                     <img src={recipe.image} alt={recipe.name} style={{ width: '50%' }} />
-                    <p><strong>Diet Labels:</strong> {recipe.diet_labels}</p>
-                    <p><strong>Health Labels:</strong> {recipe.health_labels}</p>
-                    <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
+                    <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
+                    <p><strong>Diet Labels:</strong> {dietLabels.join(', ')}</p>
+                    <p><strong>Health Labels:</strong> {healthLabels.join(', ')}</p>
+                    <p><strong>Ingredients:</strong> {recipe.ingredients.map(ingredient => ingredient.text).join(', ')}</p>
                     <h4>Nutritional Facts:</h4>
-                    {recipe.nutritional_facts.map(nutrient => (
-                        <p key={nutrient.id}><strong>{nutrient.label}:</strong> {nutrient.quantity} {nutrient.unit}</p>
-                    ))}
+                    {recipe.totalNutrients ? (
+                        Object.entries(recipe.totalNutrients).map(([key, nutrient]) => (
+                            <p key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
+                        ))
+                    ) : (
+                        <p>No nutritional information available.</p>
+                    )}
                 </DialogContent>
                 <DialogActions>
                     <Button

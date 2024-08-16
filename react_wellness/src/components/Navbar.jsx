@@ -13,7 +13,7 @@ const Navbar = ({ user, setUser }) => {
 
   const handleLogOut = async () => {
     await logOut();
-    setUser(null); // Update user state
+    setUser(null); // Update user 
     navigate('/login'); // Redirect to login page
   };
 

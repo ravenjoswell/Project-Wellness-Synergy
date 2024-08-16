@@ -38,13 +38,14 @@ const CookbookPage = () => {
             <h1>Your Cookbook</h1>
             {error && <p className="error">{error}</p>}
             <div className="cookbook-recipes">
-                {cookbookRecipes.map((recipe, index) => (
+                {cookbookRecipes.map((item, index) => (
                     <CookbookRecipeCard 
                         key={index} 
-                        recipe={recipe} 
-                        onRemoveFromCookbook={() => {/* handle remove from cookbook */}} 
-                        onAddToDiet={() => {/* handle add to diet */}}
-                        onRemoveFromDiet={() => {/* handle remove from diet */}}
+                        recipe={item.recipe}  // Assuming `item.recipe` contains the recipe object
+                        onAddToCookbook={() => {}}  // Optionally pass empty functions if needed
+                        onRemoveFromCookbook={() => {}}
+                        onAddToDiet={() => {}}
+                        onRemoveFromDiet={() => {}}
                     />
                 ))}
             </div>
