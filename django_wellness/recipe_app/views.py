@@ -12,7 +12,6 @@ from rest_framework.authentication import TokenAuthentication
 
 
 class RecipeListView(APIView):
-
     def get(self, request):
         app_id = settings.EDAMAM_APP_ID
         app_key = settings.EDAMAM_APP_KEY
@@ -21,7 +20,7 @@ class RecipeListView(APIView):
         allergies = request.GET.get('allergies', '')
         next_page_url = request.GET.get('next', '')
 
-        # Determine API URL based on   paginating or doing an initial search
+        # Determine API URL based on paginating or doing an initial search
         if next_page_url:
             api_url = next_page_url
         else:
@@ -36,10 +35,12 @@ class RecipeListView(APIView):
             response.raise_for_status()
             data = response.json()
 
-            # Save recipes to database,initial search and pagination
+            # Save recipes, ingredients, and nutrients to the database
             for hit in data['hits']:
                 recipe_data = hit['recipe']
-                Recipe.objects.get_or_create(
+
+                # Create or get the recipe
+                recipe, created = Recipe.objects.get_or_create(
                     uri=recipe_data['uri'],
                     defaults={
                         'name': recipe_data['label'],
@@ -53,6 +54,27 @@ class RecipeListView(APIView):
                         'dish_type': ', '.join(recipe_data.get('dishType', []))[:255],
                     }
                 )
+
+                # Save ingredients
+                for ingredient_data in recipe_data.get('ingredients', []):
+                    ingredient, _ = Ingredient.objects.get_or_create(
+                        name=ingredient_data.get('food', 'Unknown'),
+                        text=ingredient_data.get('text', ''),
+                        quantity=ingredient_data.get('quantity', 0.0),
+                        measure=ingredient_data.get('measure', ''),
+                        food=ingredient_data.get('food', 'Unknown'),
+                        weight=ingredient_data.get('weight', None)
+                    )
+                    recipe.ingredients.add(ingredient)
+
+                # Save nutritional facts
+                for nutrient_key, nutrient_data in recipe_data.get('totalNutrients', {}).items():
+                    nutrient, _ = Nutrient.objects.get_or_create(
+                        label=nutrient_data.get('label', ''),
+                        quantity=nutrient_data.get('quantity', 0.0),
+                        unit=nutrient_data.get('unit', '')
+                    )
+                    recipe.nutritional_facts.add(nutrient)
 
             response_data = {
                 'hits': data['hits'],
