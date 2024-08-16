@@ -55,4 +55,4 @@ class MyCookbookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MyCookbook
-        fields = ['recipe']
+        fields = ['id', 'recipe']  

@@ -116,7 +116,22 @@ class AddToCookbookView(APIView):
             return Response({'message': 'Recipe added to cookbook'}, status=HTTP_201_CREATED)
         except Recipe.DoesNotExist:
             return Response({"error": "Recipe not found"}, status=HTTP_400_BAD_REQUEST)
+        
 
+class RemoveFromCookbookView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, mycookbook_id):
+        try:
+            # Make sure you're filtering by the primary key (id) of the MyCookbook model
+            my_cookbook_entry = MyCookbook.objects.get(id=mycookbook_id, user=request.user)
+            my_cookbook_entry.delete()
+            return Response({"message": "Recipe removed from cookbook"}, status=204)
+        except MyCookbook.DoesNotExist:
+            return Response({"error": "Recipe not found in cookbook"}, status=400)
+
+        
 class CookbookView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]

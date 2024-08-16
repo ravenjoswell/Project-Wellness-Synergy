@@ -16,9 +16,7 @@ const CookbookPage = () => {
 
             try {
                 const response = await axios.get('http://localhost:8000/api/recipes/cookbook/', {
-                    headers: {
-                        Authorization: `Token ${token}`,
-                    }
+                    headers: { Authorization: `Token ${token}` },
                 });
                 setCookbookRecipes(response.data);
             } catch (err) {
@@ -33,6 +31,22 @@ const CookbookPage = () => {
         fetchCookbookRecipes();
     }, []);
 
+    const handleRemoveFromCookbook = async (myCookbookId) => {
+        const token = localStorage.getItem('token');
+        try {
+            await axios.delete(`http://localhost:8000/api/recipes/remove-from-cookbook/${myCookbookId}/`, {
+                headers: { Authorization: `Token ${token}` }
+            });
+            console.log('Removed from Cookbook');
+            setCookbookRecipes(prevRecipes => 
+                prevRecipes.filter(r => r.id !== myCookbookId) 
+            );
+        } catch (error) {
+            console.error('Failed to remove from cookbook:', error);
+        }
+    };
+    
+
     return (
         <div className="cookbook-page">
             <h1>Your Cookbook</h1>
@@ -40,13 +54,10 @@ const CookbookPage = () => {
             <div className="cookbook-recipes">
                 {cookbookRecipes.map((item, index) => (
                     <CookbookRecipeCard 
-                        key={index} 
-                        recipe={item.recipe}  // Assuming `item.recipe` contains the recipe object
-                        onAddToCookbook={() => {}}  // Optionally pass empty functions if needed
-                        onRemoveFromCookbook={() => {}}
-                        onAddToDiet={() => {}}
-                        onRemoveFromDiet={() => {}}
-                    />
+                    key={index} 
+                    recipe={item.recipe} 
+                    onRemoveFromCookbook={() => handleRemoveFromCookbook(item.id)} 
+                />
                 ))}
             </div>
         </div>

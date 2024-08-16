@@ -358,6 +358,25 @@
   background-color: blue
 }
 
+/* ********************DIET PAGE******************** */
+.diet-page {
+  margin-top: 80px; /* Adjust based on your navbar height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.day-button {
+  width: 200px; /* Adjust width as needed */
+  text-align: center;
+}
 
 
 /* ********************COMPONENTS******************** */

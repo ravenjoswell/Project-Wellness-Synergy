@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
-const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet }) => {
-    const [isInCookbook, setIsInCookbook] = useState(false);
-    const [isInDiet, setIsInDiet] = useState(false);
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet, isInCookbook, isInDiet }) => {
     const [selectedMealTime, setSelectedMealTime] = useState('breakfast');
+    const [selectedDay, setSelectedDay] = useState('Monday');
     const [open, setOpen] = useState(false);
 
     const handleCookbookClick = () => {
@@ -13,7 +14,6 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         } else {
             onAddToCookbook(recipe);
         }
-        setIsInCookbook(!isInCookbook);
     };
 
     const handleDietClick = () => {
@@ -22,7 +22,6 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         } else {
             onAddToDiet(recipe, selectedMealTime);
         }
-        setIsInDiet(!isInDiet);
     };
 
     const handleClickOpen = () => {
@@ -43,9 +42,17 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
                 View Details
             </Button>
             <div className="buttons">
-                <button onClick={handleCookbookClick}>
-                    {isInCookbook ? 'Remove from Cookbook' : 'Add to Cookbook'}
-                </button>
+            <div className="buttons">
+                {isInCookbook ? (
+                    <button onClick={() => onRemoveFromCookbook(recipe.my_cookbook_id)}>
+                        Remove from Cookbook
+                    </button>
+                ) : (
+                    <button onClick={() => onAddToCookbook(recipe)}>
+                        Add to Cookbook
+                    </button>
+                )}
+            </div>
                 <div className="meal-time-select">
                     <label htmlFor={`meal-time-${recipe.uri}`}>Select Meal Time: </label>
                     <select
@@ -57,6 +64,16 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
                         <option value="lunch">Lunch</option>
                         <option value="dinner">Dinner</option>
                         <option value="snack">Snack</option>
+                    </select>
+                    <label htmlFor={`day-of-week-${recipe.uri}`}>Select Day: </label>
+                    <select
+                        id={`day-of-week-${recipe.uri}`}
+                        value={selectedDay}
+                        onChange={(e) => setSelectedDay(e.target.value)}
+                    >
+                        {daysOfWeek.map((day) => (
+                            <option key={day} value={day}>{day}</option>
+                        ))}
                     </select>
                     <button onClick={handleDietClick}>
                         {isInDiet ? 'Remove from Diet' : `Add to ${selectedMealTime}`}
@@ -73,9 +90,13 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
                     <p><strong>Health Labels:</strong> {recipe.healthLabels.join(', ')}</p>
                     <p><strong>Ingredients:</strong> {recipe.ingredientLines.join(', ')}</p>
                     <h4>Nutritional Facts:</h4>
-                    {Object.entries(recipe.totalNutrients).map(([key, nutrient]) => (
-                        <p key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
-                    ))}
+                    {recipe.totalNutrients ? (
+                        Object.entries(recipe.totalNutrients).map(([key, nutrient]) => (
+                            <p key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
+                        ))
+                    ) : (
+                        <p>No nutritional information available.</p>
+                    )}
                 </DialogContent>
                 <DialogActions>
                     <Button

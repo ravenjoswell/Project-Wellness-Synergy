@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
-const CookbookRecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet }) => {
-    const [isInCookbook, setIsInCookbook] = useState(false);
-    const [isInDiet, setIsInDiet] = useState(false);
+const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet, isInDiet }) => {
     const [selectedMealTime, setSelectedMealTime] = useState('breakfast');
     const [open, setOpen] = useState(false);
 
     const dietLabels = Array.isArray(recipe.diet_labels) ? recipe.diet_labels : recipe.diet_labels.split(', ');
     const healthLabels = Array.isArray(recipe.health_labels) ? recipe.health_labels : recipe.health_labels.split(', ');
 
-    const handleCookbookClick = () => {
-        if (isInCookbook) {
-            onRemoveFromCookbook(recipe);
-        } else {
-            onAddToCookbook(recipe);
-        }
-        setIsInCookbook(!isInCookbook);
-    };
-
+    
     const handleDietClick = () => {
         if (isInDiet) {
             onRemoveFromDiet(recipe);
         } else {
             onAddToDiet(recipe, selectedMealTime);
         }
-        setIsInDiet(!isInDiet);
     };
 
     const handleClickOpen = () => {
@@ -48,9 +37,11 @@ const CookbookRecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onA
                 View Details
             </Button>
             <div className="buttons">
-                <button onClick={handleCookbookClick}>
-                    {isInCookbook ? 'Remove from Cookbook' : 'Add to Cookbook'}
-                </button>
+            <div className="buttons">
+                    <button onClick={() => onRemoveFromCookbook(recipe.my_cookbook_id)}>
+                        Remove from Cookbook
+                    </button>
+            </div>
                 <div className="meal-time-select">
                     <label htmlFor={`meal-time-${recipe.uri}`}>Select Meal Time: </label>
                     <select
