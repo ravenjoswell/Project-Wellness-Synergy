@@ -33,10 +33,10 @@ function AboutPage() {
       {/* Journey */}
       <div className="journey-container mx-5 sm:mx-10 md:mx-16 lg:mx-20 flex-grow mt-0">
         <div className="text-center mb-8 md:mb-12 journey-title">
-          <h2 className="text-2xl md:text-4xl font-serif text-white underline">Start Your Journey With Us</h2>
+          <h2 className="text-2xl md:text-4xl font-serif text-black underline">Start Your Journey With Us</h2>
         </div>
         <div className="text-center mb-6 md:mb-8 journey-description">
-          <p className="text-lg md:text-xl text-white">
+          <p className="text-lg md:text-xl text-black">
             Empower your journey with a comprehensive tool for managing Ulcerative Colitis, Crohn's, and dietary needs. Seamlessly integrate dietary management with mental health support for a holistic approach to well-being. Optimize your health, achieve lasting wellness, and live better every day!
           </p>
         </div>
