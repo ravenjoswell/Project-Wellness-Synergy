@@ -18,9 +18,9 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
 
     const handleDietClick = () => {
         if (isInDiet) {
-            onRemoveFromDiet(recipe);
+            onRemoveFromDiet(recipe, selectedMealTime, convertDayToDate(selectedDay));
         } else {
-            onAddToDiet(recipe, selectedMealTime);
+            onAddToDiet(recipe, selectedMealTime, convertDayToDate(selectedDay));
         }
     };
 
@@ -30,6 +30,16 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const convertDayToDate = (day) => {
+        const today = new Date();
+        const dayIndex = daysOfWeek.indexOf(day);
+        const currentDayIndex = today.getDay();
+        const dayDifference = dayIndex - currentDayIndex;
+        const resultDate = new Date(today);
+        resultDate.setDate(today.getDate() + dayDifference);
+        return resultDate.toISOString().split('T')[0];  // Convert to YYYY-MM-DD format
     };
 
     return (
@@ -42,17 +52,17 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
                 View Details
             </Button>
             <div className="buttons">
-            <div className="buttons">
-                {isInCookbook ? (
-                    <button onClick={() => onRemoveFromCookbook(recipe.my_cookbook_id)}>
-                        Remove from Cookbook
-                    </button>
-                ) : (
-                    <button onClick={() => onAddToCookbook(recipe)}>
-                        Add to Cookbook
-                    </button>
-                )}
-            </div>
+                <div className="buttons">
+                    {isInCookbook ? (
+                        <button onClick={() => onRemoveFromCookbook(recipe.my_cookbook_id)}>
+                            Remove from Cookbook
+                        </button>
+                    ) : (
+                        <button onClick={() => onAddToCookbook(recipe)}>
+                            Add to Cookbook
+                        </button>
+                    )}
+                </div>
                 <div className="meal-time-select">
                     <label htmlFor={`meal-time-${recipe.uri}`}>Select Meal Time: </label>
                     <select

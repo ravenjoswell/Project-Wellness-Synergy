@@ -360,23 +360,31 @@
 
 /* ********************DIET PAGE******************** */
 .diet-page {
-  margin-top: 80px; /* Adjust based on your navbar height */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
 }
 
-.day-buttons {
+.diet-plan-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px; /* Space between buttons */
-  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
-.day-button {
-  width: 200px; /* Adjust width as needed */
-  text-align: center;
+.day-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
+
+.meal-time-section {
+  margin-top: 10px;
+}
+
+.recipe-item {
+  margin-left: 10px;
+}
+
 
 
 /* ********************COMPONENTS******************** */

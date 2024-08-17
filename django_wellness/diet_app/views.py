@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_204_NO_CONTENT
-from .models import DietPlan, DailyDietPlan, DietPlanRecipe
+from .models import DietPlan, DailyDietPlan, DietPlanRecipe, DailyDietPlanMeal
 from .serializers import DietPlanSerializer, DailyDietPlanSerializer
 from recipe_app.models import Recipe
 from django.contrib.auth.decorators import login_required
@@ -61,27 +61,63 @@ class DailyDietPlanDetailView(APIView):
         except DailyDietPlan.DoesNotExist:
             return Response({"error": "Daily Diet Plan not found"}, status=HTTP_400_BAD_REQUEST)
 
+
 class AddToDietPlanView(APIView):
     @method_decorator(login_required)
     def post(self, request):
-        user = request.user
-        recipe_id = request.data.get('recipe_id')
+        uri = request.data.get('uri')
         meal_time = request.data.get('meal_time')
+        date = request.data.get('date')
+
+        # Ensure all fields are present
+        if not uri or not meal_time or not date:
+            return Response({"error": "Missing required fields."}, status=HTTP_400_BAD_REQUEST)
+
         try:
-            recipe = Recipe.objects.get(id=recipe_id)
+            user = request.user
+            recipe = Recipe.objects.get(uri=uri)
+
+            # Add to DietPlan
             diet_plan, created = DietPlan.objects.get_or_create(user=user, name="My Diet Plan")
-            DietPlanRecipe.objects.create(diet_plan=diet_plan, recipe=recipe, meal_time=meal_time)
-            return Response({"message": "Recipe added to diet plan"}, status=HTTP_201_CREATED)
+            DietPlanRecipe.objects.create(
+                diet_plan=diet_plan, 
+                recipe=recipe, 
+                meal_time=meal_time, 
+                date=date
+            )
+
+            # Add to DailyDietPlan
+            daily_diet_plan, created = DailyDietPlan.objects.get_or_create(user=user, date=date)
+            DailyDietPlanMeal.objects.create(
+                daily_diet_plan=daily_diet_plan, 
+                recipe=recipe, 
+                meal_time=meal_time
+            )
+
+            return Response({"message": "Recipe added to diet plan."}, status=HTTP_201_CREATED)
         except Recipe.DoesNotExist:
-            return Response({"error": "Recipe not found"}, status=HTTP_400_BAD_REQUEST)
-        
-    def delete(self, request, recipe_id):
+            return Response({"error": "Recipe not found."}, status=HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        uri = request.data.get('uri')
         meal_time = request.data.get('meal_time')
-        user = request.user
+        date = request.data.get('date')
+
+        if not uri or not meal_time or not date:
+            return Response({"error": "Missing required fields."}, status=HTTP_400_BAD_REQUEST)
+
         try:
-            recipe = Recipe.objects.get(id=recipe_id)
-            diet_plan = DietPlan.objects.get(user=user, name="Default Plan")
-            DietPlanRecipe.objects.filter(diet_plan=diet_plan, recipe=recipe, meal_time=meal_time).delete()
-            return Response({"message": "Removed from diet"}, status=HTTP_204_NO_CONTENT)
+            user = request.user
+            recipe = Recipe.objects.get(uri=uri)
+
+            # Remove from DietPlan
+            diet_plan = DietPlan.objects.get(user=user, name="My Diet Plan")
+            DietPlanRecipe.objects.filter(diet_plan=diet_plan, recipe=recipe, meal_time=meal_time, date=date).delete()
+
+            # Remove from DailyDietPlan
+            daily_diet_plan = DailyDietPlan.objects.get(user=user, date=date)
+            DailyDietPlanMeal.objects.filter(daily_diet_plan=daily_diet_plan, recipe=recipe, meal_time=meal_time).delete()
+
+            return Response({"message": "Removed from diet."}, status=HTTP_204_NO_CONTENT)
         except Recipe.DoesNotExist:
-            return Response({"error": "Recipe not found"}, status=HTTP_400_BAD_REQUEST)
+            return Response({"error": "Recipe not found."}, status=HTTP_400_BAD_REQUEST)

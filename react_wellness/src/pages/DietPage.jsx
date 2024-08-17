@@ -1,81 +1,90 @@
-import React, { useState } from 'react';
-import { Modal, Button } from '@mui/material';
-import RecipeCard from '../components/RecipeCard';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; // Adjusted to start with Sunday
 
-const DietPage = ({ recipes, onAddToDiet, onRemoveFromDiet, dietPlan }) => {
-    const [selectedDay, setSelectedDay] = useState(null);
-    const [selectedMealTime, setSelectedMealTime] = useState(null);
-    const [open, setOpen] = useState(false);
+const DietPage = () => {
+    const [dietPlan, setDietPlan] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const handleOpen = (day) => {
-        setSelectedDay(day);
-        setOpen(true);
+    useEffect(() => {
+        const fetchDietPlan = async () => {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await axios.get('http://localhost:8000/api/diet/daily-diet-plans/', {
+                    headers: { Authorization: `Token ${token}` },
+                });
+                const dietPlanData = organizeDietData(response.data);
+                setDietPlan(dietPlanData);
+                setLoading(false);
+            } catch (err) {
+                setError('Failed to fetch diet plan');
+                setLoading(false);
+            }
+        };
+
+        fetchDietPlan();
+    }, []);
+
+    const organizeDietData = (data) => {
+        const organizedData = {};
+
+        daysOfWeek.forEach(day => {
+            organizedData[day] = {
+                date: '',
+                breakfast: [],
+                lunch: [],
+                dinner: [],
+                snack: []
+            };
+        });
+
+        data.forEach(item => {
+            const date = new Date(item.date);
+            const dayName = daysOfWeek[date.getDay()];
+
+            organizedData[dayName].date = date.toLocaleDateString(); // Add the date to the day
+            item.meals.forEach(meal => {
+                organizedData[dayName][meal.meal_time].push(meal.recipe);
+            });
+        });
+
+        return organizedData;
     };
 
-    const handleClose = () => {
-        setOpen(false);
-        setSelectedMealTime(null);
-    };
+    const renderMealTime = (mealTime, recipes) => (
+        <div className="meal-time-section">
+            <h4>{mealTime.charAt(0).toUpperCase() + mealTime.slice(1)}</h4>
+            {recipes.length > 0 ? (
+                recipes.map(recipe => (
+                    <div key={recipe.uri} className="recipe-item">
+                        <p>{recipe.name}</p>
+                    </div>
+                ))
+            ) : (
+                <p>No recipes added.</p>
+            )}
+        </div>
+    );
 
-    const handleMealTimeClick = (mealTime) => {
-        setSelectedMealTime(mealTime);
-    };
-
-    const getRecipesForMealTime = () => {
-        if (!selectedMealTime || !selectedDay) return [];
-        return dietPlan.filter(
-            (item) => item.meal_time === selectedMealTime && item.date === selectedDay
-        );
-    };
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <div className="diet-page">
             <h1>My Diet Plan</h1>
-            <div className="day-buttons">
-                {daysOfWeek.map((day) => (
-                    <Button
-                        variant="outlined"
-                        key={day}
-                        onClick={() => handleOpen(day)}
-                        className="day-button"
-                    >
-                        {day}
-                    </Button>
+            <div className="diet-plan-container">
+                {Object.keys(dietPlan).map(day => (
+                    <div key={day} className="day-section">
+                        <h3>{day} {dietPlan[day].date && `(${dietPlan[day].date})`}</h3>
+                        {renderMealTime('breakfast', dietPlan[day].breakfast)}
+                        {renderMealTime('lunch', dietPlan[day].lunch)}
+                        {renderMealTime('dinner', dietPlan[day].dinner)}
+                        {renderMealTime('snack', dietPlan[day].snack)}
+                    </div>
                 ))}
             </div>
-
-            <Modal open={open} onClose={handleClose}>
-                <div className="modal-content">
-                    <h2>{selectedDay}</h2>
-                    <div className="meal-time-buttons">
-                        {['breakfast', 'lunch', 'dinner', 'snack'].map((mealTime) => (
-                            <Button
-                                key={mealTime}
-                                variant="contained"
-                                onClick={() => handleMealTimeClick(mealTime)}
-                            >
-                                {mealTime.charAt(0).toUpperCase() + mealTime.slice(1)}
-                            </Button>
-                        ))}
-                    </div>
-                    {selectedMealTime && (
-                        <div className="recipe-list">
-                            <h3>{selectedMealTime.charAt(0).toUpperCase() + selectedMealTime.slice(1)} Recipes</h3>
-                            {getRecipesForMealTime().map((recipe) => (
-                                <RecipeCard
-                                    key={recipe.id}
-                                    recipe={recipe}
-                                    onAddToCookbook={onAddToDiet}
-                                    onRemoveFromCookbook={onRemoveFromDiet}
-                                    isInCookbook={true} // Logic to determine if it's in the diet plan
-                                />
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </Modal>
         </div>
     );
 };

@@ -11,7 +11,9 @@ const RecipePage = () => {
     const [error, setError] = useState(null);
     const [nextPageUrl, setNextPageUrl] = useState(null);
     const [cookbookRecipes, setCookbookRecipes] = useState([]);
+    const [dietRecipes, setDietRecipes] = useState([]);  // State for diet recipes
 
+    // Fetch recipes from the API
     useEffect(() => {
         const fetchCookbookRecipes = async () => {
             const token = localStorage.getItem('token');
@@ -24,7 +26,21 @@ const RecipePage = () => {
                 console.error('Failed to fetch cookbook recipes:', err);
             }
         };
+
+        const fetchDietRecipes = async () => {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await axios.get('http://localhost:8000/api/diet/diet-plans/', {
+                    headers: { Authorization: `Token ${token}` },
+                });
+                setDietRecipes(response.data);
+            } catch (err) {
+                console.error('Failed to fetch diet recipes:', err);
+            }
+        };
+
         fetchCookbookRecipes();
+        fetchDietRecipes();
     }, []);
 
     const handleSearch = async () => {
@@ -85,6 +101,32 @@ const RecipePage = () => {
         }
     };
 
+    const handleAddToDiet = async (recipe, mealTime, day) => {
+        const token = localStorage.getItem('token');
+    
+        if (!mealTime || !day) {
+            console.error('Meal time and day must be provided.');
+            return;
+        }
+    
+        try {
+            await axios.post('http://localhost:8000/api/diet/add-to-diet/', 
+                { 
+                    uri: recipe.uri,  // Send the recipe URI
+                    meal_time: mealTime,  // Send the meal time ("breakfast")
+                    date: day  // Send the date (e.g., "2024-08-17")
+                }, 
+                { headers: { Authorization: `Token ${token}` } }
+            );
+            setDietRecipes((prevDietRecipes) => [...prevDietRecipes, recipe]);  // Update the diet recipes state
+        } catch (error) {
+            console.error('Failed to add to diet:', error.response ? error.response.data : error.message);
+        }
+    };
+    
+
+    
+
     return (
         <div className="recipe-page">
             <h1>Find Your Perfect Recipe</h1>
@@ -111,8 +153,10 @@ const RecipePage = () => {
                         key={index} 
                         recipe={recipe.recipe} 
                         onAddToCookbook={handleAddToCookbook}
-                        onRemoveFromCookbook={() => handleRemoveFromCookbook(item.id)} 
+                        onRemoveFromCookbook={() => handleRemoveFromCookbook(recipe.my_cookbook_id)} 
+                        onAddToDiet={handleAddToDiet}  // Pass the add to diet function
                         isInCookbook={cookbookRecipes.some(r => r.uri === recipe.recipe.uri)}
+                        isInDiet={dietRecipes.some(r => r.uri === recipe.recipe.uri)}  // Check if the recipe is in the diet plan
                     />
                 ))}
             </div>
