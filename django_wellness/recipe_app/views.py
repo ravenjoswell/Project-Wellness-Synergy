@@ -4,11 +4,11 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_201_CR
 from .models import Recipe, MyCookbook, Ingredient, Nutrient, RecipeCategory
 from .serializers import RecipeSerializer, MyCookbookSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import requests
 from django.conf import settings
-from rest_framework.authentication import TokenAuthentication
 
 
 class RecipeListView(APIView):

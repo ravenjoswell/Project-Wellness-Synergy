@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CookbookRecipeCard from '../components/CookbookRecipeCard';
+import { useOutletContext } from 'react-router-dom';
 
 const CookbookPage = () => {
+    const { handleAddToDiet, handleRemoveFromDiet, dietRecipes } = useOutletContext();
     const [cookbookRecipes, setCookbookRecipes] = useState([]);
     const [error, setError] = useState('');
 
@@ -37,7 +39,6 @@ const CookbookPage = () => {
             await axios.delete(`http://localhost:8000/api/recipes/remove-from-cookbook/${myCookbookId}/`, {
                 headers: { Authorization: `Token ${token}` }
             });
-            console.log('Removed from Cookbook');
             setCookbookRecipes(prevRecipes => 
                 prevRecipes.filter(r => r.id !== myCookbookId) 
             );
@@ -45,7 +46,6 @@ const CookbookPage = () => {
             console.error('Failed to remove from cookbook:', error);
         }
     };
-    
 
     return (
         <div className="cookbook-page">
@@ -54,10 +54,13 @@ const CookbookPage = () => {
             <div className="cookbook-recipes">
                 {cookbookRecipes.map((item, index) => (
                     <CookbookRecipeCard 
-                    key={index} 
-                    recipe={item.recipe} 
-                    onRemoveFromCookbook={() => handleRemoveFromCookbook(item.id)} 
-                />
+                        key={index} 
+                        recipe={item.recipe} 
+                        onRemoveFromCookbook={() => handleRemoveFromCookbook(item.id)} 
+                        onAddToDiet={handleAddToDiet}
+                        onRemoveFromDiet={handleRemoveFromDiet}
+                        isInDiet={dietRecipes.some(r => r.uri === item.recipe.uri)}
+                    />
                 ))}
             </div>
         </div>

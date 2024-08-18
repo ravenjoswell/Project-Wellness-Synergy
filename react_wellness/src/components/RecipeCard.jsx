@@ -16,13 +16,18 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         }
     };
 
-    const handleDietClick = () => {
-        if (isInDiet) {
-            onRemoveFromDiet(recipe, selectedMealTime, convertDayToDate(selectedDay));
-        } else {
-            onAddToDiet(recipe, selectedMealTime, convertDayToDate(selectedDay));
-        }
-    };
+ const handleDietClick = () => {
+    const date = convertDayToDate(selectedDay);
+
+    if (!selectedMealTime || !selectedDay || !date) {
+        console.error('Meal time, day of the week, and date must be provided.');
+        return;
+    }
+
+    onAddToDiet(recipe, selectedMealTime, selectedDay, date);
+};
+
+    
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -32,15 +37,29 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         setOpen(false);
     };
 
+   
     const convertDayToDate = (day) => {
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
         const dayIndex = daysOfWeek.indexOf(day);
-        const currentDayIndex = today.getDay();
-        const dayDifference = dayIndex - currentDayIndex;
+        const currentDayIndex = today.getUTCDay(); // Get the current day index in UTC
+    
+        let dayDifference = dayIndex - currentDayIndex;
+        if (dayDifference < 0) {
+            dayDifference += 7; // Adjust for days earlier in the week
+        }
+    
         const resultDate = new Date(today);
-        resultDate.setDate(today.getDate() + dayDifference);
-        return resultDate.toISOString().split('T')[0];  // Convert to YYYY-MM-DD format
+        resultDate.setUTCDate(today.getUTCDate() + dayDifference); // Adjust the date in UTC
+    
+        // Return date in YYYY-MM-DD format
+        return resultDate.toISOString().split('T')[0];
     };
+    
+    
+
+    
+    
 
     return (
         <div className="recipe-card">
@@ -54,7 +73,7 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
             <div className="buttons">
                 <div className="buttons">
                     {isInCookbook ? (
-                        <button onClick={() => onRemoveFromCookbook(recipe.my_cookbook_id)}>
+                        <button onClick={() => onRemoveFromCookbook(recipe)}>
                             Remove from Cookbook
                         </button>
                     ) : (

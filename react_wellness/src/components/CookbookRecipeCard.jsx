@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
 const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet, isInDiet }) => {
     const [selectedMealTime, setSelectedMealTime] = useState('breakfast');
+    const [selectedDay, setSelectedDay] = useState('Monday');
     const [open, setOpen] = useState(false);
 
     const dietLabels = Array.isArray(recipe.diet_labels) ? recipe.diet_labels : recipe.diet_labels.split(', ');
     const healthLabels = Array.isArray(recipe.health_labels) ? recipe.health_labels : recipe.health_labels.split(', ');
 
-    
     const handleDietClick = () => {
+        const date = convertDayToDate(selectedDay);
+
+        if (!selectedMealTime || !selectedDay || !date) {
+            console.error('Meal time, day of the week, and date must be provided.');
+            return;
+        }
+
         if (isInDiet) {
-            onRemoveFromDiet(recipe);
+            onRemoveFromDiet(recipe, selectedMealTime, date);
         } else {
-            onAddToDiet(recipe, selectedMealTime);
+            onAddToDiet(recipe, selectedMealTime, selectedDay, date);
         }
     };
 
@@ -23,6 +32,23 @@ const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemov
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const convertDayToDate = (day) => {
+        const today = new Date();
+        const dayIndex = daysOfWeek.indexOf(day);
+        const currentDayIndex = today.getDay(); // Get the current day index
+
+        let dayDifference = dayIndex - currentDayIndex;
+        if (dayDifference < 0) {
+            dayDifference += 7; // Adjust for days earlier in the week
+        }
+
+        const resultDate = new Date(today);
+        resultDate.setDate(today.getDate() + dayDifference); // Adjust the date
+
+        const dateString = resultDate.toISOString().split('T')[0]; // This will give the date in YYYY-MM-DD format
+        return dateString;
     };
 
     return (
@@ -37,11 +63,9 @@ const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemov
                 View Details
             </Button>
             <div className="buttons">
-            <div className="buttons">
-                    <button onClick={() => onRemoveFromCookbook(recipe.my_cookbook_id)}>
-                        Remove from Cookbook
-                    </button>
-            </div>
+                <button onClick={() => onRemoveFromCookbook(recipe.my_cookbook_id)}>
+                    Remove from Cookbook
+                </button>
                 <div className="meal-time-select">
                     <label htmlFor={`meal-time-${recipe.uri}`}>Select Meal Time: </label>
                     <select
@@ -53,6 +77,16 @@ const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemov
                         <option value="lunch">Lunch</option>
                         <option value="dinner">Dinner</option>
                         <option value="snack">Snack</option>
+                    </select>
+                    <label htmlFor={`day-of-week-${recipe.uri}`}>Select Day: </label>
+                    <select
+                        id={`day-of-week-${recipe.uri}`}
+                        value={selectedDay}
+                        onChange={(e) => setSelectedDay(e.target.value)}
+                    >
+                        {daysOfWeek.map((day) => (
+                            <option key={day} value={day}>{day}</option>
+                        ))}
                     </select>
                     <button onClick={handleDietClick}>
                         {isInDiet ? 'Remove from Diet' : `Add to ${selectedMealTime}`}

@@ -7,11 +7,18 @@ from recipe_app.models import Recipe
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from user_app.models import User
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+from datetime import timedelta
+from datetime import datetime
+import pytz
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class DietPlanListView(APIView):
     def get(self, request):
-        diet_plans = DietPlan.objects.all()
+        diet_plans = DietPlan.objects.filter(user=request.user).order_by('start_date')
         serializer = DietPlanSerializer(diet_plans, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
 
@@ -41,7 +48,7 @@ class DietPlanDetailView(APIView):
 
 class DailyDietPlanListView(APIView):
     def get(self, request):
-        daily_diet_plans = DailyDietPlan.objects.all()
+        daily_diet_plans = DailyDietPlan.objects.filter(user=request.user).order_by('date')
         serializer = DailyDietPlanSerializer(daily_diet_plans, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
 
@@ -63,31 +70,45 @@ class DailyDietPlanDetailView(APIView):
 
 
 class AddToDietPlanView(APIView):
-    @method_decorator(login_required)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
-        uri = request.data.get('uri')
+        user = request.user
+        recipe_uri = request.data.get('uri')
         meal_time = request.data.get('meal_time')
+        day_of_week = request.data.get('day_of_week')
         date = request.data.get('date')
 
-        # Ensure all fields are present
-        if not uri or not meal_time or not date:
+        if not recipe_uri or not meal_time or not day_of_week or not date:
             return Response({"error": "Missing required fields."}, status=HTTP_400_BAD_REQUEST)
 
         try:
-            user = request.user
-            recipe = Recipe.objects.get(uri=uri)
+            recipe = Recipe.objects.get(uri=recipe_uri)
+
+            # Ensure the meal time does not already have a recipe for this day in the DietPlan
+            if DietPlanRecipe.objects.filter(
+                diet_plan__user=user,  # Filter by the current user
+                meal_time=meal_time, 
+                day_of_week=day_of_week
+            ).exists():
+                return Response({"error": "Meal time already has a recipe for this day."}, status=HTTP_400_BAD_REQUEST)
 
             # Add to DietPlan
-            diet_plan, created = DietPlan.objects.get_or_create(user=user, name="My Diet Plan")
+            diet_plan, _ = DietPlan.objects.get_or_create(
+                user=user,
+                name="My Diet Plan",
+                defaults={'start_date': timezone.now(), 'end_date': timezone.now() + timedelta(days=7)}
+            )
             DietPlanRecipe.objects.create(
                 diet_plan=diet_plan, 
                 recipe=recipe, 
                 meal_time=meal_time, 
-                date=date
+                day_of_week=day_of_week
             )
 
             # Add to DailyDietPlan
-            daily_diet_plan, created = DailyDietPlan.objects.get_or_create(user=user, date=date)
+            daily_diet_plan, _ = DailyDietPlan.objects.get_or_create(user=user, date=date)
             DailyDietPlanMeal.objects.create(
                 daily_diet_plan=daily_diet_plan, 
                 recipe=recipe, 
@@ -97,26 +118,35 @@ class AddToDietPlanView(APIView):
             return Response({"message": "Recipe added to diet plan."}, status=HTTP_201_CREATED)
         except Recipe.DoesNotExist:
             return Response({"error": "Recipe not found."}, status=HTTP_400_BAD_REQUEST)
-
     def delete(self, request):
-        uri = request.data.get('uri')
+        recipe_id = request.data.get('recipe_id')
         meal_time = request.data.get('meal_time')
+        day_of_week = request.data.get('day_of_week')
         date = request.data.get('date')
 
-        if not uri or not meal_time or not date:
+        if not recipe_id or not meal_time or not day_of_week or not date:
             return Response({"error": "Missing required fields."}, status=HTTP_400_BAD_REQUEST)
 
         try:
-            user = request.user
-            recipe = Recipe.objects.get(uri=uri)
+            # Fetch the recipe based on recipe_id
+            recipe = Recipe.objects.get(id=recipe_id)
 
             # Remove from DietPlan
-            diet_plan = DietPlan.objects.get(user=user, name="My Diet Plan")
-            DietPlanRecipe.objects.filter(diet_plan=diet_plan, recipe=recipe, meal_time=meal_time, date=date).delete()
+            diet_plan = DietPlan.objects.get(user=request.user, name="My Diet Plan")
+            DietPlanRecipe.objects.filter(
+                diet_plan=diet_plan, 
+                recipe=recipe, 
+                meal_time=meal_time, 
+                day_of_week=day_of_week
+            ).delete()
 
             # Remove from DailyDietPlan
-            daily_diet_plan = DailyDietPlan.objects.get(user=user, date=date)
-            DailyDietPlanMeal.objects.filter(daily_diet_plan=daily_diet_plan, recipe=recipe, meal_time=meal_time).delete()
+            daily_diet_plan = DailyDietPlan.objects.get(user=request.user, date=date)
+            DailyDietPlanMeal.objects.filter(
+                daily_diet_plan=daily_diet_plan, 
+                recipe=recipe, 
+                meal_time=meal_time
+            ).delete()
 
             return Response({"message": "Removed from diet."}, status=HTTP_204_NO_CONTENT)
         except Recipe.DoesNotExist:
