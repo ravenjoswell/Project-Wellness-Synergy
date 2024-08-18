@@ -16,19 +16,21 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         }
     };
 
- const handleDietClick = () => {
-    const date = convertDayToDate(selectedDay);
-
-    if (!selectedMealTime || !selectedDay || !date) {
-        console.error('Meal time, day of the week, and date must be provided.');
-        return;
-    }
-
-    onAddToDiet(recipe, selectedMealTime, selectedDay, date);
-};
-
+    const handleDietClick = () => {
+        const date = convertDayToDate(selectedDay);
     
-
+        if (!selectedMealTime || !selectedDay || !date) {
+            console.error('Meal time, day of the week, and date must be provided.');
+            return;
+        }
+    
+        if (isInDiet) {
+            onRemoveFromDiet(recipe, selectedMealTime, date); // Pass date to remove function
+        } else {
+            onAddToDiet(recipe, selectedMealTime, selectedDay, date);
+        }
+    };
+    
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -37,7 +39,6 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         setOpen(false);
     };
 
-   
     const convertDayToDate = (day) => {
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
@@ -56,11 +57,6 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         return resultDate.toISOString().split('T')[0];
     };
     
-    
-
-    
-    
-
     return (
         <div className="recipe-card">
             <h2>{recipe.label}</h2>

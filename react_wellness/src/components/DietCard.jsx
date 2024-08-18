@@ -4,9 +4,10 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/
 const DietCard = ({ recipe, onRemoveFromDiet, onAddToCookbook, onRemoveFromCookbook, isInDiet, isInCookbook }) => {
     const [open, setOpen] = useState(false);
 
-    // Assuming the recipe object has `dietLabels`, `healthLabels`, `name`, etc.
-    const dietLabels = Array.isArray(recipe.dietLabels) ? recipe.dietLabels : recipe.dietLabels?.split(', ') || [];
-    const healthLabels = Array.isArray(recipe.healthLabels) ? recipe.healthLabels : recipe.healthLabels?.split(', ') || [];
+    // Assuming the recipe object has `diet_labels`, `health_labels`, `ingredients`, etc.
+    const dietLabels = Array.isArray(recipe.diet_labels) ? recipe.diet_labels : recipe.diet_labels?.split(', ') || [];
+    const healthLabels = Array.isArray(recipe.health_labels) ? recipe.health_labels : recipe.health_labels?.split(', ') || [];
+    const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
 
     const handleDietClick = () => {
         if (isInDiet) {
@@ -35,7 +36,7 @@ const DietCard = ({ recipe, onRemoveFromDiet, onAddToCookbook, onRemoveFromCookb
             <h2>{recipe.name}</h2>
             <img src={recipe.image} alt={recipe.name} />
             <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
-            <p><strong>Ingredients:</strong> {recipe.ingredients.map(ingredient => ingredient.text).join(', ')}</p>
+            <p><strong>Ingredients:</strong> {ingredients.map(ingredient => ingredient.text).join(', ')}</p>
             <p><strong>Diet Labels:</strong> {dietLabels.join(', ')}</p>
             <p><strong>Health Labels:</strong> {healthLabels.join(', ')}</p>
             <Button variant="contained" color="primary" onClick={handleClickOpen}>
@@ -57,11 +58,11 @@ const DietCard = ({ recipe, onRemoveFromDiet, onAddToCookbook, onRemoveFromCookb
                     <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
                     <p><strong>Diet Labels:</strong> {dietLabels.join(', ')}</p>
                     <p><strong>Health Labels:</strong> {healthLabels.join(', ')}</p>
-                    <p><strong>Ingredients:</strong> {recipe.ingredients.map(ingredient => ingredient.text).join(', ')}</p>
+                    <p><strong>Ingredients:</strong> {ingredients.map(ingredient => ingredient.text).join(', ')}</p>
                     <h4>Nutritional Facts:</h4>
-                    {recipe.totalNutrients ? (
-                        Object.entries(recipe.totalNutrients).map(([key, nutrient]) => (
-                            <p key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
+                    {recipe.nutritional_facts ? (
+                        recipe.nutritional_facts.map((nutrient, index) => (
+                            <p key={index}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
                         ))
                     ) : (
                         <p>No nutritional information available.</p>

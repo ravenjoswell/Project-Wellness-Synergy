@@ -153,6 +153,32 @@ function App() {
     }
 };
 
+    const handleRemoveFromDiet = async (recipe, mealTime, date) => {
+      const token = localStorage.getItem('token');
+      try {
+          await axios.delete('http://localhost:8000/api/diet/daily-diet-plans/', {
+              headers: { Authorization: `Token ${token}` },
+              data: {
+                  uri: recipe.uri,
+                  meal_time: mealTime,
+                  date: date
+              }
+          });
+
+          // Update diet plan after removal
+          const updatedDietPlan = { ...dietPlan };
+          const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+
+          // Remove the recipe from the specified day and meal time
+          updatedDietPlan[dayName][mealTime] = updatedDietPlan[dayName][mealTime].filter(r => r.uri !== recipe.uri);
+
+          setDietPlan(updatedDietPlan);
+      } catch (err) {
+          console.error("Failed to remove recipe from diet:", err);
+      }
+    };
+
+
 
 
 
@@ -178,6 +204,7 @@ function App() {
         handleAddToCookbook,
         handleRemoveFromCookbook,
         handleAddToDiet,
+        handleRemoveFromDiet,
         cookbookRecipes,
         dietRecipes,
       }} />

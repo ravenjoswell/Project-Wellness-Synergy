@@ -18,7 +18,6 @@ const DietPage = () => {
 
     const {
         handleRemoveFromDiet,
-        handleAddToDiet,
         dietRecipes,
         handleRemoveFromCookbook,
         handleAddToCookbook,
@@ -70,8 +69,6 @@ const DietPage = () => {
     
         return organizedData;
     };
-    
-    
 
     const handleDayClick = (day) => {
         setSelectedDay(day);
@@ -96,6 +93,9 @@ const DietPage = () => {
         setSelectedRecipes([]);
     };
     
+    const isRecipeInDiet = (recipe) => {
+        return dietRecipes.some(r => r.uri === recipe.uri);
+    };
 
     const isRecipeInCookbook = (recipe) => {
         return cookbookRecipes.some(r => r.uri === recipe.uri);
@@ -156,8 +156,8 @@ const DietPage = () => {
                                     onRemoveFromDiet={handleRemoveFromDiet}
                                     onAddToCookbook={handleAddToCookbook} 
                                     onRemoveFromCookbook={handleRemoveFromCookbook}
-                                    isInDiet={dietRecipes.some(r => r.uri === meal.uri)}  
-                                    isInCookbook={isRecipeInCookbook(meal)}
+                                    isInDiet={isRecipeInDiet(recipe)}  
+                                    isInCookbook={isRecipeInCookbook(recipe)}
                                 />
                             );
                         })
