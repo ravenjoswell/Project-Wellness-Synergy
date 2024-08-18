@@ -5,7 +5,7 @@ import CookbookPage from "./pages/CookbookPage";
 import DietPage from "./pages/DietPage";
 import HomePage from "./pages/HomePage";
 import JournalPage from "./pages/JournalPage";
-import MindfullnessPage from "./pages/MindfullnessPage";
+import MindfulnessPage from "./pages/MindfullnessPage";
 import RecipePage from "./pages/RecipePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'mindfulness/',
-                element: <MindfullnessPage />,
+                element: <MindfulnessPage />,
                 loader: confirmUser,
             },
             {

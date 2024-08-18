@@ -42,6 +42,7 @@ class JournalEntryListView(APIView):
             
             return Response({"entry": serializer.data, "ai_response": ai_response}, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+    
 class JournalEntryDetailView(APIView):
     def get(self, request, journal_entry_id):
         try:

@@ -9,5 +9,7 @@ class MentalWellBeingLog(models.Model):
     sleep_hours = models.DecimalField(max_digits=4, decimal_places=2)  # 0.0 hours
     anxiety_level = models.IntegerField()  # Scale of 1-10
     depression_level = models.IntegerField()  # Scale of 1-10
+    additional_notes = models.TextField(blank=True)
+    
 
 

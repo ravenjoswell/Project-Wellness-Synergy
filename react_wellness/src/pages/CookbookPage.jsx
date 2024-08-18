@@ -60,6 +60,7 @@ const CookbookPage = () => {
                         onAddToDiet={handleAddToDiet}
                         onRemoveFromDiet={handleRemoveFromDiet}
                         isInDiet={dietRecipes.some(r => r.uri === item.recipe.uri)}
+                        isInCookbook={true}
                     />
                 ))}
             </div>
