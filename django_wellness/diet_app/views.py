@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_204_NO_CONTENT
-from .models import DietPlan, DailyDietPlan, DietPlanRecipe, DailyDietPlanMeal
+from .models import DietPlan, DailyDietPlan, DietPlanRecipe, DailyDietPlanMeal, WeeklyLogEntry
 from .serializers import DietPlanSerializer, DailyDietPlanSerializer
 from recipe_app.models import Recipe
 from django.contrib.auth.decorators import login_required
@@ -151,3 +151,39 @@ class AddToDietPlanView(APIView):
             return Response({"message": "Removed from diet."}, status=HTTP_204_NO_CONTENT)
         except Recipe.DoesNotExist:
             return Response({"error": "Recipe not found."}, status=HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
+class WeeklyLogView(APIView):
+    def post(self, request):
+        data = request.POST
+        reflection = data.get('reflection', '')  # Default to an empty string if not provided
+        goals_for_next_week = data.get('goals_for_next_week', '')
+        challenges = data.get('challenges', '')
+        highlights = data.get('highlights', '')
+
+        # Create the weekly log entry with the provided data
+        WeeklyLogEntry.objects.create(
+            user=request.user,
+            reflection=reflection,
+            goals_for_next_week=goals_for_next_week,
+            challenges=challenges,
+            highlights=highlights
+        )
+
+        # Clear out the meals from existing DailyDietPlan entries without deleting the entries themselves
+        daily_diet_plans = DailyDietPlan.objects.filter(user=request.user)
+        for daily_diet_plan in daily_diet_plans:
+            DailyDietPlanMeal.objects.filter(daily_diet_plan=daily_diet_plan).delete()
+
+        # Optionally, reset other fields in DailyDietPlan if needed
+        # for daily_diet_plan in daily_diet_plans:
+        #     daily_diet_plan.some_field = None
+        #     daily_diet_plan.save()
+
+        return Response({"message": "Weekly log saved, diet plan cleared, and days reset."})
+

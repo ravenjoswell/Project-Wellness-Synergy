@@ -47,3 +47,11 @@ class DailyDietPlanMeal(models.Model):
 
     def __str__(self):
         return f"{self.meal_time}: {self.recipe.name} on {self.daily_diet_plan.date}"
+
+class WeeklyLogEntry(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reflection = models.TextField()
+    goals_for_next_week = models.TextField()
+    challenges = models.TextField()
+    highlights = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)

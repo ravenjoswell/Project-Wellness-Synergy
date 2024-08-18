@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DietPlan, DailyDietPlan, DietPlanRecipe, DailyDietPlanMeal
+from .models import DietPlan, DailyDietPlan, DietPlanRecipe, DailyDietPlanMeal, WeeklyLogEntry
 
 class DietPlanRecipeInline(admin.TabularInline):
     model = DietPlanRecipe
@@ -21,3 +21,5 @@ class DailyDietPlanAdmin(admin.ModelAdmin):
 
 admin.site.register(DietPlan, DietPlanAdmin)
 admin.site.register(DailyDietPlan, DailyDietPlanAdmin)
+admin.site.register(WeeklyLogEntry)
+

@@ -15,6 +15,12 @@ const DietPage = () => {
     const [selectedDay, setSelectedDay] = useState('');
     const [selectedMealTime, setSelectedMealTime] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
+    
+    // Form state variables
+    const [weeklyReflection, setWeeklyReflection] = useState('');
+    const [goalsForNextWeek, setGoalsForNextWeek] = useState('');
+    const [challenges, setChallenges] = useState('');
+    const [highlights, setHighlights] = useState('');
 
     const {
         handleRemoveFromDiet,
@@ -25,27 +31,27 @@ const DietPage = () => {
     } = useOutletContext();
 
     useEffect(() => {
-        const fetchDietPlan = async () => {
-            const token = localStorage.getItem('token');
-            try {
-                const response = await axios.get('http://localhost:8000/api/diet/daily-diet-plans/', {
-                    headers: { Authorization: `Token ${token}` },
-                });
-                const dietPlanData = organizeDietData(response.data);
-                setDietPlan(dietPlanData);
-                setLoading(false);
-            } catch (err) {
-                setError('Failed to fetch diet plan');
-                setLoading(false);
-            }
-        };
-
         fetchDietPlan();
     }, []);
 
+    const fetchDietPlan = async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await axios.get('http://localhost:8000/api/diet/daily-diet-plans/', {
+                headers: { Authorization: `Token ${token}` },
+            });
+            const dietPlanData = organizeDietData(response.data);
+            setDietPlan(dietPlanData);
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to fetch diet plan');
+            setLoading(false);
+        }
+    };
+
     const organizeDietData = (data) => {
         const organizedData = {};
-    
+
         daysOfWeek.forEach(day => {
             organizedData[day] = {
                 date: '',
@@ -55,18 +61,18 @@ const DietPage = () => {
                 snack: []
             };
         });
-    
+
         data.forEach(item => {
             const date = new Date(item.date);
             const dayName = date.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
-    
+
             organizedData[dayName].date = date.toISOString().split('T')[0]; // Add the date to the day
-    
+
             item.meals.forEach(meal => {
                 organizedData[dayName][meal.meal_time].push(meal.recipe);
             });
         });
-    
+
         return organizedData;
     };
 
@@ -92,13 +98,37 @@ const DietPage = () => {
         setSelectedMealTime('');
         setSelectedRecipes([]);
     };
-    
+
     const isRecipeInDiet = (recipe) => {
         return dietRecipes.some(r => r.uri === recipe.uri);
     };
 
     const isRecipeInCookbook = (recipe) => {
         return cookbookRecipes.some(r => r.uri === recipe.uri);
+    };
+
+    const handleWeeklyLogEntry = async (e) => {
+        e.preventDefault();  // Prevent default form submission
+        try {
+            const token = localStorage.getItem('token');
+            await axios.post('http://localhost:8000/api/diet/weekly-log/', {
+                reflection: weeklyReflection,
+                goals: goalsForNextWeek,
+                challenges: challenges,
+                highlights: highlights,
+            }, {
+                headers: { Authorization: `Token ${token}` },
+            });
+            // Re-fetch the diet plan data to re-render the page
+            fetchDietPlan();
+            // Clear the form fields after submission
+            setWeeklyReflection('');
+            setGoalsForNextWeek('');
+            setChallenges('');
+            setHighlights('');
+        } catch (err) {
+            setError('Failed to submit weekly log entry');
+        }
     };
 
     if (loading) return <p>Loading...</p>;
@@ -171,6 +201,35 @@ const DietPage = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            {/* Weekly Log Form */}
+            <form onSubmit={handleWeeklyLogEntry} style={{ marginTop: '20px' }}>
+                <textarea
+                    placeholder="Weekly Reflection"
+                    value={weeklyReflection}
+                    onChange={(e) => setWeeklyReflection(e.target.value)}
+                    required
+                />
+                <textarea
+                    placeholder="Goals for Next Week"
+                    value={goalsForNextWeek}
+                    onChange={(e) => setGoalsForNextWeek(e.target.value)}
+                    required
+                />
+                <textarea
+                    placeholder="Challenges"
+                    value={challenges}
+                    onChange={(e) => setChallenges(e.target.value)}
+                />
+                <textarea
+                    placeholder="Highlights"
+                    value={highlights}
+                    onChange={(e) => setHighlights(e.target.value)}
+                />
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Saving...' : 'Submit Weekly Log and Clear Diet'}
+                </button>
+            </form>
         </div>
     );
 };
