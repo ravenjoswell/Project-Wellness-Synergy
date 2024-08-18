@@ -12,6 +12,11 @@ class MentalWellBeingLogListView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
+    def get(self, request):
+        logs = MentalWellBeingLog.objects.filter(user=request.user)
+        serializer = MentalWellBeingLogSerializer(logs, many=True)
+        return Response(serializer.data, status=HTTP_200_OK)
+
     def post(self, request):
         app_key = settings.OPENAI_APP_KEY
         data = request.data.copy()

@@ -176,6 +176,8 @@
   align-items: center;
   padding: 2rem;
   background-color: #2d2d2d; /* Dark gray background */
+  min-height: 100vh; /* Ensure the homepage takes up full viewport height */
+  color: white;
   overflow: hidden;
 }
 
@@ -184,6 +186,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
+  overflow: hidden;
 }
 
 .video {
@@ -204,18 +207,20 @@
   position: relative;
   z-index: 10;
   text-align: center;
-  color: white;
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
 }
 
 .title {
-  font-size: 2.5rem; /* Base size for smaller screens */
+  font-size: 3rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .description {
-  font-size: 1.125rem; /* Base size for smaller screens */
-  margin-bottom: 3rem;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 /* Grid for boxes */
@@ -223,7 +228,27 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
+  width: 100%;
 }
+
+/* Dashboard Section */
+.dashboard {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.dashboard-section {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.dashboard-navigation {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 
 
 /* ********************RECIPE PAGE******************** */
