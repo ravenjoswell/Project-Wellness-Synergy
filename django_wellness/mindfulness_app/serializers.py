@@ -4,7 +4,7 @@ from .models import MentalWellBeingLog
 class MentalWellBeingLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = MentalWellBeingLog
-        fields = ['mood', 'stress_level', 'sleep_hours', 'anxiety_level', 'depression_level', 'additional_notes']
+        fields = ['date', 'mood', 'stress_level', 'sleep_hours', 'anxiety_level', 'depression_level', 'additional_notes']
         extra_kwargs = {
             'mood': {'required': False, 'allow_null': True},
             'stress_level': {'required': False, 'allow_null': True},

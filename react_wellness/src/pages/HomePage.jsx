@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Line, Pie, Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import Box from '../components/Box';
-import '../App.css'; // Import your CSS file
-import { Button, Typography } from '@mui/material';
+import '../App.css'; 
+import { Button } from '@mui/material';
+import moment from 'moment';
 
 Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -25,19 +26,15 @@ const HomePage = () => {
           },
         };
 
-        // user's name
         const userResponse = await axios.get('http://127.0.0.1:8000/api/users/', config);
-        setUserName(userResponse.data.full_name);
+        setUserName(userResponse.data.user);
 
-        // number of recipes in the user's cookbook
         const recipesResponse = await axios.get('http://127.0.0.1:8000/api/recipes/cookbook/', config);
         setRecipeCount(recipesResponse.data.length);
 
-        // user's journal entries for the past week
         const journalResponse = await axios.get('http://127.0.0.1:8000/api/journal/journal-entries/', config);
         setJournalEntries(journalResponse.data);
 
-        // user's mindfulness logs for the past week
         const mindfulnessResponse = await axios.get('http://127.0.0.1:8000/api/mindfulness/well-being-logs/', config);
         setMindfulnessLogs(mindfulnessResponse.data);
 
@@ -51,29 +48,84 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  // data for the Line Charts
-  const dates = mindfulnessLogs.map(log => new Date(log.date).toLocaleDateString());
+  // Data for the combined Line Chart
+  const dates = mindfulnessLogs.map(log => moment(log.date).format('YYYY-MM-DD'));
   const moodData = mindfulnessLogs.map(log => log.mood);
   const stressLevelData = mindfulnessLogs.map(log => log.stress_level);
   const sleepHoursData = mindfulnessLogs.map(log => log.sleep_hours);
   const anxietyLevelData = mindfulnessLogs.map(log => log.anxiety_level);
   const depressionLevelData = mindfulnessLogs.map(log => log.depression_level);
 
-  // Line chart 
-  const lineChartOptions = (label, data, color) => ({
+  const combinedLineChartData = {
     labels: dates,
     datasets: [
       {
-        label: label,
-        data: data,
+        label: 'Mood',
+        data: moodData,
         fill: false,
-        backgroundColor: color,
-        borderColor: color,
+        backgroundColor: 'blue',
+        borderColor: 'blue',
       },
-    ],
-  });
+      {
+        label: 'Stress Level',
+        data: stressLevelData,
+        fill: false,
+        backgroundColor: 'red',
+        borderColor: 'red',
+      },
+      {
+        label: 'Sleep Hours',
+        data: sleepHoursData,
+        fill: false,
+        backgroundColor: 'green',
+        borderColor: 'green',
+      },
+      {
+        label: 'Anxiety Level',
+        data: anxietyLevelData,
+        fill: false,
+        backgroundColor: 'purple',
+        borderColor: 'purple',
+      },
+      {
+        label: 'Depression Level',
+        data: depressionLevelData,
+        fill: false,
+        backgroundColor: 'yellow',
+        borderColor: 'yellow',
+      }
+    ]
+  };
 
-  // Data Journal Entries Pie Chart
+  // Chart.js animation 
+  const combinedLineChartOptions = {
+    animations: {
+      tension: {
+        duration: 5000,
+        easing: 'easeInBounce',
+        from: 1,
+        to: 0,
+        loop: false
+      }
+    },
+    scales: {
+      x: {
+        type: 'category',
+        labels: dates
+      },
+      y: {
+        beginAtZero: true
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+    },
+  };
+
+  // Data for the Journal Pie Chart
   const journalEntriesCount = journalEntries.length;
   const pieChartData = {
     labels: ['Logged', 'Remaining'],
@@ -86,13 +138,13 @@ const HomePage = () => {
     ],
   };
 
-  // Data Cookbook Gauge Chart
+  // Data for the Cookbook Gauge Chart
   const gaugeChartData = {
     labels: ['Recipes'],
     datasets: [
       {
         label: 'Recipes in Cookbook',
-        data: [recipeCount, 10 - recipeCount], // out of 20
+        data: [recipeCount, 20 - recipeCount], // out of 20
         backgroundColor: ['#FFCE56', '#E7E9ED'],
       },
     ],
@@ -103,7 +155,7 @@ const HomePage = () => {
       {/* Background Video */}
       <div className="background-video">
         <video
-          src="your-video-url.mp4"
+          src=""
           autoPlay
           loop
           muted
@@ -114,9 +166,9 @@ const HomePage = () => {
       <div className="overlay"></div>
       {/* Content */}
       <div className="content">
-        <Typography variant="h2" className="title">
+        <h2 className="user-title">
           Welcome, {userName}
-        </Typography>
+        </h2>
         <div className="box-grid">
           <Box to="/recipe" title="Recipe" />
           <Box to="/cookbook" title="Cookbook" />
@@ -128,44 +180,22 @@ const HomePage = () => {
         {/* User Dashboard */}
         {!loading && (
           <div className="dashboard">
-            <Typography variant="h4" className="dashboard-title">
+            <h4 className="dashboard-title">
               Your Dashboard
-            </Typography>
-            <div className="dashboard-section">
-              <Typography variant="h6">Cookbook Recipes</Typography>
-              <Doughnut data={gaugeChartData} />
+            </h4>
+            <div className="charts-container">
+              <div className="dashboard-section">
+                <h6>Cookbook Recipes</h6>
+                <Doughnut data={gaugeChartData} />
+              </div>
+              <div className="dashboard-section">
+                <h6>Weekly Journal Entries</h6>
+                <Pie data={pieChartData} />
+              </div>
             </div>
-            <div className="dashboard-section">
-              <Typography variant="h6">Weekly Journal Entries</Typography>
-              <Pie data={pieChartData} />
-            </div>
-            <div className="dashboard-section">
-              <Typography variant="h6">Mood</Typography>
-              <Line data={lineChartOptions('Mood', moodData, 'blue')} />
-            </div>
-            <div className="dashboard-section">
-              <Typography variant="h6">Stress Level</Typography>
-              <Line data={lineChartOptions('Stress Level', stressLevelData, 'red')} />
-            </div>
-            <div className="dashboard-section">
-              <Typography variant="h6">Sleep Hours</Typography>
-              <Line data={lineChartOptions('Sleep Hours', sleepHoursData, 'green')} />
-            </div>
-            <div className="dashboard-section">
-              <Typography variant="h6">Anxiety Level</Typography>
-              <Line data={lineChartOptions('Anxiety Level', anxietyLevelData, 'purple')} />
-            </div>
-            <div className="dashboard-section">
-              <Typography variant="h6">Depression Level</Typography>
-              <Line data={lineChartOptions('Depression Level', depressionLevelData, 'yellow')} />
-            </div>
-            <div className="dashboard-navigation">
-              <Button variant="contained" color="primary" href="/recipe">
-                Go to Recipe Page
-              </Button>
-              <Button variant="contained" color="secondary" href="/diet">
-                View Your Diet Plan
-              </Button>
+            <div className="dashboard-section large-chart">
+              <h6>Mindfulness Metrics</h6>
+              <Line data={combinedLineChartData} options={combinedLineChartOptions} />
             </div>
           </div>
         )}

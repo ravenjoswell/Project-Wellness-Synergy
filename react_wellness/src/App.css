@@ -212,10 +212,10 @@
   padding: 2rem;
 }
 
-.title {
-  font-size: 3rem;
+.user-title {
   font-weight: bold;
-  margin-bottom: 1rem;
+  color: rgb(249, 248, 248);
+  z-index: 25;
 }
 
 .description {
@@ -242,11 +242,41 @@
   text-align: left;
 }
 
-.dashboard-navigation {
+
+.dashboard {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.charts-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Allow the charts to wrap to the next line */
+}
+
+.dashboard-section {
+  flex: 1;
+  margin: 0 1rem;
+  text-align: center;
+  min-width: 250px; /* Minimum width for each chart */
+}
+
+.large-chart {
   margin-top: 2rem;
+  width: 100%;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .charts-container {
+    flex-direction: column;
+  }
+
+  .dashboard-section {
+    margin: 0 auto 2rem auto; /* Center the chart sections on smaller screens */
+  }
 }
 
 
