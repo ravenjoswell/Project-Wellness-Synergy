@@ -66,7 +66,7 @@ const DietPage = () => {
             const date = new Date(item.date);
             const dayName = date.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
 
-            organizedData[dayName].date = date.toISOString().split('T')[0]; // Add the date to the day
+            organizedData[dayName].date = date.toISOString().split('T')[0]; // Add date to the day
 
             item.meals.forEach(meal => {
                 organizedData[dayName][meal.meal_time].push(meal.recipe);
@@ -119,9 +119,9 @@ const DietPage = () => {
             }, {
                 headers: { Authorization: `Token ${token}` },
             });
-            // Re-fetch the diet plan data to re-render the page
+            // Re-fetch diet plan data to re-render the page
             fetchDietPlan();
-            // Clear the form fields after submission
+            // Clear form fields after submission
             setWeeklyReflection('');
             setGoalsForNextWeek('');
             setChallenges('');
@@ -177,7 +177,7 @@ const DietPage = () => {
                                 ...meal,
                                 dietLabels: meal.diet_labels.split(', '),
                                 healthLabels: meal.health_labels.split(', '),
-                                ingredients: meal.ingredients,  // Ensure ingredients are passed as an array of objects
+                                ingredients: meal.ingredients,  // Ensure ingredients passed as an array of objects
                             };
                             return (
                                 <DietCard 

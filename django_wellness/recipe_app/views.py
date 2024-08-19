@@ -20,7 +20,7 @@ class RecipeListView(APIView):
         allergies = request.GET.get('allergies', '')
         next_page_url = request.GET.get('next', '')
 
-        # Determine API URL based on paginating or doing an initial search
+        # Determine API URL based on paginating or initial search
         if next_page_url:
             api_url = next_page_url
         else:
@@ -44,7 +44,7 @@ class RecipeListView(APIView):
                     uri=recipe_data['uri'],
                     defaults={
                         'name': recipe_data['label'],
-                        'image': recipe_data['image'][:5000],  # Truncate if too long
+                        'image': recipe_data['image'][:5000],  # Truncate 
                         'diet_labels': ', '.join(recipe_data.get('dietLabels', []))[:255],
                         'health_labels': ', '.join(recipe_data.get('healthLabels', []))[:255],
                         'cautions': ', '.join(recipe_data.get('cautions', []))[:255],
@@ -124,7 +124,7 @@ class RemoveFromCookbookView(APIView):
 
     def delete(self, request, mycookbook_id):
         try:
-            # Make sure you're filtering by the primary key (id) of the MyCookbook model
+            # filtering by the primary key (id) of the MyCookbook model
             my_cookbook_entry = MyCookbook.objects.get(id=mycookbook_id, user=request.user)
             my_cookbook_entry.delete()
             return Response({"message": "Recipe removed from cookbook"}, status=204)

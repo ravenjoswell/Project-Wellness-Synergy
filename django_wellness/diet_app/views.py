@@ -118,6 +118,7 @@ class AddToDietPlanView(APIView):
             return Response({"message": "Recipe added to diet plan."}, status=HTTP_201_CREATED)
         except Recipe.DoesNotExist:
             return Response({"error": "Recipe not found."}, status=HTTP_400_BAD_REQUEST)
+        
     def delete(self, request):
         recipe_id = request.data.get('recipe_id')
         meal_time = request.data.get('meal_time')

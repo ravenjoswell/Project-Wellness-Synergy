@@ -4,7 +4,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/
 const DietCard = ({ recipe, onRemoveFromDiet, onAddToCookbook, onRemoveFromCookbook, isInDiet, isInCookbook }) => {
     const [open, setOpen] = useState(false);
 
-    // Assuming the recipe object has `diet_labels`, `health_labels`, `ingredients`, etc.
+    // diet_labels`, `health_labels`, `ingredients`
     const dietLabels = Array.isArray(recipe.diet_labels) ? recipe.diet_labels : recipe.diet_labels?.split(', ') || [];
     const healthLabels = Array.isArray(recipe.health_labels) ? recipe.health_labels : recipe.health_labels?.split(', ') || [];
     const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];

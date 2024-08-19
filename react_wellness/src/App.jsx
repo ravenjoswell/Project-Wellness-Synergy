@@ -137,15 +137,15 @@ function App() {
     try {
       await axios.post('http://localhost:8000/api/diet/add-to-diet/', 
         { 
-          uri: recipe.uri,  // Use the recipe.uri as in AddToCookbookView
+          uri: recipe.uri,  // Use recipe.uri as in AddToCookbookView
           meal_time: mealTime,  // Pass the meal time
           day_of_week: dayOfWeek,  // Pass the day of the week
-          date: date  // Pass the specific date
+          date: date  // Pass specific date
         }, 
         { headers: { Authorization: `Token ${token}` } }
       );
 
-      // Optionally, update the state with the new recipe
+      // Optionally, update state with the new recipe
       setDietRecipes((prevDietRecipes) => [...prevDietRecipes, recipe]);  
       
     } catch (error) {
@@ -169,7 +169,7 @@ function App() {
           const updatedDietPlan = { ...dietPlan };
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
 
-          // Remove the recipe from the specified day and meal time
+          // Remove recipe from the specified day and meal time
           updatedDietPlan[dayName][mealTime] = updatedDietPlan[dayName][mealTime].filter(r => r.uri !== recipe.uri);
 
           setDietPlan(updatedDietPlan);

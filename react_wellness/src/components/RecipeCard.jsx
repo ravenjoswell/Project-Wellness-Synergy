@@ -43,7 +43,7 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
         const dayIndex = daysOfWeek.indexOf(day);
-        const currentDayIndex = today.getUTCDay(); // Get the current day index in UTC
+        const currentDayIndex = today.getUTCDay(); // Get current day index in UTC
     
         let dayDifference = dayIndex - currentDayIndex;
         if (dayDifference < 0) {
@@ -51,7 +51,7 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         }
     
         const resultDate = new Date(today);
-        resultDate.setUTCDate(today.getUTCDate() + dayDifference); // Adjust the date in UTC
+        resultDate.setUTCDate(today.getUTCDate() + dayDifference); // Adjust date in UTC
     
         // Return date in YYYY-MM-DD format
         return resultDate.toISOString().split('T')[0];

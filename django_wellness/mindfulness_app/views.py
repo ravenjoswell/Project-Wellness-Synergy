@@ -32,7 +32,7 @@ class MentalWellBeingLogListView(APIView):
         if serializer.is_valid():
             log = serializer.save(user=request.user)
 
-            # Determine the best category for guided session
+            # best category for guided session
             if log.stress_level >= 7 or log.anxiety_level >= 7:
                 recommended_category = 'meditation'
             elif log.sleep_hours < 5:

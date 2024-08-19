@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Line, Pie, Doughnut } from 'react-chartjs-2';
+import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import Box from '../components/Box';
 import '../App.css'; // Import your CSS file
 import { Button, Typography } from '@mui/material';
 
+Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
 const HomePage = () => {
   const [userName, setUserName] = useState('');
   const [recipeCount, setRecipeCount] = useState(0);
-  const [journalEntriesCount, setJournalEntriesCount] = useState(0);
-  const [mindfulnessLogsCount, setMindfulnessLogsCount] = useState(0);
+  const [journalEntries, setJournalEntries] = useState([]);
+  const [mindfulnessLogs, setMindfulnessLogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,21 +25,21 @@ const HomePage = () => {
           },
         };
 
-        // Fetch the user's name
+        // user's name
         const userResponse = await axios.get('http://127.0.0.1:8000/api/users/', config);
         setUserName(userResponse.data.full_name);
 
-        // Fetch the number of recipes in the user's cookbook
+        // number of recipes in the user's cookbook
         const recipesResponse = await axios.get('http://127.0.0.1:8000/api/recipes/cookbook/', config);
         setRecipeCount(recipesResponse.data.length);
 
-        // Fetch the user's journal entries for the past week
+        // user's journal entries for the past week
         const journalResponse = await axios.get('http://127.0.0.1:8000/api/journal/journal-entries/', config);
-        setJournalEntriesCount(journalResponse.data.length);
+        setJournalEntries(journalResponse.data);
 
-        // Fetch the user's mindfulness logs for the past week
+        // user's mindfulness logs for the past week
         const mindfulnessResponse = await axios.get('http://127.0.0.1:8000/api/mindfulness/well-being-logs/', config);
-        setMindfulnessLogsCount(mindfulnessResponse.data.length);
+        setMindfulnessLogs(mindfulnessResponse.data);
 
         setLoading(false);
       } catch (error) {
@@ -46,6 +50,53 @@ const HomePage = () => {
 
     fetchData();
   }, []);
+
+  // data for the Line Charts
+  const dates = mindfulnessLogs.map(log => new Date(log.date).toLocaleDateString());
+  const moodData = mindfulnessLogs.map(log => log.mood);
+  const stressLevelData = mindfulnessLogs.map(log => log.stress_level);
+  const sleepHoursData = mindfulnessLogs.map(log => log.sleep_hours);
+  const anxietyLevelData = mindfulnessLogs.map(log => log.anxiety_level);
+  const depressionLevelData = mindfulnessLogs.map(log => log.depression_level);
+
+  // Line chart 
+  const lineChartOptions = (label, data, color) => ({
+    labels: dates,
+    datasets: [
+      {
+        label: label,
+        data: data,
+        fill: false,
+        backgroundColor: color,
+        borderColor: color,
+      },
+    ],
+  });
+
+  // Data Journal Entries Pie Chart
+  const journalEntriesCount = journalEntries.length;
+  const pieChartData = {
+    labels: ['Logged', 'Remaining'],
+    datasets: [
+      {
+        label: 'Journal Entries',
+        data: [journalEntriesCount, 7 - journalEntriesCount],
+        backgroundColor: ['#36A2EB', '#FF6384'],
+      },
+    ],
+  };
+
+  // Data Cookbook Gauge Chart
+  const gaugeChartData = {
+    labels: ['Recipes'],
+    datasets: [
+      {
+        label: 'Recipes in Cookbook',
+        data: [recipeCount, 10 - recipeCount], // out of 20
+        backgroundColor: ['#FFCE56', '#E7E9ED'],
+      },
+    ],
+  };
 
   return (
     <div className="home-container">
@@ -82,15 +133,31 @@ const HomePage = () => {
             </Typography>
             <div className="dashboard-section">
               <Typography variant="h6">Cookbook Recipes</Typography>
-              <Typography>{recipeCount} recipes</Typography>
+              <Doughnut data={gaugeChartData} />
             </div>
             <div className="dashboard-section">
               <Typography variant="h6">Weekly Journal Entries</Typography>
-              <Typography>{journalEntriesCount} entries this week</Typography>
+              <Pie data={pieChartData} />
             </div>
             <div className="dashboard-section">
-              <Typography variant="h6">Mindfulness Logs</Typography>
-              <Typography>{mindfulnessLogsCount} logs this week</Typography>
+              <Typography variant="h6">Mood</Typography>
+              <Line data={lineChartOptions('Mood', moodData, 'blue')} />
+            </div>
+            <div className="dashboard-section">
+              <Typography variant="h6">Stress Level</Typography>
+              <Line data={lineChartOptions('Stress Level', stressLevelData, 'red')} />
+            </div>
+            <div className="dashboard-section">
+              <Typography variant="h6">Sleep Hours</Typography>
+              <Line data={lineChartOptions('Sleep Hours', sleepHoursData, 'green')} />
+            </div>
+            <div className="dashboard-section">
+              <Typography variant="h6">Anxiety Level</Typography>
+              <Line data={lineChartOptions('Anxiety Level', anxietyLevelData, 'purple')} />
+            </div>
+            <div className="dashboard-section">
+              <Typography variant="h6">Depression Level</Typography>
+              <Line data={lineChartOptions('Depression Level', depressionLevelData, 'yellow')} />
             </div>
             <div className="dashboard-navigation">
               <Button variant="contained" color="primary" href="/recipe">
