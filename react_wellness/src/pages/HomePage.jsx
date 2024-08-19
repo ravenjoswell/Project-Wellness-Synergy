@@ -133,7 +133,7 @@ const HomePage = () => {
       {
         label: 'Journal Entries',
         data: [journalEntriesCount, 7 - journalEntriesCount],
-        backgroundColor: ['#36A2EB', '#FF6384'],
+        backgroundColor: ['orange', '#black'],
       },
     ],
   };
@@ -145,7 +145,7 @@ const HomePage = () => {
       {
         label: 'Recipes in Cookbook',
         data: [recipeCount, 20 - recipeCount], // out of 20
-        backgroundColor: ['#FFCE56', '#E7E9ED'],
+        backgroundColor: ['orange', 'black'],
       },
     ],
   };

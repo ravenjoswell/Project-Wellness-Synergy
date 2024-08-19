@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import { Card, CardMedia, CardContent, CardActions, Button, IconButton, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Tooltip } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -18,19 +21,19 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
 
     const handleDietClick = () => {
         const date = convertDayToDate(selectedDay);
-    
+
         if (!selectedMealTime || !selectedDay || !date) {
             console.error('Meal time, day of the week, and date must be provided.');
             return;
         }
-    
+
         if (isInDiet) {
-            onRemoveFromDiet(recipe, selectedMealTime, date); // Pass date to remove function
+            onRemoveFromDiet(recipe, selectedMealTime, date);
         } else {
             onAddToDiet(recipe, selectedMealTime, selectedDay, date);
         }
     };
-    
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -43,101 +46,106 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
         const dayIndex = daysOfWeek.indexOf(day);
-        const currentDayIndex = today.getUTCDay(); // Get current day index in UTC
-    
+        const currentDayIndex = today.getUTCDay();
+
         let dayDifference = dayIndex - currentDayIndex;
         if (dayDifference < 0) {
-            dayDifference += 7; // Adjust for days earlier in the week
+            dayDifference += 7;
         }
-    
+
         const resultDate = new Date(today);
-        resultDate.setUTCDate(today.getUTCDate() + dayDifference); // Adjust date in UTC
-    
-        // Return date in YYYY-MM-DD format
+        resultDate.setUTCDate(today.getUTCDate() + dayDifference);
+
         return resultDate.toISOString().split('T')[0];
     };
-    
+
     return (
-        <div className="recipe-card">
-            <h2>{recipe.label}</h2>
-            <img src={recipe.image} alt={recipe.label} />
-            <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
-            <p><strong>Ingredients:</strong> {recipe.ingredients.length}</p>
-            <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                View Details
-            </Button>
-            <div className="buttons">
-                <div className="buttons">
-                    {isInCookbook ? (
-                        <button onClick={() => onRemoveFromCookbook(recipe)}>
-                            Remove from Cookbook
-                        </button>
-                    ) : (
-                        <button onClick={() => onAddToCookbook(recipe)}>
-                            Add to Cookbook
-                        </button>
-                    )}
-                </div>
+        <Card sx={{ maxWidth: 330, margin: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '16px' }}>
+                <Typography 
+                    variant="h6" 
+                    sx={{ 
+                        height: '60px', 
+                        overflow: 'hidden', 
+                        textOverflow: 'ellipsis', 
+                        whiteSpace: 'normal', 
+                        display: '-webkit-box', 
+                        WebkitLineClamp: 2, 
+                        WebkitBoxOrient: 'vertical',
+                        wordWrap: 'break-word', // Prevents long words from breaking the layout
+                    }}
+                >
+                    {recipe.label}
+                </Typography>
+                <Tooltip title="View Cooking Instructions">
+                    <IconButton href={recipe.url} target="_blank" rel="noopener noreferrer">
+                        <MoreVertIcon />
+                    </IconButton>
+                </Tooltip>
+            </div>
+            <CardMedia
+                component="img"
+                height="194"
+                image={recipe.image}
+                alt={recipe.label}
+            />
+            <CardContent>
+                <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center' }}>
+                    Ingredients: {recipe.ingredients.length}
+                </Typography>
                 <div className="meal-time-select">
-                    <label htmlFor={`meal-time-${recipe.uri}`}>Select Meal Time: </label>
-                    <select
-                        id={`meal-time-${recipe.uri}`}
-                        value={selectedMealTime}
-                        onChange={(e) => setSelectedMealTime(e.target.value)}
-                    >
+                    <select value={selectedMealTime} onChange={(e) => setSelectedMealTime(e.target.value)}>
                         <option value="breakfast">Breakfast</option>
                         <option value="lunch">Lunch</option>
                         <option value="dinner">Dinner</option>
                         <option value="snack">Snack</option>
                     </select>
-                    <label htmlFor={`day-of-week-${recipe.uri}`}>Select Day: </label>
-                    <select
-                        id={`day-of-week-${recipe.uri}`}
-                        value={selectedDay}
-                        onChange={(e) => setSelectedDay(e.target.value)}
-                    >
+                    <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)}>
                         {daysOfWeek.map((day) => (
                             <option key={day} value={day}>{day}</option>
                         ))}
                     </select>
-                    <button onClick={handleDietClick}>
+                    <Button onClick={handleDietClick} variant="contained" color={isInDiet ? "secondary" : "primary"}>
                         {isInDiet ? 'Remove from Diet' : `Add to ${selectedMealTime}`}
-                    </button>
+                    </Button>
                 </div>
-            </div>
+            </CardContent>
+            <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
+                <Tooltip title={isInCookbook ? "Remove from Cookbook" : "Add to Cookbook"}>
+                    <IconButton onClick={handleCookbookClick} color={isInCookbook ? "error" : "default"}>
+                        <FavoriteIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="View More Details">
+                    <IconButton onClick={handleClickOpen}>
+                        <ExpandMoreIcon />
+                    </IconButton>
+                </Tooltip>
+            </CardActions>
 
+            {/* Modal for Recipe Details */}
             <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                 <DialogTitle>{recipe.label}</DialogTitle>
                 <DialogContent>
-                    <img src={recipe.image} alt={recipe.label} style={{ width: '50%' }} />
-                    <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
-                    <p><strong>Diet Labels:</strong> {recipe.dietLabels.join(', ')}</p>
-                    <p><strong>Health Labels:</strong> {recipe.healthLabels.join(', ')}</p>
-                    <p><strong>Ingredients:</strong> {recipe.ingredientLines.join(', ')}</p>
-                    <h4>Nutritional Facts:</h4>
+                    <Typography paragraph><strong>Diet Labels:</strong> {recipe.dietLabels.join(', ')}</Typography>
+                    <Typography paragraph><strong>Health Labels:</strong> {recipe.healthLabels.join(', ')}</Typography>
+                    <Typography paragraph><strong>Ingredients:</strong> {recipe.ingredientLines.join(', ')}</Typography>
+                    <Typography paragraph><strong>Nutritional Facts:</strong></Typography>
                     {recipe.totalNutrients ? (
                         Object.entries(recipe.totalNutrients).map(([key, nutrient]) => (
-                            <p key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
+                            <Typography paragraph key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</Typography>
                         ))
                     ) : (
-                        <p>No nutritional information available.</p>
+                        <Typography paragraph>No nutritional information available.</Typography>
                     )}
                 </DialogContent>
                 <DialogActions>
-                    <Button
-                        href={recipe.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        color="primary"
-                    >
-                        View Full Recipe Instructions
-                    </Button>
                     <Button onClick={handleClose} color="primary">
                         Close
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </Card>
     );
 };
 

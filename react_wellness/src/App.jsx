@@ -153,30 +153,22 @@ function App() {
     }
 };
 
-    const handleRemoveFromDiet = async (recipe, mealTime, date) => {
-      const token = localStorage.getItem('token');
-      try {
-          await axios.delete('http://localhost:8000/api/diet/daily-diet-plans/', {
-              headers: { Authorization: `Token ${token}` },
-              data: {
-                  uri: recipe.uri,
-                  meal_time: mealTime,
-                  date: date
-              }
-          });
+const handleRemoveFromDiet = async (dietPlanMealId) => {
+  const token = localStorage.getItem('token');
+  try {
+      await axios.delete(`http://localhost:8000/api/diet/remove-from-diet/${dietPlanMealId}/`, {
+          headers: { Authorization: `Token ${token}` }
+      });
 
-          // Update diet plan after removal
-          const updatedDietPlan = { ...dietPlan };
-          const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+      // Optionally, update your state here
+      setDietRecipes((prevDietRecipes) => prevDietRecipes.filter(r => r.id !== dietPlanMealId));
+  } catch (err) {
+      console.error("Failed to remove recipe from diet:", err);
+  }
+};
 
-          // Remove recipe from the specified day and meal time
-          updatedDietPlan[dayName][mealTime] = updatedDietPlan[dayName][mealTime].filter(r => r.uri !== recipe.uri);
 
-          setDietPlan(updatedDietPlan);
-      } catch (err) {
-          console.error("Failed to remove recipe from diet:", err);
-      }
-    };
+
 
 
 

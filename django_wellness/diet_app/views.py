@@ -119,39 +119,19 @@ class AddToDietPlanView(APIView):
         except Recipe.DoesNotExist:
             return Response({"error": "Recipe not found."}, status=HTTP_400_BAD_REQUEST)
         
-    def delete(self, request):
-        recipe_id = request.data.get('recipe_id')
-        meal_time = request.data.get('meal_time')
-        day_of_week = request.data.get('day_of_week')
-        date = request.data.get('date')
+class RemoveFromDietPlanView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
-        if not recipe_id or not meal_time or not day_of_week or not date:
-            return Response({"error": "Missing required fields."}, status=HTTP_400_BAD_REQUEST)
-
+    def delete(self, request, diet_plan_meal_id):
         try:
-            # Fetch the recipe based on recipe_id
-            recipe = Recipe.objects.get(id=recipe_id)
+            # Fetch the DailyDietPlanMeal entry by its primary key (id)
+            daily_diet_plan_meal = DailyDietPlanMeal.objects.get(id=diet_plan_meal_id, daily_diet_plan__user=request.user)
+            daily_diet_plan_meal.delete()
 
-            # Remove from DietPlan
-            diet_plan = DietPlan.objects.get(user=request.user, name="My Diet Plan")
-            DietPlanRecipe.objects.filter(
-                diet_plan=diet_plan, 
-                recipe=recipe, 
-                meal_time=meal_time, 
-                day_of_week=day_of_week
-            ).delete()
-
-            # Remove from DailyDietPlan
-            daily_diet_plan = DailyDietPlan.objects.get(user=request.user, date=date)
-            DailyDietPlanMeal.objects.filter(
-                daily_diet_plan=daily_diet_plan, 
-                recipe=recipe, 
-                meal_time=meal_time
-            ).delete()
-
-            return Response({"message": "Removed from diet."}, status=HTTP_204_NO_CONTENT)
-        except Recipe.DoesNotExist:
-            return Response({"error": "Recipe not found."}, status=HTTP_400_BAD_REQUEST)
+            return Response({"message": "Removed from diet."}, status=204)
+        except DailyDietPlanMeal.DoesNotExist:
+            return Response({"error": "Meal entry not found in diet plan"}, status=400)
 
 
 

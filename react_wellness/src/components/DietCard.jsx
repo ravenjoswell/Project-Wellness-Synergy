@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, IconButton, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Tooltip } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const DietCard = ({ recipe, onRemoveFromDiet, onAddToCookbook, onRemoveFromCookbook, isInDiet, isInCookbook }) => {
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+const DietCard = ({ recipe, onRemoveFromDiet, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, isInDiet, isInCookbook }) => {
+    const [selectedMealTime, setSelectedMealTime] = useState('breakfast');
+    const [selectedDay, setSelectedDay] = useState('Monday');
     const [open, setOpen] = useState(false);
 
-    // diet_labels`, `health_labels`, `ingredients`
     const dietLabels = Array.isArray(recipe.diet_labels) ? recipe.diet_labels : recipe.diet_labels?.split(', ') || [];
     const healthLabels = Array.isArray(recipe.health_labels) ? recipe.health_labels : recipe.health_labels?.split(', ') || [];
     const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
 
     const handleDietClick = () => {
-        if (isInDiet) {
-            onRemoveFromDiet(recipe);
+        const date = convertDayToDate(selectedDay);
+
+        if (!selectedMealTime || !selectedDay || !date) {
+            console.error('Meal time, day of the week, and date must be provided.');
+            return;
         }
+
+        // Allow adding the same recipe to different meals or days
+        onAddToDiet(recipe, selectedMealTime, selectedDay, date);
     };
 
     const handleCookbookClick = () => {
@@ -31,58 +43,120 @@ const DietCard = ({ recipe, onRemoveFromDiet, onAddToCookbook, onRemoveFromCookb
         setOpen(false);
     };
 
-    return (
-        <div className="recipe-card">
-            <h2>{recipe.name}</h2>
-            <img src={recipe.image} alt={recipe.name} />
-            <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
-            <p><strong>Ingredients:</strong> {ingredients.map(ingredient => ingredient.text).join(', ')}</p>
-            <p><strong>Diet Labels:</strong> {dietLabels.join(', ')}</p>
-            <p><strong>Health Labels:</strong> {healthLabels.join(', ')}</p>
-            <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                View Details
-            </Button>
-            <div className="buttons">
-                <button onClick={handleDietClick}>
-                    {isInDiet ? 'Remove from Diet' : 'Already in Diet'}
-                </button>
-                <button onClick={handleCookbookClick}>
-                    {isInCookbook ? 'Remove from Cookbook' : 'Add to Cookbook'}
-                </button>
-            </div>
+    const convertDayToDate = (day) => {
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const today = new Date();
+        const dayIndex = daysOfWeek.indexOf(day);
+        const currentDayIndex = today.getUTCDay();
 
+        let dayDifference = dayIndex - currentDayIndex;
+        if (dayDifference < 0) {
+            dayDifference += 7;
+        }
+
+        const resultDate = new Date(today);
+        resultDate.setUTCDate(today.getUTCDate() + dayDifference);
+
+        return resultDate.toISOString().split('T')[0];
+    };
+
+    return (
+        <Card sx={{ maxWidth: 330, margin: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <CardHeader
+                title={
+                    <Typography 
+                        variant="h6" 
+                        sx={{ 
+                            height: '60px', 
+                            overflow: 'hidden', 
+                            textOverflow: 'ellipsis', 
+                            whiteSpace: 'normal', 
+                            display: '-webkit-box', 
+                            WebkitLineClamp: 2, 
+                            WebkitBoxOrient: 'vertical',
+                            wordWrap: 'break-word',
+                        }}
+                    >
+                        {recipe.name}
+                    </Typography>
+                }
+                action={
+                    <Tooltip title="View Cooking Instructions">
+                        <IconButton href={recipe.instructions} target="_blank" rel="noopener noreferrer">
+                            <MoreVertIcon />
+                        </IconButton>
+                    </Tooltip>
+                }
+                subheader={`Calories: ${Math.round(recipe.calories)} kcal`}
+            />
+            <CardMedia
+                component="img"
+                height="194"
+                image={recipe.image}
+                alt={recipe.name}
+            />
+            <CardContent>
+                <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center' }}>
+                    Ingredients: {ingredients.length}
+                </Typography>
+                <div className="meal-time-select" style={{ textAlign: 'center', marginTop: '16px' }}>
+                    <select value={selectedMealTime} onChange={(e) => setSelectedMealTime(e.target.value)} style={{ marginRight: '10px' }}>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="snack">Snack</option>
+                    </select>
+                    <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)}>
+                        {daysOfWeek.map((day) => (
+                            <option key={day} value={day}>{day}</option>
+                        ))}
+                    </select>
+                    <Button onClick={handleDietClick} variant="contained" color="primary" style={{ marginTop: '16px' }}>
+                        Add to {selectedMealTime}
+                    </Button>
+                    {isInDiet && (
+                        <Button onClick={() => onRemoveFromDiet(recipe)} variant="contained" color="secondary" style={{ marginTop: '16px' }}>
+                            Remove from Diet
+                        </Button>
+                    )}
+                </div>
+            </CardContent>
+            <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
+                <Tooltip title={isInCookbook ? "Remove from Cookbook" : "Add to Cookbook"}>
+                    <IconButton onClick={handleCookbookClick} color={isInCookbook ? "error" : "default"}>
+                        <FavoriteIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="View More Details">
+                    <IconButton onClick={handleClickOpen}>
+                        <ExpandMoreIcon />
+                    </IconButton>
+                </Tooltip>
+            </CardActions>
+
+            {/* Modal for Recipe Details */}
             <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                 <DialogTitle>{recipe.name}</DialogTitle>
                 <DialogContent>
-                    <img src={recipe.image} alt={recipe.name} style={{ width: '50%' }} />
-                    <p><strong>Calories:</strong> {Math.round(recipe.calories)} kcal</p>
-                    <p><strong>Diet Labels:</strong> {dietLabels.join(', ')}</p>
-                    <p><strong>Health Labels:</strong> {healthLabels.join(', ')}</p>
-                    <p><strong>Ingredients:</strong> {ingredients.map(ingredient => ingredient.text).join(', ')}</p>
-                    <h4>Nutritional Facts:</h4>
+                    <Typography paragraph><strong>Diet Labels:</strong> {dietLabels.join(', ')}</Typography>
+                    <Typography paragraph><strong>Health Labels:</strong> {healthLabels.join(', ')}</Typography>
+                    <Typography paragraph><strong>Ingredients:</strong> {ingredients.map(ingredient => ingredient.text).join(', ')}</Typography>
+                    <Typography paragraph><strong>Nutritional Facts:</strong></Typography>
                     {recipe.nutritional_facts ? (
                         recipe.nutritional_facts.map((nutrient, index) => (
-                            <p key={index}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
+                            <Typography paragraph key={index}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</Typography>
                         ))
                     ) : (
-                        <p>No nutritional information available.</p>
+                        <Typography paragraph>No nutritional information available.</Typography>
                     )}
                 </DialogContent>
                 <DialogActions>
-                    <Button
-                        href={recipe.instructions}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        color="primary"
-                    >
-                        View Full Recipe Instructions
-                    </Button>
                     <Button onClick={handleClose} color="primary">
                         Close
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </Card>
     );
 };
 
