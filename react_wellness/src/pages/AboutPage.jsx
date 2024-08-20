@@ -6,27 +6,30 @@
 // import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
 
 
-import React, { useEffect } from 'react';
-import '../App.css'; // Assuming your CSS is in App.css
+import '../App.css'; 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function AboutPage() {
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const carousel = document.querySelector('.carousel');
-      carousel.appendChild(carousel.firstElementChild); // Move the first recipe to the end of the list
-    }, 3000); // Rotate every 3 seconds
-
-    return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, []);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
 
   const recipes = [
     { name: 'Recipe 1', img: './burger.jpg' },
-    { name: 'Recipe 2', img: './recipe2.jpg' },
-    { name: 'Recipe 3', img: './recipe3.jpg' },
-    { name: 'Recipe 4', img: './recipe4.jpg' },
-    { name: 'Recipe 5', img: './recipe5.jpg' },
-    { name: 'Recipe 6', img: './recipe6.jpg' },
+    { name: 'Recipe 2', img: './burger.jpg' },
+    { name: 'Recipe 3', img: './burger.jpg' },
+    { name: 'Recipe 4', img: './burger.jpg' },
+    { name: 'Recipe 5', img: './burger.jpg' },
+    { name: 'Recipe 6', img: './burger.jpg' },
   ];
 
 
@@ -88,6 +91,16 @@ function AboutPage() {
                   With Us.<br />
                 </h1>
               </div>
+              <div className="right-title-scroll-container-2">
+                <h1 className="right-text-2">
+                  Join Us for: <br />
+                  Guidance towards <br/>
+                  A sound body, A sound mind, <br />
+                  Improved sleep, Daily Journaling,<br />
+                  
+                  And a balanced dietary lifestyle.<br />
+                </h1>
+              </div>
               <div className="second-video-container">
               <div className="second-video-box">
               <video
@@ -128,33 +141,26 @@ function AboutPage() {
          {/* Long Scrolling Section */}
          <div className="long-container-2">
           <div className="long-scroll-container-2">
-            <video
-              src=""
-              autoPlay
-              loop
-              muted
-            />
-            <div className="relative z-10">
-              {/* Scrolling Title Text */}
-              <div className="left-title-scroll-container">
-                <h1 className="left-text">
-                  Start <br />
-                  Your <br/>
-                  Journey <br />
-                  With Us.<br />
+          <div className="about-recipe-container">
+                <h1 className="about-recipe-text">
+                Craft Your Perfect Plate
                 </h1>
               </div>
-                 {/* Half-Circle Carousel */}
-                <div className="carousel-container">
-                <div className="carousel">
-                  {recipes.map((recipe, index) => (
-                  <div key={index} className="carousel-item">
-                <img src={recipe.img} alt={recipe.name} />
-                <p>{recipe.name}</p>
+          <Slider {...settings}>
+              {recipes.map((recipe, index) => (
+                <div key={index}>
+                  <img src={recipe.img} alt={recipe.name} />
+                  <p>{recipe.name}</p>
+                </div>
+              ))}
+            </Slider>
+            <div className="relative z-10">
+              {/* Scrolling Title Text */}
+              <div className="about-recipe-container-2">
+                <h1 className="about-recipe-text-2">
+                Fuel your wellness journey with recipes designed to meet your unique dietary needs. From your personal cookbook to tailored weekly and daily meal plans, explore hundreds of healthy recipes that nourish your body and support your health goals. Here, your dietary needs are our priority, and every dish is crafted with care.
+                </h1>
               </div>
-            ))}
-          </div>
-        </div>
             </div>
           </div>
         </div>
