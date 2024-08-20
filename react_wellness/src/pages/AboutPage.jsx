@@ -6,14 +6,36 @@
 // import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../App.css'; // Assuming your CSS is in App.css
 
 function AboutPage() {
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const carousel = document.querySelector('.carousel');
+      carousel.appendChild(carousel.firstElementChild); // Move the first recipe to the end of the list
+    }, 3000); // Rotate every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
+  const recipes = [
+    { name: 'Recipe 1', img: './burger.jpg' },
+    { name: 'Recipe 2', img: './recipe2.jpg' },
+    { name: 'Recipe 3', img: './recipe3.jpg' },
+    { name: 'Recipe 4', img: './recipe4.jpg' },
+    { name: 'Recipe 5', img: './recipe5.jpg' },
+    { name: 'Recipe 6', img: './recipe6.jpg' },
+  ];
+
+
+
+
   return (
     <div className="about-page-wrapper">
       <div className="about-page-container">
-        {/* Video Box */}
+        {/* First Video Box */}
         <div className="about-video-box">
           <div className="about-video-container">
             <video
@@ -36,17 +58,106 @@ function AboutPage() {
               {/* Pitch Text Container */}
               <div className="pitch-text-container">
                 <p className="pitch-text">
-                Discover wellness with a balanced approach,<br />
-                  tailored to your unique dietary needs.<br />
-                    Combine mindful support and nutrition,<br />
-                      for a healthier, happier way of life.  
-                  
+                <br/>Embrace a mindful approach to wellness,
+                <br/>nurturing both your mind and body.
+                <br/>Support your journey with nutrition 
+                <br/>tailored to your dietary needs,
+                <br/>for a healthier, happier way of life.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Long Scrolling Section */}
+        <div className="long-container">
+          <div className="long-scroll-container">
+            <video
+              src=""
+              autoPlay
+              loop
+              muted
+            />
+            <div className="relative z-10">
+              {/* Scrolling Title Text */}
+              <div className="right-title-scroll-container">
+                <h1 className="right-text">
+                  Start <br />
+                  Your <br/>
+                  Journey <br />
+                  With Us.<br />
+                </h1>
+              </div>
+              <div className="second-video-container">
+              <div className="second-video-box">
+              <video
+              src="./aboutbg1.mp4"
+              autoPlay
+              loop
+              muted
+              />
+              <div className="second-video-text">
+              <h1 >
+              </h1>
+              </div>
+               </div>
+              </div>
+              <div className="third-video-container">
+              <div className="third-video-box">
+              <video
+              src="./aboutbg2.mp4"
+              autoPlay
+              loop
+              muted
+              />
+               </div>
+              </div>
+              <div className="fourth-video-container">
+              <div className="fourth-video-box">
+              <video
+              src="./aboutbg3.mp4"
+              autoPlay
+              loop
+              muted
+              />
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+         {/* Long Scrolling Section */}
+         <div className="long-container-2">
+          <div className="long-scroll-container-2">
+            <video
+              src=""
+              autoPlay
+              loop
+              muted
+            />
+            <div className="relative z-10">
+              {/* Scrolling Title Text */}
+              <div className="left-title-scroll-container">
+                <h1 className="left-text">
+                  Start <br />
+                  Your <br/>
+                  Journey <br />
+                  With Us.<br />
+                </h1>
+              </div>
+                 {/* Half-Circle Carousel */}
+                <div className="carousel-container">
+                <div className="carousel">
+                  {recipes.map((recipe, index) => (
+                  <div key={index} className="carousel-item">
+                <img src={recipe.img} alt={recipe.name} />
+                <p>{recipe.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -57,36 +168,11 @@ export default AboutPage;
 
 
 
-{/* Journey */}
-{/* <div className="about-journey-container mx-5 sm:mx-10 md:mx-16 lg:mx-20 flex-grow mt-0">
-  <div className="text-center mb-8 md:mb-12 about-journey-title">
-    <h2 className="text-2xl md:text-4xl font-serif text-black underline">Start Your Journey With Us</h2>
-  </div>
-  <div className="text-center mb-6 md:mb-8 about-journey-description">
-    <p className="text-lg md:text-xl text-black">
-      Empower your journey with a comprehensive tool for managing Ulcerative Colitis, Crohn's, and dietary needs. Seamlessly integrate dietary management with mental health support for a holistic approach to well-being. Optimize your health, achieve lasting wellness, and live better every day!
-    </p>
-  </div>
-  <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row justify-center items-center">
-    <div className="text-white flex flex-col items-center mb-6 sm:mb-4 lg:mb-6 about-icon-container">
-      <RestaurantOutlinedIcon style={{ fontSize: 30 }} />
-      <span className="mt-2 text-lg sm:text-lg lg:text-2xl">Browse Recipes</span>
-    </div>
-    <div className="text-white flex flex-col items-center mb-6 sm:mb-4 lg:mb-6 about-icon-container">
-      <ArticleOutlinedIcon style={{ fontSize: 30 }} />
-      <span className="mt-2 text-lg sm:text-lg lg:text-2xl">Create Diet Plans</span>
-    </div>
-    <div className="text-white flex flex-col items-center mb-6 sm:mb-4 lg:mb-6 about-icon-container">
-      <MenuBookOutlinedIcon style={{ fontSize: 30 }} />
-      <span className="mt-2 text-lg sm:text-lg lg:text-2xl">Save Recipes</span>
-    </div>
-    <div className="text-white flex flex-col items-center mb-6 sm:mb-4 lg:mb-6 about-icon-container">
-      <PsychologyAltOutlinedIcon style={{ fontSize: 30 }} />
-      <span className="mt-2 text-lg sm:text-lg lg:text-2xl">Practice Mindfulness</span>
-    </div>
-    <div className="text-white flex flex-col items-center mb-6 sm:mb-4 lg:mb-6 about-icon-container">
-      <DrawOutlinedIcon style={{ fontSize: 30 }} />
-      <span className="mt-2 text-lg sm:text-lg lg:text-2xl">Create Journal Entries</span>
-    </div>
-  </div>
-</div> */}
+
+
+
+
+
+
+
+

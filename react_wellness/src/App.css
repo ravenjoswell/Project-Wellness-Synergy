@@ -2,13 +2,13 @@
 /* About Page Wrapper */
 .about-page-wrapper {
   display: flex;
-  justify-content: center; /* Horizontally centers the container */
-  align-items: center; /* Vertically centers the container */
-  min-height: 100vh; /* Ensure it takes full viewport height */
-  padding: 100px; /* Adds space around the first layer */
-  background-color: white; /* Background color for the first layer */
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh;
+  padding: 100px; 
+  background-color: white; 
   box-shadow: 0px 0px 20px rgb(255, 255, 255);
-  border-radius: 15px; /* Optional: Rounds the corners of the first layer */
+  border-radius: 15px; 
 }
 
 /* About Page Container */
@@ -20,28 +20,28 @@
   
   position: relative;
   z-index: 1;
-  width: 100%; /* Make it slightly smaller than the wrapper */
-  max-width: 2400px; /* Ensure it doesn't get too wide on large screens */
+  width: 100%; 
+  max-width: 2400px; 
  
-  overflow-y: auto; /* Allow scrolling if content exceeds container height */
-  margin: 20px; /* Ensures perfect margin inside the wrapper */
+  overflow-y: auto; 
+  margin: 20px;
   
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 1.5 vh;
 }
 
 /* About Video Box */
 .about-video-box {
-  width: 100%; /* Ensure it takes the full width of the container */
-  max-width: 2200px; /* Adjust to keep it within the container */
-  margin: 20px 0; /* Add equal top and bottom margin */
-  border: 3px solid rgb(255, 255, 255);
+  width: 100%; 
+  max-width: 2200px; 
+  margin: 20px 0; 
+  border: 10px solid rgb(255, 255, 255);
   padding: 4px;
   border-radius: 8px;
-  box-shadow: 0 0 40px rgb(19, 19, 19);
+  box-shadow: 0 0 40px rgb(0, 0, 0);
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -71,55 +71,153 @@
 
 /* Parallax Text Container */
 .about-parallax-container {
-  position: fixed; /* Fix position so it stays in place while scrolling */
-  top: 20%; /* Adjust vertical placement */
-  left: 10%; /* Adjust horizontal placement */
-  z-index: 3; /* Ensure it's above other content */
-  text-align: left; /* Align text to the left */
+  position: fixed; 
+  top: 15%; 
+  left: 10%; 
+  z-index: 3; 
+  text-align: left; 
 }
 
 /* Stacked Text Styling */
 .stacked-text {
-  font-size: calc(4rem + 2vw);  /* Adjust font size as needed */
-  line-height: 1.2; /* Adjust line height for spacing between words */
-  color: white; /* Text color */
+  font-size: calc(5rem + 2vw);  
+  line-height: 1.2; 
+  color: white; 
   margin: 0;
-  text-transform: uppercase; /* Optional: Makes the text uppercase */
+  text-transform: uppercase;
   max-width: 100%;
 }
 
 /* Additional Content Below */
 .about-content {
-  margin-top: 50px; /* Ensure space between the video box and additional content */
+  margin-top: 50px; 
   padding: 20px;
-  height: 1000px; /* Example height to create a scrolling effect */
+  height: 1000px; 
 }
 
-/* Pitch Text */
+
 /* Pitch Text Container */
 .pitch-text-container {
-  position: relative; /* Fix position so it stays in place while scrolling */
-  margin-top: 800px; /* Align to the bottom */
-  left: 100%; /* Align to the right */
-  z-index: 1000; /* Ensure it's above all other content */
-  padding: 20px; /* Add some padding to give space from the edges */
+  position: relative; 
+  margin-top: 700px; 
+  left: 120%; 
+  z-index: 1000; 
+  padding: 20px; 
   
 }
 
 /* Pitch Text */
 .pitch-text {
-  background-color: transparent; /* Optional: Add a semi-transparent background */
-  color: white; /* Text color */
-  padding: 10px; /* Add some padding inside the text box */
-  border-radius: 8px; /* Optional: Round the corners */
-  font-size: calc(1.2rem + 0.5vw);; /* Adjust font size for readability */
-  line-height: 1.5; /* Control spacing between lines */
-  text-align: right; /* Align text to the right */
+  background-color: transparent; 
+  color: white; 
+  padding: 10px; 
+  border-radius: 8px; 
+  font-size: calc(1.2rem + 0.5vw);; 
+  line-height: 1.5; 
+  text-align: right; 
   margin: 0;
-  display: block; /* Ensure each word is on a new line */
+  display: block; 
   
 }
 
+.long-container {
+  position: relative;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 310vh;
+  min-width: 90vw;
+  margin-top: -90px; 
+  background-color:white;
+}
+
+.long-scroll-container{
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  min-height: 300vh;
+  min-width: 87vw;
+}
+
+.right-title-scroll-container{
+  position: fixed; 
+  top: 15%; 
+  left: 60%; 
+  z-index: 3;
+  text-align: left; 
+}
+
+.right-text{
+  font-size: calc(5rem + 2vw);  
+  line-height: 1.2; 
+  color: rgb(214, 100, 0); 
+  margin: 0;
+  text-transform: uppercase; 
+  max-width: 100%;
+}
+
+.second-video-container{
+  border: 7px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgb(0, 0, 0);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  width: 35vw;
+  height: 90vh;
+  margin-left: 5vh;
+}
+
+
+
+.third-video-container{
+  border: 7px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgb(0, 0, 0);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  width: 35vw;
+  height: 90vh;
+  margin-top: 5vh;
+  margin-left: 5vh;
+}
+
+.fourth-video-container{
+  border: 7px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgb(0, 0, 0);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  width: 35vw;
+  height: 90vh;
+  margin-top: 5vh;
+  margin-left: 5vh;
+}
+
+.long-container-2{
+  position: relative;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh;
+  min-width: 90vw;
+  margin-top: -90px; 
+  background-color:rgb(255, 255, 255);
+}
+
+.long-scroll-container-2{
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  min-height: 95vh;
+  min-width: 87vw;
+}
 
 
 
