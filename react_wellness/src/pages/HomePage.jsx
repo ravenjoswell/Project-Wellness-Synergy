@@ -4,7 +4,6 @@ import { Line, Pie, Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import Box from '../components/Box';
 import '../App.css'; 
-import { Button } from '@mui/material';
 import moment from 'moment';
 
 Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -48,7 +47,6 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  // Data for the combined Line Chart
   const dates = mindfulnessLogs.map(log => moment(log.date).format('YYYY-MM-DD'));
   const moodData = mindfulnessLogs.map(log => log.mood);
   const stressLevelData = mindfulnessLogs.map(log => log.stress_level);
@@ -97,7 +95,6 @@ const HomePage = () => {
     ]
   };
 
-  // Chart.js animation 
   const combinedLineChartOptions = {
     animations: {
       tension: {
@@ -125,7 +122,6 @@ const HomePage = () => {
     },
   };
 
-  // Data for the Journal Pie Chart
   const journalEntriesCount = journalEntries.length;
   const pieChartData = {
     labels: ['Logged', 'Remaining'],
@@ -133,18 +129,17 @@ const HomePage = () => {
       {
         label: 'Journal Entries',
         data: [journalEntriesCount, 7 - journalEntriesCount],
-        backgroundColor: ['orange', '#black'],
+        backgroundColor: ['orange', 'black'],
       },
     ],
   };
 
-  // Data for the Cookbook Gauge Chart
   const gaugeChartData = {
     labels: ['Recipes'],
     datasets: [
       {
         label: 'Recipes in Cookbook',
-        data: [recipeCount, 20 - recipeCount], // out of 20
+        data: [recipeCount, 20 - recipeCount],
         backgroundColor: ['orange', 'black'],
       },
     ],
@@ -154,13 +149,7 @@ const HomePage = () => {
     <div className="home-container">
       {/* Background Video */}
       <div className="background-video">
-        <video
-          src=""
-          autoPlay
-          loop
-          muted
-          className="video"
-        />
+        <video src="./background-video.mp4" autoPlay loop muted className="video" />
       </div>
       {/* Overlay */}
       <div className="overlay"></div>
@@ -177,7 +166,6 @@ const HomePage = () => {
           <Box to="/journal" title="Journal" />
         </div>
 
-        {/* User Dashboard */}
         {!loading && (
           <div className="dashboard">
             <h4 className="dashboard-title">

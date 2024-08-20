@@ -23,7 +23,7 @@ const Navbar = ({ user, setUser }) => {
   };
 
   return (
-    <nav className="bg-stone-950 bg-opacity-20 h-20 fixed w-full top-0 left-0 z-50">
+    <nav className="bg-stone-950 bg-opacity-15 h-20 fixed w-full top-0 left-0 z-50">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full">
         <div className="flex items-center relative">
           {/* Drop Down Icon */}

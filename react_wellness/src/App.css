@@ -1,39 +1,65 @@
 /* ********************ABOUT PAGE******************** */
-@keyframes float {
-  0% {
-      transform: translateY(0);
-  }
-  50% {
-      transform: translateY(-50px);
-  }
-  100% {
-      transform: translateY(0);
-  }
+/* About Page Wrapper */
+.about-page-wrapper {
+  display: flex;
+  justify-content: center; /* Horizontally centers the container */
+  align-items: center; /* Vertically centers the container */
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  padding: 100px; /* Adds space around the first layer */
+  background-color: white; /* Background color for the first layer */
+  box-shadow: 0px 0px 20px rgb(255, 255, 255);
+  border-radius: 15px; /* Optional: Rounds the corners of the first layer */
 }
 
-/* Video Box  */
-.video-box {
-  width: calc(100% - 40px);
-  border: 3px solid white;
+/* About Page Container */
+.about-page-container {
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.823);
+  border-radius: 20px;
+  
+  position: relative;
+  z-index: 1;
+  width: 100%; /* Make it slightly smaller than the wrapper */
+  max-width: 2400px; /* Ensure it doesn't get too wide on large screens */
+ 
+  overflow-y: auto; /* Allow scrolling if content exceeds container height */
+  margin: 20px; /* Ensures perfect margin inside the wrapper */
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+/* About Video Box */
+.about-video-box {
+  width: 100%; /* Ensure it takes the full width of the container */
+  max-width: 2200px; /* Adjust to keep it within the container */
+  margin: 20px 0; /* Add equal top and bottom margin */
+  border: 3px solid rgb(255, 255, 255);
   padding: 4px;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  margin-top: 15px;
-  margin-bottom: 64px;
+  box-shadow: 0 0 40px rgb(19, 19, 19);
   overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 
-/* Video Container */
-.video-container {
+/* About Video Container */
+.about-video-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: 60vh;
+  height: 85vh;
+  width: 100%;
+  z-index: 2; 
 }
 
-.video-container video {
+.about-video-container video {
   position: absolute;
   top: 0;
   left: 0;
@@ -43,130 +69,60 @@
   border-radius: 8px;
 }
 
-/* Parallax Effect */
-.parallax-container {
-  perspective: 1px;
+/* Parallax Text Container */
+.about-parallax-container {
+  position: fixed; /* Fix position so it stays in place while scrolling */
+  top: 20%; /* Adjust vertical placement */
+  left: 10%; /* Adjust horizontal placement */
+  z-index: 3; /* Ensure it's above other content */
+  text-align: left; /* Align text to the left */
 }
 
-.parallax {
-  transform-style: preserve-3d;
-  transform: translateZ(0);
-  animation: float 3s ease-in-out infinite;
-  position: relative;
-  width: 100%;
-  height: 100%;
+/* Stacked Text Styling */
+.stacked-text {
+  font-size: calc(4rem + 2vw);  /* Adjust font size as needed */
+  line-height: 1.2; /* Adjust line height for spacing between words */
+  color: white; /* Text color */
+  margin: 0;
+  text-transform: uppercase; /* Optional: Makes the text uppercase */
+  max-width: 100%;
 }
 
-.parallax-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-family: serif;
-  font-size: 2rem;
+/* Additional Content Below */
+.about-content {
+  margin-top: 50px; /* Ensure space between the video box and additional content */
+  padding: 20px;
+  height: 1000px; /* Example height to create a scrolling effect */
 }
 
-/* Journey Section */
-.journey-container {
-  background: transparent;
-  border-radius: 8px;
-  padding: 32px;
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  margin: 0 20px;
-}
-
-.journey-title {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.journey-title h2 {
-  font-size: 2rem;
-  font-family: serif;
-  color: white;
-  text-decoration: underline;
-}
-
-.journey-description {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.journey-description p {
-  font-size: 1.25rem;
-  color: white;
-}
-
-/* Icon Container */
-.icon-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
-  transition: box-shadow 0.3s ease, color 0.3s ease;
-}
-
-.icon-container:hover {
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-  color: #000000;
-}
-
-.icon-container span {
-  margin-left: 10px;
-  font-size: 1.25rem;
-  transition: color 0.3s ease;
-}
-
-.icon-container:hover span {
-  color: #000000;
-}
-
-/* Vertical Video*/
-.vertical-videos {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin: 64px 80px 32px;
+/* Pitch Text */
+/* Pitch Text Container */
+.pitch-text-container {
+  position: relative; /* Fix position so it stays in place while scrolling */
+  margin-top: 800px; /* Align to the bottom */
+  left: 100%; /* Align to the right */
+  z-index: 1000; /* Ensure it's above all other content */
+  padding: 20px; /* Add some padding to give space from the edges */
   
 }
 
-.video-item {
-  position: relative;
-  width: 100%;
-  border: 3px solid white;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: border-color 0.3s ease-in-out;
+/* Pitch Text */
+.pitch-text {
+  background-color: transparent; /* Optional: Add a semi-transparent background */
+  color: white; /* Text color */
+  padding: 10px; /* Add some padding inside the text box */
+  border-radius: 8px; /* Optional: Round the corners */
+  font-size: calc(1.2rem + 0.5vw);; /* Adjust font size for readability */
+  line-height: 1.5; /* Control spacing between lines */
+  text-align: right; /* Align text to the right */
+  margin: 0;
+  display: block; /* Ensure each word is on a new line */
+  
 }
 
 
-.video-item video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease-in-out;
-}
 
-.video-item:hover video {
-  transform: scale(1.2); 
-}
 
-.video-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-family: serif;
-  font-size: 23px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 8px;
-}
 
 /* ********************HOME PAGE******************** */
 .home-container {
@@ -175,8 +131,8 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  background-color: #2d2d2d; /* Dark gray background */
-  min-height: 100vh; /* Ensure the homepage takes up full viewport height */
+  background-color: rgb(53, 53, 53);
+  min-height: 100vh;
   color: white;
   overflow: hidden;
 }
@@ -199,7 +155,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Content styling */
@@ -214,7 +170,8 @@
 
 .user-title {
   font-weight: bold;
-  color: rgb(249, 248, 248);
+  font-size: 2.5rem;
+  color: #f9f8f8;
   z-index: 25;
 }
 
@@ -223,7 +180,6 @@
   margin-bottom: 2rem;
 }
 
-/* Grid for boxes */
 .box-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -242,7 +198,6 @@
   text-align: left;
 }
 
-
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -253,14 +208,14 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
-  flex-wrap: wrap; /* Allow the charts to wrap to the next line */
+  flex-wrap: wrap;
 }
 
 .dashboard-section {
   flex: 1;
   margin: 0 1rem;
   text-align: center;
-  min-width: 250px; /* Minimum width for each chart */
+  min-width: 250px;
 }
 
 .large-chart {
@@ -268,14 +223,17 @@
   width: 100%;
 }
 
-/* Media Query for smaller screens */
 @media (max-width: 768px) {
   .charts-container {
     flex-direction: column;
   }
 
   .dashboard-section {
-    margin: 0 auto 2rem auto; /* Center the chart sections on smaller screens */
+    margin: 0 auto 2rem auto;
+  }
+
+  .user-title {
+    font-size: 2rem;
   }
 }
 
@@ -284,16 +242,183 @@
 /* ********************RECIPE PAGE******************** */
 .recipe-page {
   max-width: 1200px;
-  margin: 100px auto;
+  margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000000;
+}
+
+/* Video Container */
+.recipe-video-container {
+  position: relative;
+  width: 100%; /* Full width, but within max-width limits */
+  
+  max-width: 1500px;
+  margin-top: 130px;
+  margin-bottom: 64px;
+  border: 5px solid white;
+  border-radius: 8px;
+  box-shadow: 0 0 100px rgb(74, 74, 74);
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 20px;
+}
+
+.overlay-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px; /* Adjust this value to control the width */
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.41);
+  border: 1px solid white;
+  color: white;
   text-align: center;
 }
 
+.search-bar button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #087500;
+  color: white;
+  border: none;
+}
+
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 800px; /* Adjust this value to control the width */
+}
+
+.filter-bar select {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgba(55, 55, 55, 0.341);
+  border: 1px solid white;
+  color: white;
+}
+
+/* Recipe Results Container */
+.recipe-results-container {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.952));
+  padding: 50px 20px;
+  min-height: 100vh;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Recipe Results */
 .recipe-results {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 0 20px rgb(187, 187, 187);
 }
+
+.load-more {
+  margin: 20px auto;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .video-container {
+    width: 100%; /* Ensures video container scales down */
+  }
+  
+  .overlay-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .search-bar,
+  .filter-bar {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+
+  .search-bar input, 
+  .filter-bar select, 
+  .search-bar button {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .load-more {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay-content h1 {
+    font-size: 2rem;
+  }
+
+  .search-bar input, 
+  .filter-bar select, 
+  .search-bar button {
+    font-size: 0.9rem;
+    padding: 7px;
+  }
+
+  .load-more {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+}
+
+
+
+
+
 
 .recipe-card {
   width: 300px;
@@ -304,7 +429,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
   box-sizing: border-box;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,6 +443,7 @@
   text-align: center;
 }
 
+/* Responsive Layout Adjustments */
 @media (max-width: 1200px) {
   .recipe-card {
     flex: 1 0 45%; /* 2 per row */
@@ -331,7 +456,7 @@
   }
 }
 
-
+/* ********************COOKBOOK PAGE******************** */
 
 
 /* ********************JOURNAL PAGE******************** */
@@ -492,63 +617,3 @@
   background: linear-gradient(45deg, #333130, #302823);
 }
 
-.recipe-card {
-  width: 300px;
-  height: 490px;
-  perspective: 1000px;
-  margin: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.recipe-card img {
-  max-width: 100%;
-  border-radius: 4px;
-}
-
-.recipe-details {
-  text-align: center;
-}
-
-.recipe-buttons button {
-  margin: 8px;
-  padding: 8px 16px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.recipe-buttons button:hover {
-  background-color: #45a049;
-}
-
-.recipe-card .front,
-.recipe-card .back {
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: transform 0.6s linear;
-}
-
-.recipe-card.flipped .front {
-    transform: rotateY(180deg);
-}
-
-.recipe-card .back {
-    transform: rotateY(180deg);
-}
-
-.recipe-card.flipped .back {
-    transform: rotateY(0);
-}
