@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { confirmUser } from './utilities';
@@ -200,6 +201,7 @@ const handleRemoveFromDiet = async (dietPlanMealId) => {
         cookbookRecipes,
         dietRecipes,
       }} />
+      <Footer />
     </>
   );
 }

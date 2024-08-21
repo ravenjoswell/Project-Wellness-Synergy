@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Line, Pie, Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-import Box from '../components/Box';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined'; 
+import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
+import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
+import PsychologyAltOutlinedIcon from '@mui/icons-material/PsychologyAltOutlined';
+import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
 import '../App.css'; 
 import moment from 'moment';
 
@@ -61,36 +66,36 @@ const HomePage = () => {
         label: 'Mood',
         data: moodData,
         fill: false,
-        backgroundColor: 'blue',
-        borderColor: 'blue',
+        backgroundColor: '#66b3ff',
+        borderColor: '#3A5FCD',
       },
       {
         label: 'Stress Level',
         data: stressLevelData,
         fill: false,
-        backgroundColor: 'red',
+        backgroundColor: '#ff6666',
         borderColor: 'red',
       },
       {
         label: 'Sleep Hours',
         data: sleepHoursData,
         fill: false,
-        backgroundColor: 'green',
+        backgroundColor: '#66ff66',
         borderColor: 'green',
       },
       {
         label: 'Anxiety Level',
         data: anxietyLevelData,
         fill: false,
-        backgroundColor: 'purple',
+        backgroundColor: '#d1b3ff',
         borderColor: 'purple',
       },
       {
         label: 'Depression Level',
         data: depressionLevelData,
         fill: false,
-        backgroundColor: 'yellow',
-        borderColor: 'yellow',
+        backgroundColor: '#ffff99',
+        borderColor: '#b8860b',
       }
     ]
   };
@@ -108,18 +113,33 @@ const HomePage = () => {
     scales: {
       x: {
         type: 'category',
-        labels: dates
+        labels: dates,
+        ticks: {
+          font: {
+            size: 20 
+          }
+        }
       },
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 20 
+          }
+        }
       }
     },
     plugins: {
       legend: {
         display: true,
         position: 'top',
-      },
-    },
+        labels: {
+          font: {
+            size: 20 
+          }
+        }
+      }
+    }
   };
 
   const journalEntriesCount = journalEntries.length;
@@ -129,9 +149,22 @@ const HomePage = () => {
       {
         label: 'Journal Entries',
         data: [journalEntriesCount, 7 - journalEntriesCount],
-        backgroundColor: ['orange', 'black'],
+        backgroundColor: ['#3A5FCD', '#b35900'],
       },
+      
     ],
+  
+  };
+  const pieChartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 25 // Change this value to adjust the legend label size
+          }
+        }
+      }
+    }
   };
 
   const gaugeChartData = {
@@ -140,49 +173,99 @@ const HomePage = () => {
       {
         label: 'Recipes in Cookbook',
         data: [recipeCount, 20 - recipeCount],
-        backgroundColor: ['orange', 'black'],
+        backgroundColor: ['#3A5FCD', '#b35900'],
       },
     ],
   };
+  const gaugeChartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 25 // Change this value to adjust the legend label size
+          }
+        }
+      }
+    }
+  };
 
   return (
-    <div className="home-container">
-      {/* Background Video */}
-      <div className="background-video">
-        <video src="./background-video.mp4" autoPlay loop muted className="video" />
-      </div>
-      {/* Overlay */}
-      <div className="overlay"></div>
-      {/* Content */}
+    <div className="home-page-wrapper">
       <div className="content">
         <h2 className="user-title">
-          Welcome, {userName}
+          Hello, {userName}
         </h2>
-        <div className="box-grid">
-          <Box to="/recipe" title="Recipe" />
-          <Box to="/cookbook" title="Cookbook" />
-          <Box to="/diet" title="Diet" />
-          <Box to="/mindfulness" title="Mindfulness" />
-          <Box to="/journal" title="Journal" />
-        </div>
+        {/* Link Buttons */}
+<div className="wide-button-container">
+  <Link to="/recipe" className="wide-button">
+    <RestaurantOutlinedIcon style={{ fontSize: 30 }} />
+    <div>
+      <h3>Recipe</h3>
+      <p>
+        Explore a vast collection of recipes with powerful search and filter options to find the perfect dish for any occasion.
+      </p>
+    </div>
+  </Link>
+  
+  <Link to="/cookbook" className="wide-button">
+    <MenuBookOutlinedIcon style={{ fontSize: 30 }} />
+    <div>
+      <h3>Cookbook</h3>
+      <p>
+        Save your favorite recipes in your personal cookbook, ensuring they're always just a click away.
+      </p>
+    </div>
+  </Link>
+  
+  <Link to="/diet" className="wide-button">
+    <ArticleOutlinedIcon style={{ fontSize: 30 }} />
+    <div>
+      <h3>Diet</h3>
+      <p>
+        Plan your meals for the week with daily diet plans, organized by meal times to keep you on track with your nutritional goals.
+      </p>
+    </div>
+  </Link>
+  
+  <Link to="/mindfulness" className="wide-button">
+    <PsychologyAltOutlinedIcon style={{ fontSize: 30 }} />
+    <div>
+      <h3>Mindfulness</h3>
+      <p>
+        Track your mood, stress, sleep, anxiety, and depression levels. Get expert guidance on improving your mental and physical well-being with mindful practices.
+      </p>
+    </div>
+  </Link>
+  
+  <Link to="/journal" className="wide-button">
+    <DrawOutlinedIcon style={{ fontSize: 30 }} />
+    <div>
+      <h3>Journal</h3>
+      <p>
+        Reflect on your daily experiences and cultivate gratitude with a personal journaling space that supports your mental health journey.
+      </p>
+    </div>
+  </Link>
+</div>
+
 
         {!loading && (
           <div className="dashboard">
             <h4 className="dashboard-title">
-              Your Dashboard
+            Your Wellness Overview
             </h4>
             <div className="charts-container">
               <div className="dashboard-section">
-                <h6>Cookbook Recipes</h6>
-                <Doughnut data={gaugeChartData} />
+                <h6>Cookbook</h6>
+                <Doughnut data={gaugeChartData} options={gaugeChartOptions} />
               </div>
               <div className="dashboard-section">
-                <h6>Weekly Journal Entries</h6>
-                <Pie data={pieChartData} />
+                <h6>Journaling Tracker</h6>
+                <Pie data={pieChartData} options={pieChartOptions}  />
               </div>
             </div>
             <div className="dashboard-section large-chart">
-              <h6>Mindfulness Metrics</h6>
+              <h6>Mindfulness Tracker</h6>
               <Line data={combinedLineChartData} options={combinedLineChartOptions} />
             </div>
           </div>

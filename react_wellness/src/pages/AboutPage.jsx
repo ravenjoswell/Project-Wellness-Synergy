@@ -24,12 +24,12 @@ function AboutPage() {
   };
 
   const recipes = [
-    { name: 'Recipe 1', img: './burger.jpg' },
-    { name: 'Recipe 2', img: './burger.jpg' },
-    { name: 'Recipe 3', img: './burger.jpg' },
-    { name: 'Recipe 4', img: './burger.jpg' },
-    { name: 'Recipe 5', img: './burger.jpg' },
-    { name: 'Recipe 6', img: './burger.jpg' },
+    { name: 'Gluten-Free Eggnog Pancakes', img: './pancake.jpg' },
+    { name: 'Gluten-Free/Keto Friendly Buttermilk Chicken Salad', img: './chicken.jpg' },
+    { name: 'Sweet Potato Fries', img: './fries.jpg' },
+    { name: 'Teriyaki Salmon', img: './salmon.jpg' },
+    { name: 'Coconut Shrimp', img: './shrimp.jpg' },
+    { name: 'Steak Tacos', img: './tacos.jpg' },
   ];
 
 
@@ -93,11 +93,12 @@ function AboutPage() {
               </div>
               <div className="right-title-scroll-container-2">
                 <h1 className="right-text-2">
-                  Join Us for: <br />
-                  Guidance towards <br/>
-                  A sound body, A sound mind, <br />
-                  Improved sleep, Daily Journaling,<br />
+                  Join us for guidance towards: <br/>
                   
+                  A sound body... <br />
+                  A sound mind... <br />
+                  Improved sleep... <br />
+                  Daily Journaling...<br />
                   And a balanced dietary lifestyle.<br />
                 </h1>
               </div>

@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class JournalEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(default=timezone.now)
+    date = models.DateTimeField(default=timezone.now)
     entry_text = models.TextField(null=False, blank=False)  # Non-empty 
     mood = models.IntegerField(null=False, blank=False)  # Non-empty 
     gratitude_1 = models.CharField(max_length=255, null=False, blank=False)  # Non-empty 
