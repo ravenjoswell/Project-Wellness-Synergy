@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
-import { Card, CardMedia, CardContent, CardActions, Button, IconButton, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Tooltip } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+import React, { useState, useEffect } from 'react';
+import { FaHeart, FaRegHeart, FaEllipsisV, FaChevronDown } from 'react-icons/fa';
 
 const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet, isInCookbook, isInDiet }) => {
     const [selectedMealTime, setSelectedMealTime] = useState('breakfast');
     const [selectedDay, setSelectedDay] = useState('Monday');
-    const [open, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        } else {
+            document.body.style.overflow = 'auto'; // Enable scrolling
+        }
+    }, [isOpen]);
 
     const handleCookbookClick = () => {
         if (isInCookbook) {
@@ -34,12 +37,8 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
         }
     };
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
     };
 
     const convertDayToDate = (day) => {
@@ -60,92 +59,62 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
     };
 
     return (
-        <Card sx={{ maxWidth: 330, margin: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , padding: '16px' }}>
-                <Typography 
-                    variant="h6" 
-                    sx={{ 
-                        height: '60px', 
-                        overflow: 'hidden', 
-                        textOverflow: 'ellipsis', 
-                        whiteSpace: 'normal', 
-                        display: '-webkit-box', 
-                        WebkitLineClamp: 2, 
-                        WebkitBoxOrient: 'vertical',
-                        wordWrap: 'break-word', // Prevents long words from breaking the layout
-                    }}
-                >
-                    {recipe.label}
-                </Typography>
-                <Tooltip title="View Cooking Instructions">
-                    <IconButton href={recipe.url} target="_blank" rel="noopener noreferrer">
-                        <MoreVertIcon />
-                    </IconButton>
-                </Tooltip>
+        <div className="recipe-card">
+            <div className="card-header">
+                <h2 className="recipe-title">{recipe.label}</h2>
+                <button className="more-icon" onClick={() => window.open(recipe.url, '_blank')} title="View Cooking Instructions">
+                    <FaEllipsisV />
+                </button>
             </div>
-            <CardMedia
-                component="img"
-                height="194"
-                image={recipe.image}
-                alt={recipe.label}
-            />
-            <CardContent sx={{ textAlign: 'center' }}>
-                <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center' }}>
-                    Ingredients: {recipe.ingredients.length}
-                </Typography>
-                <div className="meal-time-select" >
-                    <select value={selectedMealTime} onChange={(e) => setSelectedMealTime(e.target.value)}>
+            <img src={recipe.image} alt={recipe.label} className="recipe-image" />
+            <div className="card-content">
+                <p>Ingredients: {recipe.ingredients.length}</p>
+                <div className="meal-time-select">
+                    <select value={selectedMealTime} onChange={(e) => setSelectedMealTime(e.target.value)} className="dropdown">
                         <option value="breakfast">Breakfast</option>
                         <option value="lunch">Lunch</option>
                         <option value="dinner">Dinner</option>
                         <option value="snack">Snack</option>
                     </select>
-                    <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)}>
-                        {daysOfWeek.map((day) => (
+                    <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)} className="dropdown">
+                        {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
                             <option key={day} value={day}>{day}</option>
                         ))}
                     </select>
-                    <Button onClick={handleDietClick} variant="contained" color={isInDiet ? "secondary" : "primary"}>
+                    <button onClick={handleDietClick} className="diet-button">
                         {isInDiet ? 'Remove from Diet' : `Add to ${selectedMealTime}`}
-                    </Button>
+                    </button>
                 </div>
-            </CardContent>
-            <CardActions disableSpacing sx={{ justifyContent: 'space-between' }}>
-                <Tooltip title={isInCookbook ? "Remove from Cookbook" : "Add to Cookbook"}>
-                    <IconButton onClick={handleCookbookClick} color={isInCookbook ? "error" : "default"}>
-                        <FavoriteIcon />
-                    </IconButton>
-                </Tooltip>
-                <Tooltip title="View More Details">
-                    <IconButton onClick={handleClickOpen}>
-                        <ExpandMoreIcon />
-                    </IconButton>
-                </Tooltip>
-            </CardActions>
+            </div>
+            <div className="card-actions">
+                <button onClick={handleCookbookClick} className="favorite-icon" title={isInCookbook ? "Remove from Cookbook" : "Add to Cookbook"}>
+                    {isInCookbook ? <FaHeart /> : <FaRegHeart />}
+                </button>
+                <button onClick={toggleModal} className="expand-icon" title="See More Details">
+                    <FaChevronDown />
+                </button>
+            </div>
 
-            {/* Modal for Recipe Details */}
-            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-                <DialogTitle>{recipe.label}</DialogTitle>
-                <DialogContent>
-                    <Typography paragraph><strong>Diet Labels:</strong> {recipe.dietLabels.join(', ')}</Typography>
-                    <Typography paragraph><strong>Health Labels:</strong> {recipe.healthLabels.join(', ')}</Typography>
-                    <Typography paragraph><strong>Ingredients:</strong> {recipe.ingredientLines.join(', ')}</Typography>
-                    <Typography paragraph><strong>Nutritional Facts:</strong></Typography>
-                    {recipe.totalNutrients ? (
-                        Object.entries(recipe.totalNutrients).map(([key, nutrient]) => (
-                            <Typography paragraph key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</Typography>
-                        ))
-                    ) : (
-                        <Typography paragraph>No nutritional information available.</Typography>
-                    )}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </Card>
+            {isOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>{recipe.label}</h3>
+                        <p><strong>Diet Labels:</strong> {recipe.dietLabels.join(', ')}</p>
+                        <p><strong>Health Labels:</strong> {recipe.healthLabels.join(', ')}</p>
+                        <p><strong>Ingredients:</strong> {recipe.ingredientLines.join(', ')}</p>
+                        <p><strong>Nutritional Facts:</strong></p>
+                        {recipe.totalNutrients ? (
+                            Object.entries(recipe.totalNutrients).map(([key, nutrient]) => (
+                                <p key={key}><strong>{nutrient.label}:</strong> {Math.round(nutrient.quantity)} {nutrient.unit}</p>
+                            ))
+                        ) : (
+                            <p>No nutritional information available.</p>
+                        )}
+                        <button onClick={toggleModal} className="close-button">Close</button>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 
