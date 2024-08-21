@@ -61,7 +61,7 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
 
     return (
         <Card sx={{ maxWidth: 330, margin: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '16px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , padding: '16px' }}>
                 <Typography 
                     variant="h6" 
                     sx={{ 
@@ -89,11 +89,11 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
                 image={recipe.image}
                 alt={recipe.label}
             />
-            <CardContent>
+            <CardContent sx={{ textAlign: 'center' }}>
                 <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center' }}>
                     Ingredients: {recipe.ingredients.length}
                 </Typography>
-                <div className="meal-time-select">
+                <div className="meal-time-select" >
                     <select value={selectedMealTime} onChange={(e) => setSelectedMealTime(e.target.value)}>
                         <option value="breakfast">Breakfast</option>
                         <option value="lunch">Lunch</option>
