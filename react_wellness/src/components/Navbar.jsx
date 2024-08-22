@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { logOut } from "../utilities";
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { logOut } from '../utilities'
+import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
+
 
 const Navbar = ({ user, setUser }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen)
 
   const handleLogOut = async () => {
-    await logOut();
-    setUser(null);
-    navigate('/login');
-  };
+    await logOut()
+    setUser(null)
+    navigate('/login')
+  }
 
   const handleLinkClick = () => {
-    setIsMenuOpen(false);
-    setIsUserMenuOpen(false);
-  };
+    setIsMenuOpen(false)
+    setIsUserMenuOpen(false)
+  }
 
   return (
     <nav className="navbar">
@@ -42,7 +42,7 @@ const Navbar = ({ user, setUser }) => {
 
           {/* Logo */}
           <div className="navbar-logo">
-            <h1 className='font-serif text-3xl text-blue-600'>Wellness Synergy</h1>
+            <h1 className="font-serif text-3xl text-blue-600">Wellness Synergy</h1>
           </div>
 
           {/* Dropdown Menu */}
@@ -91,8 +91,8 @@ const Navbar = ({ user, setUser }) => {
             <Link to="/signup" className="menu-link" role="menuitem" tabIndex="-1" onClick={handleLinkClick}>Sign Up</Link>
             <Link
               onClick={async () => {
-                await handleLogOut();
-                handleLinkClick();
+                await handleLogOut()
+                handleLinkClick()
               }}
               to="/login"
               className="menu-link"
@@ -105,7 +105,7 @@ const Navbar = ({ user, setUser }) => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useOutletContext } from 'react-router-dom';
-import DietCard from '../components/DietCard';
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useOutletContext } from 'react-router-dom'
+import DietCard from '../components/DietCard'
 
-const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 const DietPage = () => {
-    const [dietPlan, setDietPlan] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [mealTimeModalOpen, setMealTimeModalOpen] = useState(false);
-    const [recipeModalOpen, setRecipeModalOpen] = useState(false);
-    const [selectedDay, setSelectedDay] = useState('');
-    const [selectedMealTime, setSelectedMealTime] = useState('');
-    const [selectedRecipes, setSelectedRecipes] = useState([]);
-    const [showWeeklyLog, setShowWeeklyLog] = useState(false);
+    const [dietPlan, setDietPlan] = useState({})
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+    const [mealTimeModalOpen, setMealTimeModalOpen] = useState(false)
+    const [recipeModalOpen, setRecipeModalOpen] = useState(false)
+    const [selectedDay, setSelectedDay] = useState('')
+    const [selectedMealTime, setSelectedMealTime] = useState('')
+    const [selectedRecipes, setSelectedRecipes] = useState([])
+    const [showWeeklyLog, setShowWeeklyLog] = useState(false)
     
     // Form state variables
-    const [weeklyReflection, setWeeklyReflection] = useState('');
-    const [goalsForNextWeek, setGoalsForNextWeek] = useState('');
-    const [challenges, setChallenges] = useState('');
-    const [highlights, setHighlights] = useState('');
+    const [weeklyReflection, setWeeklyReflection] = useState('')
+    const [goalsForNextWeek, setGoalsForNextWeek] = useState('')
+    const [challenges, setChallenges] = useState('')
+    const [highlights, setHighlights] = useState('')
 
     const {
         handleRemoveFromDiet,
@@ -28,29 +28,29 @@ const DietPage = () => {
         handleRemoveFromCookbook,
         handleAddToCookbook,
         cookbookRecipes,
-    } = useOutletContext();
+    } = useOutletContext()
 
     useEffect(() => {
-        fetchDietPlan();
-    }, []);
+        fetchDietPlan()
+    }, [])
 
     const fetchDietPlan = async () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
         try {
             const response = await axios.get('http://localhost:8000/api/diet/daily-diet-plans/', {
                 headers: { Authorization: `Token ${token}` },
-            });
-            const dietPlanData = organizeDietData(response.data);
-            setDietPlan(dietPlanData);
-            setLoading(false);
+            })
+            const dietPlanData = organizeDietData(response.data)
+            setDietPlan(dietPlanData)
+            setLoading(false)
         } catch (err) {
-            setError('Failed to fetch diet plan');
-            setLoading(false);
+            setError('Failed to fetch diet plan', err)
+            setLoading(false)
         }
-    };
+    }
 
     const organizeDietData = (data) => {
-        const organizedData = {};
+        const organizedData = {}
 
         daysOfWeek.forEach(day => {
             organizedData[day] = {
@@ -59,58 +59,58 @@ const DietPage = () => {
                 lunch: [],
                 dinner: [],
                 snack: []
-            };
-        });
+            }
+        })
 
         data.forEach(item => {
-            const date = new Date(item.date);
-            const dayName = date.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+            const date = new Date(item.date)
+            const dayName = date.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' })
 
-            organizedData[dayName].date = date.toISOString().split('T')[0];
+            organizedData[dayName].date = date.toISOString().split('T')[0]
 
             item.meals.forEach(meal => {
-                organizedData[dayName][meal.meal_time].push(meal.recipe);
-            });
-        });
+                organizedData[dayName][meal.meal_time].push(meal.recipe)
+            })
+        })
 
-        return organizedData;
-    };
+        return organizedData
+    }
 
     const handleDayClick = (day) => {
-        setSelectedDay(day);
-        setMealTimeModalOpen(true);
-    };
+        setSelectedDay(day)
+        setMealTimeModalOpen(true)
+    }
 
     const handleMealTimeClick = (mealTime) => {
-        setSelectedMealTime(mealTime);
-        setSelectedRecipes(dietPlan[selectedDay][mealTime] || []);
-        setRecipeModalOpen(true);
-        setMealTimeModalOpen(false);
-    };
+        setSelectedMealTime(mealTime)
+        setSelectedRecipes(dietPlan[selectedDay][mealTime] || [])
+        setRecipeModalOpen(true)
+        setMealTimeModalOpen(false)
+    }
 
     const handleCloseMealTimeModal = () => {
-        setMealTimeModalOpen(false);
-        setSelectedDay('');
-    };
+        setMealTimeModalOpen(false)
+        setSelectedDay('')
+    }
 
     const handleCloseRecipeModal = () => {
-        setRecipeModalOpen(false);
-        setSelectedMealTime('');
-        setSelectedRecipes([]);
-    };
+        setRecipeModalOpen(false)
+        setSelectedMealTime('')
+        setSelectedRecipes([])
+    }
 
     const isRecipeInDiet = (recipe) => {
-        return dietRecipes.some(r => r.uri === recipe.uri);
-    };
+        return dietRecipes.some(r => r.uri === recipe.uri)
+    }
 
     const isRecipeInCookbook = (recipe) => {
-        return cookbookRecipes.some(r => r.uri === recipe.uri);
-    };
+        return cookbookRecipes.some(r => r.uri === recipe.uri)
+    }
 
     const handleWeeklyLogEntry = async (e) => {
-        e.preventDefault();  // Prevent default form submission
+        e.preventDefault()  // Prevent default form submission
         try {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('token')
             await axios.post('http://localhost:8000/api/diet/weekly-log/', {
                 reflection: weeklyReflection,
                 goals: goalsForNextWeek,
@@ -118,22 +118,21 @@ const DietPage = () => {
                 highlights: highlights,
             }, {
                 headers: { Authorization: `Token ${token}` },
-            });
+            })
             // Re-fetch diet plan data to re-render the page
-            fetchDietPlan();
+            fetchDietPlan()
             // Clear form fields after submission
-            setWeeklyReflection('');
-            setGoalsForNextWeek('');
-            setChallenges('');
-            setHighlights('');
+            setWeeklyReflection('')
+            setGoalsForNextWeek('')
+            setChallenges('')
+            setHighlights('')
         } catch (err) {
-            setError('Failed to submit weekly log entry');
+            setError('Failed to submit weekly log entry')
         }
-    };
+    }
 
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>{error}</p>
 
     return (
         <div className="diet-outer-container">
@@ -220,7 +219,7 @@ const DietPage = () => {
                                                 dietLabels: meal.diet_labels.split(', '),
                                                 healthLabels: meal.health_labels.split(', '),
                                                 ingredients: meal.ingredients,
-                                            };
+                                            }
                                             return (
                                                 <DietCard 
                                                     key={index} 
@@ -231,7 +230,7 @@ const DietPage = () => {
                                                     isInDiet={isRecipeInDiet(recipe)}  
                                                     isInCookbook={isRecipeInCookbook(recipe)}
                                                 />
-                                            );
+                                            )
                                         })
                                     ) : (
                                         <p>No recipes added for this meal time.</p>
@@ -246,7 +245,7 @@ const DietPage = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default DietPage;
+export default DietPage

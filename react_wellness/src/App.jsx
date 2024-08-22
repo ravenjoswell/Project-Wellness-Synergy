@@ -46,7 +46,7 @@ function App() {
         const response = await axios.get('http://localhost:8000/api/recipes/cookbook/', {
           headers: { Authorization: `Token ${token}` },
         });
-        setCookbookRecipes(response.data);
+        setCookbookRecipes(response.data)
       } catch (err) {
         console.error('Failed to fetch cookbook recipes:', err)
       }
@@ -58,7 +58,7 @@ function App() {
         const response = await axios.get('http://localhost:8000/api/diet/diet-plans/', {
           headers: { Authorization: `Token ${token}` },
         });
-        setDietRecipes(response.data);
+        setDietRecipes(response.data)
       } catch (err) {
         console.error('Failed to fetch diet recipes:', err)
       }
@@ -81,13 +81,13 @@ function App() {
     } catch (err) {
       setError('Failed to fetch recipes. Please try again.', err);
     }
-    setLoading(false);
+    setLoading(false)
   };
 
   const handleLoadMore = async () => {
     if (!nextPageUrl) return;
 
-    setLoading(true);
+    setLoading(true)
     try {
       const response = await axios.get(nextPageUrl)
       setRecipes((prevRecipes) => [...prevRecipes, ...response.data.hits])
@@ -95,7 +95,7 @@ function App() {
     } catch (err) {
       setError('Failed to load more recipes. Please try again.', err);
     }
-    setLoading(false);
+    setLoading(false)
   };
 
   const handleAddToCookbook = async (recipe) => {
@@ -160,7 +160,7 @@ const handleRemoveFromDiet = async (dietPlanMealId) => {
       
       setDietRecipes((prevDietRecipes) => prevDietRecipes.filter(r => r.id !== dietPlanMealId));
   } catch (err) {
-      console.error("Failed to remove recipe from diet:", err);
+      console.error("Failed to remove recipe from diet:", err)
   }
 };
 

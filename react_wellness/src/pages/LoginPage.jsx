@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import { signIn } from "../utilities";
+import { useState } from "react"
+import { useOutletContext } from "react-router-dom"
+import { signIn } from "../utilities"
 
 const LogIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { setUser } = useOutletContext();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const { setUser } = useOutletContext()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const user = await signIn(email, password);
-    setUser(user);
-  };
+    e.preventDefault()
+    const user = await signIn(email, password)
+    setUser(user)
+  }
 
   return (
     <div className="outer-container">
@@ -26,7 +26,7 @@ const LogIn = () => {
           <h1 className="form-title">Log In</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-lg font-serif text-black">Email</label> {/* Increased font size */}
+              <label className="block text-lg font-serif text-black">Email</label>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -37,7 +37,7 @@ const LogIn = () => {
               />
             </div>
             <div>
-              <label className="block text-lg font-serif text-black">Password</label> {/* Increased font size */}
+              <label className="block text-lg font-serif text-black">Password</label>
               <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -56,7 +56,7 @@ const LogIn = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LogIn;
+export default LogIn

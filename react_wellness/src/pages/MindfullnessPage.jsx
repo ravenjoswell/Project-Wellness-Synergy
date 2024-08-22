@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Slider from '@mui/material/Slider';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from 'react'
+import axios from 'axios'
+import Slider from '@mui/material/Slider'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
 
 const MindfulnessPage = () => {
-  const [stressLevel, setStressLevel] = useState(5);
-  const [mood, setMood] = useState(5);
-  const [sleepHours, setSleepHours] = useState(7);
-  const [anxietyLevel, setAnxietyLevel] = useState(5);
-  const [depressionLevel, setDepressionLevel] = useState(5);
-  const [additionalNotes, setAdditionalNotes] = useState('');
-  const [guidedResponse, setGuidedResponse] = useState('');
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [stressLevel, setStressLevel] = useState(5)
+  const [mood, setMood] = useState(5)
+  const [sleepHours, setSleepHours] = useState(7)
+  const [anxietyLevel, setAnxietyLevel] = useState(5)
+  const [depressionLevel, setDepressionLevel] = useState(5)
+  const [additionalNotes, setAdditionalNotes] = useState('')
+  const [guidedResponse, setGuidedResponse] = useState('')
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const validateForm = () => {
     return (
@@ -26,22 +26,22 @@ const MindfulnessPage = () => {
       anxietyLevel !== null &&
       depressionLevel !== null &&
       additionalNotes !== ''
-    );
-  };
+    )
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     if (!validateForm()) {
-      alert("Please fill out all fields before submitting.");
-      return;
+      alert("Please fill out all fields before submitting.")
+      return
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')
     const config = {
       headers: {
         Authorization: `Token ${token}`
       },
-    };
+    }
 
     const data = {
       stress_level: stressLevel,
@@ -50,45 +50,45 @@ const MindfulnessPage = () => {
       anxiety_level: anxietyLevel,
       depression_level: depressionLevel,
       additional_notes: additionalNotes,
-    };
+    }
 
     try {
-      await axios.post('http://127.0.0.1:8000/api/mindfulness/well-being-logs/', data, config);
-      setGuidedResponse('');  // Clear any previous responses
-      setIsDialogOpen(true);  // Open modal after submission
+      await axios.post('http://127.0.0.1:8000/api/mindfulness/well-being-logs/', data, config)
+      setGuidedResponse('')  // Clear any previous responses
+      setIsDialogOpen(true)  // Open modal after submission
 
       // Clear form after submission
-      setStressLevel(5);
-      setMood(5);
-      setSleepHours(7);
-      setAnxietyLevel(5);
-      setDepressionLevel(5);
-      setAdditionalNotes('');
+      setStressLevel(5)
+      setMood(5)
+      setSleepHours(7)
+      setAnxietyLevel(5)
+      setDepressionLevel(5)
+      setAdditionalNotes('')
     } catch (error) {
-      console.error('Error saving entry:', error);
+      console.error('Error saving entry:', error)
     }
-  };
+  }
 
   const handleGuidedSession = async (category) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')
     const config = {
       headers: {
         Authorization: `Token ${token}`
       },
-    };
+    }
 
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/mindfulness/guided-session/${category}/`, config);
-      setGuidedResponse(response.data.session_content);  // Display response inside modal
+      const response = await axios.get(`http://127.0.0.1:8000/api/mindfulness/guided-session/${category}/`, config)
+      setGuidedResponse(response.data.session_content)  // Display response inside modal
     } catch (error) {
-      console.error('Error fetching guided session:', error);
+      console.error('Error fetching guided session:', error)
     }
-  };
+  }
 
   const closeDialog = () => {
-    setIsDialogOpen(false);
-    setGuidedResponse('');  // Clear response when closing the modal
-  };
+    setIsDialogOpen(false)
+    setGuidedResponse('')  // Clear response when closing the modal
+  }
 
   return (
     <div className="mindfulness-overall-container">
@@ -197,7 +197,7 @@ const MindfulnessPage = () => {
         </DialogActions>
       </Dialog>
     </div>
-  );
-};
+  )
+}
 
-export default MindfulnessPage;
+export default MindfulnessPage

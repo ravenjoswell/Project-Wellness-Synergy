@@ -1,18 +1,9 @@
-
-// import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined'; 
-// import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
-// import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
-// import PsychologyAltOutlinedIcon from '@mui/icons-material/PsychologyAltOutlined';
-// import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
-
-
-import '../App.css'; 
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import '../App.css'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 function AboutPage() {
-
   const settings = {
     dots: true,
     infinite: true,
@@ -21,7 +12,7 @@ function AboutPage() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-  };
+  }
 
   const recipes = [
     { name: 'Gluten-Free Eggnog Pancakes', img: './pancake.jpg' },
@@ -30,10 +21,7 @@ function AboutPage() {
     { name: 'Teriyaki Salmon', img: './salmon.jpg' },
     { name: 'Coconut Shrimp', img: './shrimp.jpg' },
     { name: 'Steak Tacos', img: './tacos.jpg' },
-  ];
-
-
-
+  ]
 
   return (
     <div className="about-page-wrapper">
@@ -61,11 +49,11 @@ function AboutPage() {
               {/* Pitch Text Container */}
               <div className="pitch-text-container">
                 <p className="pitch-text">
-                <br/>Embrace a mindful approach to wellness,
-                <br/>nurturing both your mind and body.
-                <br/>Support your journey with nutrition 
-                <br/>tailored to your dietary needs,
-                <br/>for a healthier, happier way of life.
+                  <br />Embrace a mindful approach to wellness,
+                  <br />nurturing both your mind and body.
+                  <br />Support your journey with nutrition
+                  <br />tailored to your dietary needs,
+                  <br />for a healthier, happier way of life.
                 </p>
               </div>
             </div>
@@ -86,15 +74,14 @@ function AboutPage() {
               <div className="right-title-scroll-container">
                 <h1 className="right-text">
                   Start <br />
-                  Your <br/>
+                  Your <br />
                   Journey <br />
                   With Us.<br />
                 </h1>
               </div>
               <div className="right-title-scroll-container-2">
                 <h1 className="right-text-2">
-                  Join us for guidance towards: <br/>
-                  
+                  Join us for guidance towards: <br />
                   A sound body... <br />
                   A sound mind... <br />
                   Improved sleep... <br />
@@ -103,51 +90,51 @@ function AboutPage() {
                 </h1>
               </div>
               <div className="second-video-container">
-              <div className="second-video-box">
-              <video
-              src="./aboutbg1.mp4"
-              autoPlay
-              loop
-              muted
-              />
-              <div className="second-video-text">
-              <h1 >
-              </h1>
-              </div>
-               </div>
+                <div className="second-video-box">
+                  <video
+                    src="./aboutbg1.mp4"
+                    autoPlay
+                    loop
+                    muted
+                  />
+                  <div className="second-video-text">
+                    <h1></h1>
+                  </div>
+                </div>
               </div>
               <div className="third-video-container">
-              <div className="third-video-box">
-              <video
-              src="./aboutbg2.mp4"
-              autoPlay
-              loop
-              muted
-              />
-               </div>
+                <div className="third-video-box">
+                  <video
+                    src="./aboutbg2.mp4"
+                    autoPlay
+                    loop
+                    muted
+                  />
+                </div>
               </div>
               <div className="fourth-video-container">
-              <div className="fourth-video-box">
-              <video
-              src="./aboutbg3.mp4"
-              autoPlay
-              loop
-              muted
-              />
-               </div>
+                <div className="fourth-video-box">
+                  <video
+                    src="./aboutbg3.mp4"
+                    autoPlay
+                    loop
+                    muted
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-         {/* Long Scrolling Section */}
-         <div className="long-container-2">
+
+        {/* Long Scrolling Section */}
+        <div className="long-container-2">
           <div className="long-scroll-container-2">
-          <div className="about-recipe-container">
-                <h1 className="about-recipe-text">
+            <div className="about-recipe-container">
+              <h1 className="about-recipe-text">
                 Craft Your Perfect Plate
-                </h1>
-              </div>
-          <Slider {...settings}>
+              </h1>
+            </div>
+            <Slider {...settings}>
               {recipes.map((recipe, index) => (
                 <div key={index}>
                   <img src={recipe.img} alt={recipe.name} />
@@ -159,7 +146,7 @@ function AboutPage() {
               {/* Scrolling Title Text */}
               <div className="about-recipe-container-2">
                 <h1 className="about-recipe-text-2">
-                Fuel your wellness journey with recipes designed to meet your unique dietary needs. From your personal cookbook to tailored weekly and daily meal plans, explore hundreds of healthy recipes that nourish your body and support your health goals. Here, your dietary needs are our priority, and every dish is crafted with care.
+                  Fuel your wellness journey with recipes designed to meet your unique dietary needs. From your personal cookbook to tailored weekly and daily meal plans, explore hundreds of healthy recipes that nourish your body and support your health goals. Here, your dietary needs are our priority, and every dish is crafted with care.
                 </h1>
               </div>
             </div>
@@ -167,19 +154,7 @@ function AboutPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default AboutPage;
-
-
-
-
-
-
-
-
-
-
-
-
+export default AboutPage

@@ -1,62 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { FaHeart, FaRegHeart, FaEllipsisV, FaChevronDown } from 'react-icons/fa';
+import { useState, useEffect } from 'react'
+import { FaHeart, FaRegHeart, FaEllipsisV, FaChevronDown } from 'react-icons/fa'
 
 const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet, isInCookbook, isInDiet }) => {
-    const [selectedMealTime, setSelectedMealTime] = useState('breakfast');
-    const [selectedDay, setSelectedDay] = useState('Monday');
-    const [isOpen, setIsOpen] = useState(false);
+    const [selectedMealTime, setSelectedMealTime] = useState('breakfast')
+    const [selectedDay, setSelectedDay] = useState('Monday')
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            document.body.style.overflow = 'hidden'
         } else {
-            document.body.style.overflow = 'auto'; // Enable scrolling
+            document.body.style.overflow = 'auto' 
         }
-    }, [isOpen]);
+    }, [isOpen])
 
     const handleCookbookClick = () => {
         if (isInCookbook) {
-            onRemoveFromCookbook(recipe);
+            onRemoveFromCookbook(recipe)
         } else {
-            onAddToCookbook(recipe);
+            onAddToCookbook(recipe)
         }
-    };
+    }
 
     const handleDietClick = () => {
-        const date = convertDayToDate(selectedDay);
+        const date = convertDayToDate(selectedDay)
 
         if (!selectedMealTime || !selectedDay || !date) {
-            console.error('Meal time, day of the week, and date must be provided.');
-            return;
+            console.error('Meal time, day of the week, and date must be provided.')
+            return
         }
 
         if (isInDiet) {
-            onRemoveFromDiet(recipe, selectedMealTime, date);
+            onRemoveFromDiet(recipe, selectedMealTime, date)
         } else {
-            onAddToDiet(recipe, selectedMealTime, selectedDay, date);
+            onAddToDiet(recipe, selectedMealTime, selectedDay, date)
         }
-    };
+    }
 
     const toggleModal = () => {
-        setIsOpen(!isOpen);
-    };
+        setIsOpen(!isOpen)
+    }
 
     const convertDayToDate = (day) => {
-        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const today = new Date();
-        const dayIndex = daysOfWeek.indexOf(day);
-        const currentDayIndex = today.getUTCDay();
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        const today = new Date()
+        const dayIndex = daysOfWeek.indexOf(day)
+        const currentDayIndex = today.getUTCDay()
 
-        let dayDifference = dayIndex - currentDayIndex;
+        let dayDifference = dayIndex - currentDayIndex
         if (dayDifference < 0) {
-            dayDifference += 7;
+            dayDifference += 7
         }
 
-        const resultDate = new Date(today);
-        resultDate.setUTCDate(today.getUTCDate() + dayDifference);
+        const resultDate = new Date(today)
+        resultDate.setUTCDate(today.getUTCDate() + dayDifference)
 
-        return resultDate.toISOString().split('T')[0];
-    };
+        return resultDate.toISOString().split('T')[0]
+    }
 
     return (
         <div className="recipe-card">
@@ -115,7 +115,7 @@ const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default RecipeCard;
+export default RecipeCard

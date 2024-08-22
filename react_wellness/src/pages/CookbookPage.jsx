@@ -1,52 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import CookbookRecipeCard from '../components/CookbookRecipeCard';
-import { useOutletContext } from 'react-router-dom';
-import '../App.css'; // Make sure to create this CSS file for the styles
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import CookbookRecipeCard from '../components/CookbookRecipeCard'
+import { useOutletContext } from 'react-router-dom'
+import '../App.css'
 
 const CookbookPage = () => {
-    const { handleAddToDiet, handleRemoveFromDiet, dietRecipes } = useOutletContext();
-    const [cookbookRecipes, setCookbookRecipes] = useState([]);
-    const [error, setError] = useState('');
+    const { handleAddToDiet, handleRemoveFromDiet, dietRecipes } = useOutletContext()
+    const [cookbookRecipes, setCookbookRecipes] = useState([])
+    const [error, setError] = useState('')
 
     useEffect(() => {
         const fetchCookbookRecipes = async () => {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('token')
             if (!token) {
-                setError('User must be logged in to view the cookbook.');
-                return;
+                setError('User must be logged in to view the cookbook.')
+                return
             }
 
             try {
                 const response = await axios.get('http://localhost:8000/api/recipes/cookbook/', {
                     headers: { Authorization: `Token ${token}` },
-                });
-                setCookbookRecipes(response.data);
+                })
+                setCookbookRecipes(response.data)
             } catch (err) {
                 if (err.response && err.response.status === 401) {
-                    setError('Unauthorized access. Please log in.');
+                    setError('Unauthorized access. Please log in.')
                 } else {
-                    setError('Failed to fetch cookbook recipes. Please try again.');
+                    setError('Failed to fetch cookbook recipes. Please try again.')
                 }
             }
-        };
+        }
 
-        fetchCookbookRecipes();
-    }, []);
+        fetchCookbookRecipes()
+    }, [])
 
     const handleRemoveFromCookbook = async (myCookbookId) => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
         try {
             await axios.delete(`http://localhost:8000/api/recipes/remove-from-cookbook/${myCookbookId}/`, {
                 headers: { Authorization: `Token ${token}` }
-            });
+            })
             setCookbookRecipes(prevRecipes => 
                 prevRecipes.filter(r => r.id !== myCookbookId) 
-            );
+            )
         } catch (error) {
-            console.error('Failed to remove from cookbook:', error);
+            console.error('Failed to remove from cookbook:', error)
         }
-    };
+    }
 
     return (
         <div className="cookbook-outer-container">
@@ -70,7 +70,7 @@ const CookbookPage = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default CookbookPage;
+export default CookbookPage
