@@ -1,12 +1,9 @@
 /********************************* ABOUT *********************************/
 /********************************* ABOUT *********************************/
 /********************************* ABOUT *********************************/
-/* About Page Wrapper */
-/* Outer Wrapper */
-/* Outer Wrapper */
 .about-page-wrapper {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
@@ -14,11 +11,11 @@
   background-color: white;
   box-shadow: 0px 0px 20px rgb(255, 255, 255);
   border-radius: 15px;
-  overflow-y: visible; /* Ensure the whole page scrolls */
+  overflow-y: visible; 
   margin-top: 15px;
 }
 
-/* About Page Container */
+
 .about-page-container {
   background: white;
   padding: 20px;
@@ -28,7 +25,7 @@
   z-index: 1;
   width: 100%;
   max-width: 2400px;
-  overflow-y: visible; /* Remove auto scrolling to allow full page scrolling */
+  overflow-y: visible; 
   margin: 20px;
   display: flex;
   flex-direction: column;
@@ -37,7 +34,7 @@
   padding-top: 1.5vh;
 }
 
-/* About Video Box */
+
 .about-video-box {
   width: 100%;
   max-width: 2200px;
@@ -51,7 +48,7 @@
   z-index: 2;
 }
 
-/* About Video Container */
+
 .about-video-container {
   position: relative;
   display: flex;
@@ -73,7 +70,7 @@
   border-radius: 8px;
 }
 
-/* Parallax Text Container */
+
 .about-parallax-container {
   position: fixed;
   top: 15%;
@@ -82,7 +79,7 @@
   text-align: left;
 }
 
-/* Stacked Text Styling */
+
 .stacked-text {
   font-size: calc(5rem + 2vw);
   line-height: 1.2;
@@ -94,14 +91,14 @@
   font-weight: bold;
 }
 
-/* Additional Content Below */
+
 .about-content {
   margin-top: 50px;
   padding: 20px;
   height: 1000px; 
 }
 
-/* Pitch Text Container */
+
 .pitch-text-container {
   position: relative;
   margin-top: 1000px;
@@ -110,7 +107,7 @@
   padding: 20px;
 }
 
-/* Pitch Text */
+
 .pitch-text {
   background-color: transparent;
   color: white;
@@ -125,7 +122,7 @@
   font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Long Container (for Scrolling Sections) */
+
 .long-container {
   position: relative;
   display: flex;
@@ -147,7 +144,7 @@
   min-width: 87vw;
 }
 
-/* Right Title Scroll */
+
 .right-title-scroll-container {
   position: fixed;
   top: 15%;
@@ -187,7 +184,7 @@
   
 }
 
-/* Video Containers */
+
 .second-video-container,
 .third-video-container,
 .fourth-video-container {
@@ -207,7 +204,7 @@
   margin-top: 5vh;
 }
 
-/* Inner Container for Carousel */
+
 .long-container-2 {
   position: relative;
   display: flex;
@@ -229,7 +226,6 @@
   min-width: 87vw;
 }
 
-/* Slick Carousel Styles */
 .slick-slider {
   width: 87vw;
   height: 50vh;
@@ -305,7 +301,7 @@
   margin-bottom: 20px;
 }
 
-/* Recipe Title Text */
+
 .about-recipe-text {
   font-size: calc(3rem + 1vw);
   text-align: center;
@@ -319,17 +315,16 @@
   font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Recipe Pitch Container */
+
 .about-recipe-container-2 {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 30px 0;
   margin-top: 40px;
-  
 }
 
-/* Recipe Pitch Text */
+
 .about-recipe-text-2 {
   font-size: calc(1.5rem + 0.5vw); 
   text-align: center;
@@ -345,16 +340,13 @@
   font-family: 'Open Sans', Arial, sans-serif; 
 }
 
-
-
-
 /********************************* HOME *********************************/
 /********************************* HOME *********************************/
 /********************************* HOME *********************************/
-/* Home Page Wrapper */
+
 .home-page-wrapper {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-height: 150vh;
@@ -362,12 +354,10 @@
   padding: 100px;
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  overflow-y: visible; /* Ensure the whole page scrolls */
+  overflow-y: visible;
   margin-top: 75px;
 }
 
-
-/* Content Container */
 .content {
   position: relative;
   z-index: 1;
@@ -376,10 +366,8 @@
   text-align: center;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.835);
   border-radius: 20px;
-  
 }
 
-/* User Title */
 .user-title {
   font-size: calc(3rem + 2vw);
   font-weight: 600;
@@ -392,7 +380,6 @@
  
 }
 
-/* Box Grid for Navigation */
 .box-grid {
   display: flex;
   flex-wrap: wrap;
@@ -401,7 +388,6 @@
   margin-bottom: 40px;
 }
 
-/* Dashboard */
 .dashboard {
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
@@ -428,22 +414,19 @@
   transition: all 0.3s ease;
 }
 
-
 .charts-container {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 20px 30px;
-
 }
 
 .dashboard-section {
   margin-bottom: 20px;
   text-align: center;
   width: 100%;
-  max-width: 25vw; /* Make the charts larger */
-  margin: 0 auto; /* Center the charts */
-  
+  max-width: 25vw; 
+  margin: 0 auto;
 }
 
 .dashboard-section h6 {
@@ -459,26 +442,10 @@
   width: 100%;
   max-width: 70vw;
   margin: 0 auto;
-  
   margin-top: 150px;
   margin-bottom: 150px;
 }
 
-
-@media (max-width: 768px) {
-  .charts-container {
-    flex-direction: column;
-  }
-
-  .dashboard-section {
-    margin: 0 auto 2rem auto;
-  }
-
-  .user-title {
-    font-size: 2rem;
-  }
-}
-/* Wide Button Container */
 .wide-button-container {
   display: flex;
   flex-direction: column;
@@ -487,11 +454,8 @@
   max-width: 60vw;
   margin: 0 auto 40px auto;
   padding: 20px 30px;
-
-  
 }
 
-/* Wide Button Styling */
 .wide-button {
   display: flex;
   align-items: center;
@@ -514,14 +478,14 @@
 }
 
 .wide-button svg {
-  margin-right: 20px; /* Space between icon and text */
+  margin-right: 20px; 
 }
 
 .wide-button h3 {
   margin: 0;
   font-size: 1.5rem;
   margin-bottom: 5px;
-  text-align: left; /* Align the title to the left */
+  text-align: left; 
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   font-family: 'Playfair Display', Georgia, serif;
 }
@@ -530,12 +494,9 @@
   margin: 0;
   font-size: 1rem;
   color: #ecf0f1;
-  text-align: left; /* Align the description text to the left */
+  text-align: left; 
   font-family: 'Playfair Display', Georgia, serif;
 }
-
-
-
 
 /********************************* RECIPE *********************************/
 /********************************* RECIPE *********************************/
@@ -545,10 +506,10 @@
   border-radius: 20px;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.835);
   padding: 30px;
-  margin-top: 150px;  /* Adjust to create space from top of the page */
-  margin-bottom: 200px;  /* Adjust to create space from footer or next section */
+  margin-top: 150px;  
+  margin-bottom: 200px;  
   width: 100%;
-  min-width: 90vw; /* Adjust this to control the overall container width */
+  min-width: 90vw; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -562,8 +523,9 @@
   padding: 20px;
   margin-bottom: 40px;
   width: 100%;
-  max-width: 1500px; /* Adjust this to control the container width */
+  max-width: 1500px; 
 }
+
 .recipe-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -574,7 +536,7 @@
   background-color: #ffffff;
 }
 
-/* Video Container */
+
 .recipe-video-container {
   position: relative;
   background-color: white;
@@ -585,7 +547,6 @@
   border-radius: 8px;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.996);
   overflow: hidden;
-  
 }
 
 .recipe-video-container,
@@ -595,12 +556,10 @@
   overflow: hidden;
 }
 
-
 .video-container video {
   min-width: 35vw;
   object-fit: cover;
   border-radius: 20px;
-  
 }
 
 .overlay-content {
@@ -615,7 +574,6 @@
   align-items: center;
   color: white;
   padding: 20px;
-  
   
 }
 
@@ -633,9 +591,7 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
-  
   min-width: 40vw;
-  
 }
 
 .search-bar input {
@@ -672,7 +628,6 @@
   min-width: 40vw;
 }
 
-
 .filter-bar select {
   flex: 1;
   padding: 10px;
@@ -684,7 +639,6 @@
   font-family: 'Playfair Display', serif; 
 }
 
-/* Recipe Results Container */
 .recipe-results-container {
   background: white;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.996);
@@ -697,10 +651,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
- 
 }
 
-/* Recipe Results */
+
 .recipe-results {
   display: flex;
   flex-wrap: wrap;
@@ -725,54 +678,7 @@
 .load-more:hover {
   background-color: rgb(242, 136, 43) ;
 }
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .video-container {
-    width: 100%; /* Ensures video container scales down */
-  }
-  
-  .overlay-content h1 {
-    font-size: 2.5rem;
-  }
 
-  .search-bar,
-  .filter-bar {
-    max-width: 100%; /* Full width on smaller screens */
-  }
-
-  .search-bar input, 
-  .filter-bar select, 
-  .search-bar button {
-    font-size: 1rem;
-    padding: 8px;
-  }
-
-  .load-more {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
-}
-
-@media (max-width: 768px) {
-  .overlay-content h1 {
-    font-size: 2rem;
-  }
-
-  .search-bar input, 
-  .filter-bar select, 
-  .search-bar button {
-    font-size: 0.9rem;
-    padding: 7px;
-  }
-
-  .load-more {
-    font-size: 0.9rem;
-    padding: 8px 14px;
-  }
-}
-
-
-/* Card Styling */
 .recipe-card {
   width: 18vw;
   height: 55vh;
@@ -789,7 +695,6 @@
   padding: 15px;
 }
 
-/* Card Header */
 .card-header {
   width: 100%;
   display: flex;
@@ -807,7 +712,6 @@
   font-family: 'Playfair Display', serif;
 }
 
-/* Icon Styling */
 .more-icon, .favorite-icon, .expand-icon {
   background: none;
   border: none;
@@ -820,7 +724,6 @@
   color: #114184;
 }
 
-/* Image Styling */
 .recipe-image {
   height: 25vh;
   width: 100%;
@@ -828,7 +731,6 @@
   object-fit: cover;
 }
 
-/* Card Content */
 .card-content {
   text-align: center;
   flex-grow: 1;
@@ -843,7 +745,6 @@
   align-items: center;
   padding:10px;
   min-width: 10vw;
-  
 }
 
 .dropdown {
@@ -857,7 +758,6 @@
   width: 100%;
 }
 
-/* Button Styling */
 .diet-button {
   font-size: 1.5rem;
   padding: 10px 20px;
@@ -872,14 +772,12 @@
   background-color: #2a69c1
 }
 
-/* Card Actions */
 .card-actions {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-/* Modal Styling */
 .modal {
   position: fixed;
   top: 0;
@@ -890,8 +788,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure modal is on top */
-  overflow: hidden; /* Prevent scrolling */
+  z-index: 1000; 
+  overflow: hidden; 
 }
 
 .modal-content {
@@ -918,7 +816,6 @@
 /********************************* COOKBOOK *********************************/
 /********************************* COOKBOOK *********************************/
 /********************************* COOKBOOK *********************************/
-/* Outer Container */
 .cookbook-outer-container {
   display: flex;
   justify-content: center;
@@ -930,7 +827,6 @@
   margin-top: 100px;
 }
 
-/* Page Wrapper */
 .cookbook-page-wrapper {
   max-width: 80vw;
   min-height: 80vh;
@@ -944,7 +840,6 @@
   border-radius: 20px;
 }
 
-/* Page Styling */
 .cookbook-page {
   min-width: 60vw;
   min-height: 70vh;
@@ -959,18 +854,16 @@
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Error Styling */
 .error {
   color: red;
   margin-bottom: 20px;
 }
 
-/* Cookbook Recipes Container */
 .cookbook-recipes {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px; /* Space between recipe cards */
+  gap: 20px; 
 }
 
 .cookbook-title {
@@ -984,13 +877,12 @@
   border-bottom: 5px solid#114184;
 }
 
-
 /********************************* JOURNAL *********************************/
 /********************************* JOURNAL *********************************/
 /********************************* JOURNAL *********************************/
 .journal-page-wrapper {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column; 
   justify-content: flex-start;
   align-items: center;
   min-height: 80vh;
@@ -998,11 +890,11 @@
   background-color: white;
   box-shadow: 0px 0px 20px rgb(255, 255, 255);
   border-radius: 15px;
-  overflow-y: visible; /* Ensure the whole page scrolls */
+  overflow-y: visible; 
   margin-top: 50px;
 }
 
-/* Journal Page Container */
+
 .journal-page-container {
   position: relative;
   z-index: 2;
@@ -1014,13 +906,12 @@
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.823);
   border-radius: 20px;
   display: flex;
-  align-items: center; /* Center video containers vertically */
+  align-items: center; 
 }
 
-/* Video Containers */
 .j-video-container {
-  width: 20vw; /* Adjust width based on how wide you want each video container */
-  height: 30vh; /* Adjust height based on how tall you want each video container */
+  width: 20vw; 
+  height: 30vh; 
   border: 7px solid rgb(255, 255, 255);
   border-radius: 8px;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.805);
@@ -1037,34 +928,33 @@
   object-fit: cover;
 }
 
-/* Journal Page */
 .journal-page {
-  position: absolute; /* Place the journal form above the video containers */
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
   transform: translate(-50%, -50%);
-  padding: 30px; /* Adjusted padding */
+  padding: 30px; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1500px; /* Adjusted width */
+  max-width: 1500px; 
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(255, 255, 255, 0.627);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border: 3px solid white;
-  z-index: 2; /* Ensures the form is above the video containers */
+  z-index: 2; 
 }
 
 .journal-page h1,h6 {
-  color: #1253a3; /* Title color */
+  color: #1253a3; 
   font-size: 3rem;
   margin-bottom: 20px;
   font-weight: bold;
   font-family: 'Playfair Display', Georgia, serif;
-  
 }
+
 .journal-page h1{
   border-bottom: 5px solid rgb(0, 71, 122); 
 }
@@ -1106,7 +996,7 @@
   background-color: rgb(238, 155, 82);
 }
 
-/* AI Response Styling */
+
 .ai-response {
   margin-top: 20px;
   padding: 15px;
@@ -1131,7 +1021,6 @@
   font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Entries Section */
 .entries h2{
   margin-top: 30px;
   width: 100%;
@@ -1156,8 +1045,8 @@
 }
 
 .entries select {
-  background-color: #ffffff; /* Background color for the dropdown */
-  color: #1253a3; /* Text color */
+  background-color: #ffffff; 
+  color: #1253a3; 
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -1165,19 +1054,19 @@
   font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Style for the options in the dropdown */
+
 .entries select option {
-  color: #1253a3; /* Text color for options */
-  background-color: #f9f7f7; /* Background color for options */
+  color: #1253a3; 
+  background-color: #f9f7f7; 
 }
 
-/* Change the color on hover */
+
 .entries select option:hover {
   color: #ffffff;
   background-color: #e0e0e0;
 }
 
-/* Delete Button Styling */
+
 .delete-button {
   margin-top: 10px;
   padding: 8px 16px;
@@ -1192,12 +1081,12 @@
   background-color: #e94e3b;
 }
 
-/* Step Container */
+
 .step-container {
   margin-bottom: 20px;
 }
 
-/* Modal Styling */
+
 .MuiModal-root {
   display: flex;
   justify-content: center;
@@ -1229,31 +1118,15 @@
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  font-family: 'Courier', monospace; /* Optional: use a monospace font */
+  font-family: 'Courier', monospace; 
   font-size: 1.5rem;
   border-right: 3px solid;
   animation: typing 3s steps(40, end), blink .75s step-end infinite;
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  from, to { border-color: transparent; }
-  50% { border-color: rgb(0, 87, 186); } /* Adjust color as needed */
-}
-
-
-
-
-
-
 /********************************* DIET *********************************/
 /********************************* DIET *********************************/
 /********************************* DIET *********************************/
-/* Outer Container */
 .diet-outer-container {
   display: flex;
   justify-content: center;
@@ -1264,7 +1137,6 @@
   background-color: white;
 }
 
-/* Page Wrapper */
 .diet-page-wrapper {
   min-width: 80vw;
   min-height: 80vh;
@@ -1278,7 +1150,6 @@
   border-radius: 20px;
 }
 
-/* Page Styling */
 .diet-page {
   min-width: 85vw;
   min-height: 70vh;
@@ -1293,7 +1164,6 @@
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Day Sections */
 .diet-plan-container {
   display: flex;
   justify-content: space-around;
@@ -1329,7 +1199,6 @@
   transform-origin: center center;
 }
 
-/* Hover Effect */
 .day-section:hover {
   transform: scale(1.5);
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5), -4px -4px 20px rgba(255, 255, 255, 0.8);
@@ -1360,7 +1229,6 @@
   margin-bottom: 20px;
 }
 
-/* Weekly Log Button */
 .weekly-log-button {
   padding: 12px 24px;
   font-size: 2rem;
@@ -1378,7 +1246,6 @@
   transform: translateY(-2px);
 }
 
-/* Modal Styling */
 .modal {
   position: fixed;
   top: 0;
@@ -1400,7 +1267,6 @@
   max-width: 600px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease-in-out;
-  
 }
 
 .meal-times {
@@ -1433,7 +1299,6 @@
   color: #f0f0f0;
 }
 
-/* Close Modal Button */
 .close-modal-button {
   padding: 10px 20px;
   font-size: 1rem;
@@ -1467,7 +1332,6 @@
   transform: translateY(-3px);
 }
 
-/* Textarea Styling */
 textarea {
   width: 100%;
   height: 100px;
@@ -1479,18 +1343,14 @@ textarea {
   font-size: 2rem;
   resize: none;
 }
-
-/* Animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-
 /********************************* MINDFULNESS *********************************/
 /********************************* MINDFULNESS *********************************/
 /********************************* MINDFULNESS *********************************/
-/* Overall Container for the Mindfulness Page */
 .mindfulness-overall-container {
   display: flex;
   justify-content: center;
@@ -1503,7 +1363,7 @@ textarea {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific Container for Video and Form */
+
 .mindfulness-container {
   margin-top: 10vh;
   display: flex;
@@ -1534,7 +1394,7 @@ textarea {
 }
 
 .video-background-container video {
-  position: absolute; /* Video fills the entire container */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -1544,9 +1404,9 @@ textarea {
 }
 
 .mindfulness-box {
-  position: absolute; /* Positioned directly over the video */
+  position: absolute;
   z-index: 1;
-  background-color: rgba(255, 255, 255, 0.656); /* Semi-transparent white */
+  background-color: rgba(255, 255, 255, 0.656); 
   padding: 4rem;
   border-radius: 1.5rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.582);
@@ -1556,7 +1416,7 @@ textarea {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center; /* Center text inside the box */
+  text-align: center; 
 }
 
 .mindfulness-form {
@@ -1610,7 +1470,7 @@ label {
 }
 
 .dialog-content {
-  background-color: rgba(235, 245, 255, 0.438); /* Soft blue background */
+  background-color: rgba(235, 245, 255, 0.438); 
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   color: #114184;
@@ -1634,8 +1494,6 @@ label {
   background-color: #4688d9;
 }
 
-
-
 /********************************* COMPONENTS *********************************/
 /********************************* COMPONENTS *********************************/
 /********************************* COMPONENTS *********************************/
@@ -1652,8 +1510,8 @@ label {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background-color: #ffffff; /* Light blue that matches the theme */
-  box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.472); /* Lifted effect */
+  background-color: #ffffff; 
+  box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.472); 
   border-radius: 15px 15px 0 0;
   min-height: 35vh;
 }
@@ -1674,7 +1532,7 @@ label {
   line-height: 3.5rem;
   font-size: 2rem;
   font-weight: bold;
-  color: #235ca1; /* Matching with the theme's primary color */
+  color: #235ca1; 
   font-family: 'Playfair Display', serif;
 }
 
@@ -1720,13 +1578,11 @@ label {
   to { transform: rotateX(360deg) rotateY(360deg); }
 }
 
-
-
 /********************************* NAVBAR *********************************/
 /********************************* NAVBAR *********************************/
 /********************************* NAVBAR *********************************/
 .navbar {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.64);
   height: 7vh;
   position: fixed;
   width: 100%;
@@ -1746,7 +1602,7 @@ label {
   height: 100%;
 }
 
-/* Left Section */
+
 .navbar-left {
   display: flex;
   align-items: center;
@@ -1769,7 +1625,7 @@ label {
   font-weight: bold;
 }
 
-/* Dropdown Menu */
+
 .menu-dropdown {
   position: absolute;
   left: 0;
@@ -1785,7 +1641,7 @@ label {
 .menu-link {
   display: block;
   padding: 12px 16px;
-  color: #235ca1;
+  color: #235ca2;
   font-family: 'Playfair Display', serif;
   text-decoration: none;
 }
@@ -1794,7 +1650,7 @@ label {
   background-color: rgba(214, 100, 0, 0.3);
 }
 
-/* Right Section */
+
 .navbar-right {
   position: relative;
 }
@@ -1807,9 +1663,9 @@ label {
 }
 
 .user-icon {
-  width: 20px;
-  height: 20px;
-  background-color: #1976D2;
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff00;
   border-radius: 50%;
 }
 

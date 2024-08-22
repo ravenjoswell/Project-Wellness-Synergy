@@ -74,7 +74,7 @@ const Navbar = ({ user, setUser }) => {
           >
             <span className="sr-only">Open user menu</span>
             <img 
-              src="/profile.png" 
+              src="/profile.gif" 
               alt="Account" 
               className="user-icon"
               style={{ width: '70px', height: '70px', borderRadius: '50%' }} 
