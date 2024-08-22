@@ -86,15 +86,15 @@ class AddToDietPlanView(APIView):
         try:
             recipe = Recipe.objects.get(uri=recipe_uri)
 
-            # Ensure the meal time does not already have a recipe for this day in the DietPlan
+            
             if DietPlanRecipe.objects.filter(
-                diet_plan__user=user,  # Filter by the current user
+                diet_plan__user=user,  
                 meal_time=meal_time, 
                 day_of_week=day_of_week
             ).exists():
                 return Response({"error": "Meal time already has a recipe for this day."}, status=HTTP_400_BAD_REQUEST)
 
-            # Add to DietPlan
+           
             diet_plan, _ = DietPlan.objects.get_or_create(
                 user=user,
                 name="My Diet Plan",
@@ -107,7 +107,7 @@ class AddToDietPlanView(APIView):
                 day_of_week=day_of_week
             )
 
-            # Add to DailyDietPlan
+            
             daily_diet_plan, _ = DailyDietPlan.objects.get_or_create(user=user, date=date)
             DailyDietPlanMeal.objects.create(
                 daily_diet_plan=daily_diet_plan, 
@@ -125,7 +125,7 @@ class RemoveFromDietPlanView(APIView):
 
     def delete(self, request, diet_plan_meal_id):
         try:
-            # Fetch the DailyDietPlanMeal entry by its primary key (id)
+            
             daily_diet_plan_meal = DailyDietPlanMeal.objects.get(id=diet_plan_meal_id, daily_diet_plan__user=request.user)
             daily_diet_plan_meal.delete()
 
@@ -142,12 +142,12 @@ class RemoveFromDietPlanView(APIView):
 class WeeklyLogView(APIView):
     def post(self, request):
         data = request.POST
-        reflection = data.get('reflection', '')  # Default to an empty string if not provided
+        reflection = data.get('reflection', '')  
         goals_for_next_week = data.get('goals_for_next_week', '')
         challenges = data.get('challenges', '')
         highlights = data.get('highlights', '')
 
-        # Create the weekly log entry with the provided data
+        
         WeeklyLogEntry.objects.create(
             user=request.user,
             reflection=reflection,
@@ -156,15 +156,12 @@ class WeeklyLogView(APIView):
             highlights=highlights
         )
 
-        # Clear out the meals from existing DailyDietPlan entries without deleting the entries themselves
+        
         daily_diet_plans = DailyDietPlan.objects.filter(user=request.user)
         for daily_diet_plan in daily_diet_plans:
             DailyDietPlanMeal.objects.filter(daily_diet_plan=daily_diet_plan).delete()
 
-        # Optionally, reset other fields in DailyDietPlan if needed
-        # for daily_diet_plan in daily_diet_plans:
-        #     daily_diet_plan.some_field = None
-        #     daily_diet_plan.save()
+       
 
         return Response({"message": "Weekly log saved, diet plan cleared, and days reset."})
 

@@ -20,7 +20,7 @@ class RecipeListView(APIView):
         allergies = request.GET.get('allergies', '')
         next_page_url = request.GET.get('next', '')
 
-        # Determine API URL based on paginating or initial search
+        
         if next_page_url:
             api_url = next_page_url
         else:
@@ -35,11 +35,11 @@ class RecipeListView(APIView):
             response.raise_for_status()
             data = response.json()
 
-            # Save recipes, ingredients, and nutrients to the database
+            # recipes, ingredients, and nutrients 
             for hit in data['hits']:
                 recipe_data = hit['recipe']
 
-                # Create or get the recipe
+                # create or get the recipe
                 recipe, created = Recipe.objects.get_or_create(
                     uri=recipe_data['uri'],
                     defaults={
@@ -55,7 +55,7 @@ class RecipeListView(APIView):
                     }
                 )
 
-                # Save ingredients
+                # save ingredients
                 for ingredient_data in recipe_data.get('ingredients', []):
                     ingredient, _ = Ingredient.objects.get_or_create(
                         name=ingredient_data.get('food', 'Unknown'),
@@ -67,7 +67,7 @@ class RecipeListView(APIView):
                     )
                     recipe.ingredients.add(ingredient)
 
-                # Save nutritional facts
+                # save nutritional facts
                 for nutrient_key, nutrient_data in recipe_data.get('totalNutrients', {}).items():
                     nutrient, _ = Nutrient.objects.get_or_create(
                         label=nutrient_data.get('label', ''),
@@ -78,7 +78,7 @@ class RecipeListView(APIView):
 
             response_data = {
                 'hits': data['hits'],
-                'next': data['_links'].get('next', {}).get('href', None),  # Get the next page URL if available
+                'next': data['_links'].get('next', {}).get('href', None),  
             }
 
             return Response(response_data, status=HTTP_200_OK)
@@ -124,7 +124,7 @@ class RemoveFromCookbookView(APIView):
 
     def delete(self, request, mycookbook_id):
         try:
-            # filtering by the primary key (id) of the MyCookbook model
+            # filtering by the primary key (id) 
             my_cookbook_entry = MyCookbook.objects.get(id=mycookbook_id, user=request.user)
             my_cookbook_entry.delete()
             return Response({"message": "Recipe removed from cookbook"}, status=204)

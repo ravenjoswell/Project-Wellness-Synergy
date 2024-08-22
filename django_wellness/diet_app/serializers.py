@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import DietPlan, DietPlanRecipe, DailyDietPlan, DailyDietPlanMeal
 from recipe_app.serializers import RecipeSerializer
+from recipe_app.models import Recipe
 
 class DietPlanRecipeSerializer(serializers.ModelSerializer):
     recipe = RecipeSerializer(read_only=True)

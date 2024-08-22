@@ -43,16 +43,11 @@ class Log_in(APIView):
         print(user)
         if user:
             login(request, user)
-            # if
-            # return SELECT * token WHERE user = user
-            # else
-            # return INSERT token (user) VALUES (user)
             token, created = Token.objects.get_or_create(user = user)
             return Response({"user":user.full_name, "token":token.key}, status=HTTP_200_OK)
         return Response("No user matching credentials", status=HTTP_400_BAD_REQUEST)
     
 class TokenReq(APIView):
-
     authentication_classes=[TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -67,17 +62,12 @@ class Info(TokenReq):
         try:
             data = request.data.copy()
             ruser = request.user
-            # check for full_name, age, address
             ruser.full_name = data.get("full_name", ruser.full_name)
-            # authenticate credential
             cur_pass = data.get("password")
             if cur_pass and data.get("new_password"):
                 auth_user = authenticate(username = ruser.username, password = cur_pass)
                 if auth_user == ruser:
                     ruser.set_password(data.get("new_password"))
-                    
-            # if credentials match the user
-            # update password and save it
             ruser.full_clean()
             ruser.save()
             return Response({"full_name":ruser.full_name})
