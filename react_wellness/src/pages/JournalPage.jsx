@@ -312,7 +312,7 @@ const JournalPage = () => {
           </form>
           {aiResponse && (
             <div className="ai-response">
-              <h3>AI Response:</h3>
+              <h3>Wellness Partner:</h3>
               <p>{aiResponse}</p>
             </div>
           )}

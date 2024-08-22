@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CookbookRecipeCard from '../components/CookbookRecipeCard';
 import { useOutletContext } from 'react-router-dom';
+import '../App.css'; // Make sure to create this CSS file for the styles
 
 const CookbookPage = () => {
     const { handleAddToDiet, handleRemoveFromDiet, dietRecipes } = useOutletContext();
@@ -48,21 +49,25 @@ const CookbookPage = () => {
     };
 
     return (
-        <div className="cookbook-page">
-            <h1>Your Cookbook</h1>
-            {error && <p className="error">{error}</p>}
-            <div className="cookbook-recipes">
-                {cookbookRecipes.map((item, index) => (
-                    <CookbookRecipeCard 
-                        key={index} 
-                        recipe={item.recipe} 
-                        onRemoveFromCookbook={() => handleRemoveFromCookbook(item.id)} 
-                        onAddToDiet={handleAddToDiet}
-                        onRemoveFromDiet={handleRemoveFromDiet}
-                        isInDiet={dietRecipes.some(r => r.uri === item.recipe.uri)}
-                        isInCookbook={true}
-                    />
-                ))}
+        <div className="cookbook-outer-container">
+            <div className="cookbook-page-wrapper">
+                <div className="cookbook-page">
+                    <h1 className="cookbook-title">Favorite Recipes</h1>
+                    {error && <p className="error">{error}</p>}
+                    <div className="cookbook-recipes">
+                        {cookbookRecipes.map((item, index) => (
+                            <CookbookRecipeCard 
+                                key={index} 
+                                recipe={item.recipe} 
+                                onRemoveFromCookbook={() => handleRemoveFromCookbook(item.id)} 
+                                onAddToDiet={handleAddToDiet}
+                                onRemoveFromDiet={handleRemoveFromDiet}
+                                isInDiet={dietRecipes.some(r => r.uri === item.recipe.uri)}
+                                isInCookbook={true}
+                            />
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

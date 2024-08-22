@@ -14,45 +14,46 @@ const LogIn = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen">
-      <video
-        src=""
-        autoPlay
-        loop
-        muted
-        className="absolute top-0 left-0 w-full h-full object-cover"
-      />
-      <div className="relative border border-stone-900 p-20 max-w-lg mx-auto bg-transparent shadow-xl rounded-lg">
-        <h1 className="text-3xl font-serif mb-20 text-center text-black">Log In</h1>
-        <form onSubmit={(e) => handleSubmit(e)} className="space-y-4">
-          <div>
-            <label className="block text-sm font-serif text-black">Email</label>
+    <div className="outer-container">
+      <div className="white-container">
+        <video
+          src="loginbg.mp4" 
+          autoPlay
+          loop
+          muted
+        />
+        <div className="lifted-container">
+          <h1 className="form-title">Log In</h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-lg font-serif text-black">Email</label> {/* Increased font size */}
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Enter email"
+                required
+                className="input-field"
+              />
+            </div>
+            <div>
+              <label className="block text-lg font-serif text-black">Password</label> {/* Increased font size */}
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="Enter password"
+                required
+                className="input-field"
+              />
+            </div>
             <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder=" Enter email"
-              required
-              className="mt-2 block w-full py-2 border-gray-300 rounded-md shadow-sm"
+              type="submit"
+              value="Log In"
+              className="submit-button"
             />
-          </div>
-          <div>
-            <label className="block text-sm font-serif text-black">Password</label>
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder=" Enter password"
-              required
-              className="mt-2 block w-full py-2 border-gray-300 rounded-md shadow-sm"
-            />
-          </div>
-          <input
-            type="submit"
-            value="Log In"
-            className="w-full bg-stone-950 text-black py-3 rounded-md hover:bg-stone-400 font-serif"
-          />
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );
