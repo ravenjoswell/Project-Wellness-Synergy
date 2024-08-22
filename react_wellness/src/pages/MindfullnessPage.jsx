@@ -54,10 +54,10 @@ const MindfulnessPage = () => {
 
     try {
       await axios.post('http://127.0.0.1:8000/api/mindfulness/well-being-logs/', data, config)
-      setGuidedResponse('')  // Clear any previous responses
-      setIsDialogOpen(true)  // Open modal after submission
+      setGuidedResponse('')  // clear any previous responses
+      setIsDialogOpen(true)  // open modal after sub
 
-      // Clear form after submission
+     
       setStressLevel(5)
       setMood(5)
       setSleepHours(7)
@@ -79,7 +79,7 @@ const MindfulnessPage = () => {
 
     try {
       const response = await axios.get(`http://127.0.0.1:8000/api/mindfulness/guided-session/${category}/`, config)
-      setGuidedResponse(response.data.session_content)  // Display response inside modal
+      setGuidedResponse(response.data.session_content)  // response inside modal
     } catch (error) {
       console.error('Error fetching guided session:', error)
     }
@@ -87,7 +87,7 @@ const MindfulnessPage = () => {
 
   const closeDialog = () => {
     setIsDialogOpen(false)
-    setGuidedResponse('')  // Clear response when closing the modal
+    setGuidedResponse('')  // clear response when closing the modal
   }
 
   return (

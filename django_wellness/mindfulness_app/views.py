@@ -93,7 +93,7 @@ class GuidedSessionView(APIView):
                 {"role": "system", "content": "You are a mindfulness coach."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=100
+            max_tokens=400
         )
         session_content = response['choices'][0]['message']['content'].strip()
 

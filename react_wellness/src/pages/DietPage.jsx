@@ -15,8 +15,6 @@ const DietPage = () => {
     const [selectedMealTime, setSelectedMealTime] = useState('')
     const [selectedRecipes, setSelectedRecipes] = useState([])
     const [showWeeklyLog, setShowWeeklyLog] = useState(false)
-    
-    // Form state variables
     const [weeklyReflection, setWeeklyReflection] = useState('')
     const [goalsForNextWeek, setGoalsForNextWeek] = useState('')
     const [challenges, setChallenges] = useState('')
@@ -108,7 +106,7 @@ const DietPage = () => {
     }
 
     const handleWeeklyLogEntry = async (e) => {
-        e.preventDefault()  // Prevent default form submission
+        e.preventDefault()  
         try {
             const token = localStorage.getItem('token')
             await axios.post('http://localhost:8000/api/diet/weekly-log/', {
@@ -119,15 +117,15 @@ const DietPage = () => {
             }, {
                 headers: { Authorization: `Token ${token}` },
             })
-            // Re-fetch diet plan data to re-render the page
+            
             fetchDietPlan()
-            // Clear form fields after submission
+            
             setWeeklyReflection('')
             setGoalsForNextWeek('')
             setChallenges('')
             setHighlights('')
         } catch (err) {
-            setError('Failed to submit weekly log entry')
+            setError('Failed to submit weekly log entry',err)
         }
     }
 

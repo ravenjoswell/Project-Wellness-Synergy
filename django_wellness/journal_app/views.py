@@ -36,7 +36,7 @@ class JournalEntryListView(APIView):
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": f"Respond to this journal entry: {entry.entry_text}"}
                 ],
-                max_tokens=30
+                max_tokens=200
             )
             ai_response = response['choices'][0]['message']['content'].strip()
             
