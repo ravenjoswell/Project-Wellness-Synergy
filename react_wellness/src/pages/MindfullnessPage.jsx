@@ -91,93 +91,105 @@ const MindfulnessPage = () => {
   };
 
   return (
-    <div className="mindfulness-container">
-      <h1>Mindfulness Tracker</h1>
-      <form onSubmit={handleSubmit} className="mindfulness-form">
-        <div>
-          <label>Stress Level:</label>
-          <Slider
-            value={stressLevel}
-            onChange={(e, value) => setStressLevel(value)}
-            min={1}
-            max={10}
-            step={1}
-            marks
-            valueLabelDisplay="auto"
+    <div className="mindfulness-overall-container">
+      <div className="mindfulness-container">
+        <div className="video-background-container">
+          <video
+            src="cloudsbg.mp4"
+            autoPlay
+            loop
+            muted
           />
+          <div className="mindfulness-box">
+            <h1>Reflect & Receive Guidance</h1>
+            <form onSubmit={handleSubmit} className="mindfulness-form">
+              <div>
+                <label>Stress Level:</label>
+                <Slider
+                  value={stressLevel}
+                  onChange={(e, value) => setStressLevel(value)}
+                  min={1}
+                  max={10}
+                  step={1}
+                  marks
+                  valueLabelDisplay="auto"
+                />
+              </div>
+              <div>
+                <label>Mood:</label>
+                <Slider
+                  value={mood}
+                  onChange={(e, value) => setMood(value)}
+                  min={1}
+                  max={10}
+                  step={1}
+                  marks
+                  valueLabelDisplay="auto"
+                />
+              </div>
+              <div>
+                <label>Sleep Hours:</label>
+                <Slider
+                  value={sleepHours}
+                  onChange={(e, value) => setSleepHours(value)}
+                  min={0}
+                  max={12}
+                  step={0.5}
+                  marks
+                  valueLabelDisplay="auto"
+                />
+              </div>
+              <div>
+                <label>Anxiety Level:</label>
+                <Slider
+                  value={anxietyLevel}
+                  onChange={(e, value) => setAnxietyLevel(value)}
+                  min={1}
+                  max={10}
+                  step={1}
+                  marks
+                  valueLabelDisplay="auto"
+                />
+              </div>
+              <div>
+                <label>Depression Level:</label>
+                <Slider
+                  value={depressionLevel}
+                  onChange={(e, value) => setDepressionLevel(value)}
+                  min={1}
+                  max={10}
+                  step={1}
+                  marks
+                  valueLabelDisplay="auto"
+                />
+              </div>
+              <div>
+                <label>Additional Notes:</label>
+                <textarea
+                  value={additionalNotes}
+                  onChange={(e) => setAdditionalNotes(e.target.value)}
+                />
+              </div>
+              <Button type="submit" variant="contained" color="primary">Submit</Button>
+            </form>
+          </div>
         </div>
-        <div>
-          <label>Mood:</label>
-          <Slider
-            value={mood}
-            onChange={(e, value) => setMood(value)}
-            min={1}
-            max={10}
-            step={1}
-            marks
-            valueLabelDisplay="auto"
-          />
-        </div>
-        <div>
-          <label>Sleep Hours:</label>
-          <Slider
-            value={sleepHours}
-            onChange={(e, value) => setSleepHours(value)}
-            min={0}
-            max={12}
-            step={0.5}
-            marks
-            valueLabelDisplay="auto"
-          />
-        </div>
-        <div>
-          <label>Anxiety Level:</label>
-          <Slider
-            value={anxietyLevel}
-            onChange={(e, value) => setAnxietyLevel(value)}
-            min={1}
-            max={10}
-            step={1}
-            marks
-            valueLabelDisplay="auto"
-          />
-        </div>
-        <div>
-          <label>Depression Level:</label>
-          <Slider
-            value={depressionLevel}
-            onChange={(e, value) => setDepressionLevel(value)}
-            min={1}
-            max={10}
-            step={1}
-            marks
-            valueLabelDisplay="auto"
-          />
-        </div>
-        <div>
-          <label>Additional Notes:</label>
-          <textarea
-            value={additionalNotes}
-            onChange={(e) => setAdditionalNotes(e.target.value)}
-          />
-        </div>
-        <Button type="submit" variant="contained" color="primary">Submit</Button>
-      </form>
+      </div>
 
-      <Dialog open={isDialogOpen} onClose={closeDialog} fullWidth maxWidth="sm">
-        <DialogTitle>Choose Your Guidance</DialogTitle>
-        <DialogContent>
+      <Dialog open={isDialogOpen} onClose={closeDialog} fullWidth maxWidth="md">
+        <DialogTitle className="dialog-title">Choose Your Guidance</DialogTitle>
+        <DialogContent className="dialog-content">
           <DialogContentText>
             Please select the type of guidance you would like to receive.
           </DialogContentText>
           {guidedResponse && (
             <div className="guided-response">
-              <h2>Guided Mindfulness Exercise</h2>
+              <h2 className="dialog-title">Guided Mindfulness Exercise</h2>
               <p>{guidedResponse}</p>
             </div>
           )}
         </DialogContent>
-        <DialogActions>
+        <DialogActions className="dialog-actions">
           <Button onClick={() => handleGuidedSession('sleep')} color="primary">Guidance for Sleep</Button>
           <Button onClick={() => handleGuidedSession('meditation')} color="primary">Guidance for Meditation</Button>
           <Button onClick={() => handleGuidedSession('move')} color="primary">Guidance for Move</Button>
