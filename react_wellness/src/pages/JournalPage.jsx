@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Modal, Button, Typography, Box } from '@mui/material'
-import '../App.css'
+import '../style/journal.css'
 
 const JournalPage = () => {
   const [entries, setEntries] = useState([])
@@ -280,13 +280,13 @@ const JournalPage = () => {
       <div className="journal-page-container">
         {/* Video Containers */}
         <div className="j-video-container j-second-video-container">
-          <video src="./journalbg2.mp4" autoPlay loop muted />
+          <img src="./quote2.jpg"/>
         </div>
         <div className="j-video-container j-third-video-container">
-          <video src="./journalbg2.mp4" autoPlay loop muted />
+        <img src="./quote.jpg"/>
         </div>
         <div className="j-video-container j-fourth-video-container">
-          <video src="./journalbg2.mp4" autoPlay loop muted />
+        <img src="./quote1.jpg"/>
         </div>
 
         <div className="journal-page">

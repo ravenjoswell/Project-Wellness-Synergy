@@ -1,5 +1,6 @@
 import { useOutletContext } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
+import '../style/recipe.css'
 
 const RecipePage = () => {
     const {

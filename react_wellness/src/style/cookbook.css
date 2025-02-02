@@ -1,0 +1,62 @@
+.cookbook-outer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 50px;
+    background-color: white;
+    margin-top: 100px;
+  }
+  
+  .cookbook-page-wrapper {
+    max-width: 80vw;
+    min-height: 80vh;
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    /* background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), #235ca1dd); */
+    /* box-shadow: 0 0px 40px rgba(0, 0, 0, 0.868); */
+    border-radius: 20px;
+  }
+  
+  .cookbook-page {
+    min-width: 60vw;
+    min-height: 70vh;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    /* border: 1px solid #235ca1dd; */
+    /* box-shadow: 0 0px 40px rgba(0, 0, 0, 0.611); */
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 20px;
+  }
+  
+  .cookbook-recipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; 
+  }
+  
+  .cookbook-title {
+    font-size: calc(3rem + 2vw);
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    color:#235ca1dd;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-family: 'Playfair Display', Georgia, serif;
+    border-bottom: 1px solid#114184;
+  }
+  

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FaHeart, FaRegHeart, FaEllipsisV, FaChevronDown } from 'react-icons/fa'
+import '../style/recipe.css'
 
 const RecipeCard = ({ recipe, onAddToCookbook, onRemoveFromCookbook, onAddToDiet, onRemoveFromDiet, isInCookbook, isInDiet }) => {
     const [selectedMealTime, setSelectedMealTime] = useState('breakfast')

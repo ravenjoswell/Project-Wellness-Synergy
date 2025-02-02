@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '../App.css'
+import '../style/diet.css'
 import { FaHeart, FaRegHeart, FaEllipsisV, FaChevronDown } from 'react-icons/fa'
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']

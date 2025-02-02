@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import CookbookRecipeCard from '../components/CookbookRecipeCard'
 import { useOutletContext } from 'react-router-dom'
-import '../App.css'
+import '../style/cookbook.css'
 
 const CookbookPage = () => {
     const { handleAddToDiet, handleRemoveFromDiet, dietRecipes } = useOutletContext()

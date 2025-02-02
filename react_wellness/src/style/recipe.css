@@ -1,0 +1,313 @@
+.overall-lifted-container {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), #ffffffdd);
+    border-radius: 20px;
+    /* box-shadow: 0 0 40px rgba(0, 0, 0, 0.835); */
+    padding: 30px;
+    margin-top: 150px;  
+    margin-bottom: 200px;  
+    width: 100%;
+    min-width: 90vw; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .lifted-container {
+    background-color: #3b3b3b;
+    border-radius: 20px;
+    /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); */
+    padding: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 1500px; 
+  }
+  
+  .recipe-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+  }
+  
+  
+  .recipe-video-container {
+    position: relative;
+    background-color: white;
+    min-width: 35vw;
+    margin-top: 70px;
+    margin-bottom: 64px;
+    border: 1px solid rgb(0, 71, 122);
+    border-radius: 8px;
+    /* box-shadow: 0 0 50px rgba(0, 0, 0, 0.996); */
+    overflow: hidden;
+  }
+  
+  .recipe-video-container,
+  .recipe-results-container {
+    /* padding: 3px; */
+    border-radius: 30px;
+    overflow: hidden;
+  }
+  
+  .video-container video {
+    min-width: 35vw;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  
+  .overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+    
+  }
+  
+  .overlay-content h1 {
+    font-size: 6rem;
+    margin-bottom: 60px;
+    border-bottom: 1px solid #f8f8f8dd;
+    font-family: 'Playfair Display', serif; 
+    font-weight: bold;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    min-width: 40vw;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.893);
+    border: 3px solid white;
+    color: #235ca1;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Playfair Display', serif; 
+  }
+  
+  .search-bar button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color:#235ca1dd;
+    color: white;
+    border: none;
+    font-size: 2rem; 
+    font-family: 'Playfair Display', serif; 
+  }
+  
+  .search-bar button:hover{
+    background-color:#457cbfdd;;
+  }
+  
+  .filter-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-width: 40vw;
+  }
+  
+  .filter-bar select {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.831);
+    border: 1px solid white;
+    color: rgb(94, 94, 94);
+    font-size: 2rem;
+    font-family: 'Playfair Display', serif; 
+  }
+  
+  .recipe-results-container {
+    background: #fcfcfc4d;
+    /* box-shadow: 0 0 50px rgba(0, 0, 0, 0.996); */
+    border: 1px solid rgb(0, 71, 122);
+    padding: 50px 20px;
+    min-height: 120vh;
+    min-width: 72vw;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  .recipe-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 60vw;
+    margin-top: 50px;
+  }
+  
+  .load-more {
+    margin: 50px auto;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #235ca1dd;
+    background-color: solid 3px white;
+    color: rgba(255, 255, 255, 0.858);
+    border: solid 3px white;
+    display: block;
+    font-size: 2.5rem;
+    font-family: 'Playfair Display', serif; 
+  }
+  
+  .load-more:hover {
+    background-color: #4c75a6dd; ;
+  }
+  
+  .recipe-card {
+    width: 18vw;
+    height: 55vh;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    /* box-shadow: 0 0px 20px rgba(0, 0, 0, 0.818); */
+    border: 1px solid #114184 ;
+    position: relative;
+    padding: 15px;
+  }
+  
+  .card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-size: 2rem;
+  }
+  
+  .recipe-title {
+    font-size: 1.8rem;
+    color: #235ca1;
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .more-icon, .favorite-icon, .expand-icon {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #235ca1;
+  }
+  
+  .more-icon:hover, .favorite-icon:hover, .expand-icon:hover {
+    color: #114184;
+  }
+  
+  .recipe-image {
+    height: 25vh;
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    text-align: center;
+    flex-grow: 1;
+    font-size: 1.5rem;
+    color:#235ca1;
+    padding: 10px;
+  }
+  
+  .meal-time-select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:10px;
+    min-width: 10vw;
+  }
+  
+  .dropdown {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 1.2rem;
+    color: #333;
+    background-color: #f0f0f0da;
+    border-radius: 5px;
+    border: 3px solid #ccc;
+    width: 100%;
+  }
+  
+  .diet-button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    background-color: #114184;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .diet-button:hover {
+    background-color: #2a69c1
+  }
+  
+  .card-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(108, 108, 108, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+    overflow: hidden; 
+  }
+  
+  .modal-content {
+    background-color: #ffffffdf;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 30vw;
+  }
+  
+  .close-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgb(214, 100, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    background-color: rgb(161, 75, 0);
+  }
+  

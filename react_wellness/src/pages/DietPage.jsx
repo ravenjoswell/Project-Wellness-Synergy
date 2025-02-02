@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useOutletContext } from 'react-router-dom'
 import DietCard from '../components/DietCard'
+import '../style/diet.css'
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -136,7 +137,7 @@ const DietPage = () => {
         <div className="diet-outer-container">
             <div className="diet-page-wrapper">
                 <div className="diet-page">
-                    <h1 className="diet-page-title">Weekly Wellness Planner</h1>
+                    <h1 className="diet-page-title">Weekly Diet Plan</h1>
                     <div className="diet-plan-container">
                         {Object.keys(dietPlan).map(day => (
                             <div key={day} className="day-section" onClick={() => handleDayClick(day)}>

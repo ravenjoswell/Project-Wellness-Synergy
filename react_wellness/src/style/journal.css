@@ -1,0 +1,243 @@
+.journal-page-wrapper {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 80vh;
+    padding: 100px;
+    background-color: white;
+    /* box-shadow: 0px 0px 20px rgb(255, 255, 255); */
+    border-radius: 15px;
+    overflow-y: visible; 
+    margin-top: 50px;
+  }
+  
+  
+  .journal-page-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 90vw;
+    min-height: 85vh;
+    margin-top: 20px;
+    background-color: white;
+    /* box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.823); */
+    border-radius: 20px;
+    display: flex;
+    align-items: center; 
+  }
+  
+  .j-video-container {
+    width: 20vw; 
+    height: 30vh; 
+    border: 7px solid rgb(255, 255, 255);
+    border-radius: 25px;
+    /* box-shadow: 0 0 40px rgba(0, 0, 0, 0.805); */
+    overflow: hidden;
+    z-index: 1;
+    min-height: 60vh;
+    min-width: 25vw;
+    margin: 67px;
+  }
+  
+  .j-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .journal-page {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    padding: 30px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1500px; 
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgb(0, 71, 122); 
+    z-index: 2; 
+  }
+  
+  .journal-page h1,h6 {
+    color: #1253a3; 
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .journal-page h1{
+    border-bottom: 1px solid rgb(0, 71, 122); 
+  }
+  
+  .journal-page form {
+    width: 100%;
+    min-width: 40vw;
+    display: flex;
+    flex-direction: column;
+    max-height: 55vh;
+  }
+  
+  .journal-page form input,
+  .journal-page form textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #fefefe;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #114184 ;
+    color: #1253a3;
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .journal-page form button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #235ca1dd;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .journal-page form button:hover {
+    background-color: #6892c6dd;
+  }
+  
+  
+  .ai-response {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffffac;
+    border: 1px solid #114184 ;
+    border-radius: 5px;
+    width: 100%;
+    min-height: 15vh;
+  }
+  
+  .ai-response h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    color:#1253a3;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .ai-response p {
+    font-size: 2rem;
+    margin: 0;
+    color: #1253a3;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .entries h2{
+    margin-top: 30px;
+    width: 100%;
+    color: #1253a3;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .entry-details {
+    margin-top: 20px;
+    color:#1253a3;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .entry-details p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  .entry-details strong {
+    color: #004bd6;
+  
+  }
+  
+  .entries select {
+    background-color: #ffffff; 
+    color: #1253a3; 
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  
+  .entries select option {
+    color: #1253a3; 
+    background-color: #f9f7f7; 
+  }
+  
+  
+  .entries select option:hover {
+    color: #ffffff;
+    background-color: #e0e0e0;
+  }
+  
+  
+  .delete-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: #e94e3b;
+  }
+  
+  
+  .step-container {
+    margin-bottom: 20px;
+  }
+  
+  
+  .MuiModal-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .MuiBox-root {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .question-container {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .question-container h6{
+    font-size: 2rem;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .typing-effect {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'Courier', monospace; 
+    font-size: 1.5rem;
+    border-right: 3px solid;
+    animation: typing 3s steps(40, end), blink .75s step-end infinite;
+  }

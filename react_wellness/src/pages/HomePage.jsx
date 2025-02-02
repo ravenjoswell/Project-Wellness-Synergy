@@ -8,7 +8,7 @@ import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined'
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined'
 import PsychologyAltOutlinedIcon from '@mui/icons-material/PsychologyAltOutlined'
 import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined'
-import '../App.css' 
+import '../style/home.css'
 import moment from 'moment'
 
 Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
@@ -116,7 +116,7 @@ const HomePage = () => {
         labels: dates,
         ticks: {
           font: {
-            size: 20 
+            size: 20,
           }
         }
       },
@@ -149,7 +149,7 @@ const HomePage = () => {
       {
         label: 'Journal Entries',
         data: [journalEntriesCount, 7 - journalEntriesCount],
-        backgroundColor: ['#3A5FCD', '#b35900'],
+        backgroundColor: ['#3A5FCD', '#D3D3D3'],
       },
     ],
   
@@ -172,7 +172,7 @@ const HomePage = () => {
       {
         label: 'Recipes in Cookbook',
         data: [recipeCount, 20 - recipeCount],
-        backgroundColor: ['#3A5FCD', '#b35900'],
+        backgroundColor: ['#3A5FCD', '#D3D3D3'],
       },
     ],
   }
