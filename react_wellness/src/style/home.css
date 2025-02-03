@@ -1,3 +1,7 @@
+body{
+  background-color: #133156; 
+}
+
 .home-page-wrapper {
     display: flex;
     flex-direction: column;
@@ -6,7 +10,7 @@
     min-height: 150vh;
     min-width: 30vw;
     padding: 100px;
-    background-color: #ffffffdd;
+    background-color: #133156; 
     border-radius: 15px;
     overflow-y: visible;
     margin-top: 75px;
@@ -18,7 +22,6 @@
     color: rgb(2, 2, 2);
     margin-top: 20px;
     text-align: center;
-    /* box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.835); */
     border-radius: 20px;
   }
   
@@ -27,10 +30,10 @@
     font-weight: 600;
     margin-bottom: 30px;
     margin-top: 50px;
-    color:#235ca1dd;
+    color:#ffffffdd;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     font-family: 'Playfair Display', Georgia, serif;  
-    border-bottom: 1px solid #235ca1dd;
+    border-bottom: 1px solid #ffffffdd;
   }
   
   .box-grid {
@@ -49,17 +52,18 @@
     width: 100%;
     min-width: 75vw;
     min-height: 100vh;
+    box-shadow: 0px 0px 10px#64aaff;
   }
   
   .dashboard-title {
     font-size: 4.5rem;
     margin-bottom: 20px;
     text-align: center;
-    color:#235ca1dd;
+    color:#ffffffdd;
     margin-bottom: 100px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     font-family: 'Playfair Display', Georgia, serif;
-    border-bottom: 1px solid #235ca1dd;
+    border-bottom: 1px solid #ffffffdd;
   }
   
   .user-title:hover, .dashboard-title:hover{
@@ -87,9 +91,9 @@
     font-size: 3rem;
     margin-bottom: 10px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    color:#235ca1dd;
+    color:#ffffffdd;
     font-family: 'Playfair Display', Georgia, serif;
-    border-bottom: 1px solid #235ca1dd;
+    border-bottom: 1px solid #ffffffdd;
   }
   
   .large-chart {
@@ -117,6 +121,7 @@
     background-color: #ffffff;
     border: 5px solid rgb(0, 71, 122);
     background: linear-gradient(135deg, #1253a3f5, #0d4b984f);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.601);
     padding: 20px 40px;
     border-radius: 10px;
     color: white;

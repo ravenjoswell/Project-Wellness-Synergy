@@ -1,3 +1,7 @@
+body{
+  background-color: #133156; 
+}
+
 .about-page-wrapper {
     display: flex;
     flex-direction: column;
@@ -5,18 +9,15 @@
     align-items: center;
     min-height: 150vh;
     padding: 100px;
-    background-color: white;
-    /* box-shadow: 0px 0px 20px rgb(255, 255, 255); */
+    background-color: #133156; 
     border-radius: 50px;
     overflow-y: visible; 
     margin-top: 15px;
   }
   
-  
   .about-page-container {
-    background: white;
+    background-color: #133156; 
     padding: 20px;
-    /* box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.823); */
     border-radius: 50px;
     position: relative;
     z-index: 1;
@@ -28,9 +29,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 1.5vh;
+    padding-top: 3vh;
   }
-  
   
   .about-video-box {
     width: 100%;
@@ -38,7 +38,8 @@
     margin: 20px 0;
     border: 1px solid rgb(0, 71, 122);
     border-radius: 20px;
-    /* box-shadow: 0 0 40px rgb(0, 0, 0); */
+    box-shadow: 0px 0px 20px#64aaff;
+    border: 1px solid rgb(255, 255, 255);
     overflow: hidden;
     position: relative;
     z-index: 2;
@@ -73,6 +74,7 @@
     left: 13%;
     z-index: 3;
     text-align: left;
+    
   }
   
   
@@ -118,7 +120,6 @@
     font-family: 'Playfair Display', Georgia, serif;
   }
   
-  
   .long-container {
     position: relative;
     display: flex;
@@ -127,11 +128,11 @@
     min-height: 310vh;
     min-width: 90vw;
     margin-top: -60px;
-    background-color: transparent;
+    background-color: #133156; 
   }
   
   .long-scroll-container {
-    background-color: rgb(255, 255, 255);
+    background-color: #133156; 
     border-radius: 8px;
     overflow: hidden;
     position: relative;
@@ -139,7 +140,6 @@
     min-height: 300vh;
     min-width: 87vw;
   }
-  
   
   .right-title-scroll-container {
     position: fixed;
@@ -152,7 +152,7 @@
   .right-text {
     font-size: calc(5rem + 2vw);
     line-height: 1.0;
-    color: #235ca1dd;
+    color: #ffffffdd;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     margin: 0;
     max-width: 100%;
@@ -172,7 +172,7 @@
   .right-text-2 {
     font-size: calc(.2rem + 1.5vw);
     line-height: 1.5;
-    color: #235ca1dd;
+    color: #ffffffdd;
     margin: 0;
     max-width: 100%;
     font-family: 'Playfair Display', Georgia, serif; 
@@ -180,10 +180,9 @@
   .second-video-container,
   .third-video-container,
   .fourth-video-container {
-    border: 1px solid rgb(0, 71, 122);
+    border: 1px solid rgb(255, 255, 255);
     border-radius: 25px;
-  
-    /* box-shadow: 0 0 40px rgb(0, 0, 0); */
+    box-shadow: 0px 0px 10px#64aaff;
     overflow: hidden;
     position: relative;
     z-index: 2;
@@ -210,7 +209,7 @@
   }
   
   .long-scroll-container-2 {
-    background-color: rgb(255, 255, 255);
+    background-color: #133156; 
     border-radius: 8px;
     
     position: relative;
@@ -222,7 +221,7 @@
   .slick-slider {
     width: 87vw;
     height: 50vh;
-    background-color: #ffffff;
+    background-color: #133156; 
     margin-top: 200px;
   }
   
@@ -238,7 +237,7 @@
     flex-direction: column;
     height: auto;
     margin-left: 50px;
-    background-color: #ffffff;
+    background-color: #133156; 
     border-radius: 20px;
     padding: 20px;
   }
@@ -246,15 +245,14 @@
   .slick-slide img {
     max-height: 45vh;
     border-radius: 25px;
-    border: 1px solid rgb(0, 71, 122);
-    /* box-shadow: 0 0 10px rgb(0, 0, 0); */
-   
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px#64aaff;
     margin-bottom: 20px;
   }
   
   .slick-slide p {
     margin-top: 10px;
-    color: #1e3f75;
+    color: #ffffff;
     font-size: 1.3rem;
     text-align: center;
     font-family: 'Playfair Display', Georgia, serif;
@@ -266,17 +264,17 @@
   
   .slick-dots li button:before {
     font-size: 500px;
-    color: rgb(100, 100, 100);
+    color: rgb(255, 255, 255);
   }
   
   .slick-dots li.slick-active button:before {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
   }
   
   .slick-prev,
   .slick-next {
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     padding: 10px;
     font-size: 2x;
@@ -299,16 +297,15 @@
   .about-recipe-text {
     font-size: calc(3rem + 1vw);
     text-align: center;
-    color: #235ca1dd;
+    color: #ffffffdd;
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     font-weight: bold;
     margin-top: 100px;
     padding: 10px;
-    border-bottom: 1px solid rgb(0, 71, 122); 
+    border-bottom: 1px solid rgb(255, 255, 255); 
     font-family: 'Playfair Display', Georgia, serif;
   }
-  
   
   .about-recipe-container-2 {
     display: flex;
@@ -318,11 +315,10 @@
     margin-top: 40px;
   }
   
-  
   .about-recipe-text-2 {
     font-size: calc(1.5rem + 0.5vw); 
     text-align: center;
-    color: #1e3f75;
+    color: #ffffff;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     margin-top: 50px;
     margin-bottom: 150px;
@@ -330,7 +326,6 @@
     max-width: 50vw; 
     padding: 75px;
     border-radius: 10px;
-    /* box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.378);  */
     font-family: 'Open Sans', Arial, sans-serif; 
   }
   

@@ -4,13 +4,10 @@ import { logOut } from '../utilities'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
 
-
 const Navbar = ({ user, setUser }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const navigate = useNavigate()
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen)
 
   const handleLogOut = async () => {
@@ -20,7 +17,6 @@ const Navbar = ({ user, setUser }) => {
   }
 
   const handleLinkClick = () => {
-    setIsMenuOpen(false)
     setIsUserMenuOpen(false)
   }
 
@@ -28,37 +24,19 @@ const Navbar = ({ user, setUser }) => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-left">
-          {/* Menu Button */}
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-controls="mobile-menu"
-            aria-expanded={isMenuOpen}
-            onClick={toggleMenu}
-          >
-            <span className="sr-only">Open main menu</span>
-            {isMenuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
-          </button>
-
           {/* Logo */}
           <div className="navbar-logo">
             <h1 className="font-serif text-3xl text-blue-600">Wellness Synergy</h1>
           </div>
-
-          {/* Dropdown Menu */}
-          <div
-            className={`menu-dropdown ${isMenuOpen ? 'block' : 'hidden'}`}
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
-          >
-            <Link to="/" className="menu-link" role="menuitem" onClick={handleLinkClick}>About</Link>
-            <Link to="/home" className="menu-link" role="menuitem" onClick={handleLinkClick}>Home</Link>
-            <Link to="/recipe" className="menu-link" role="menuitem" onClick={handleLinkClick}>Recipes</Link>
-            <Link to="/cookbook" className="menu-link" role="menuitem" onClick={handleLinkClick}>Cookbook</Link>
-            <Link to="/diet" className="menu-link" role="menuitem" onClick={handleLinkClick}>Diet</Link>
-            <Link to="/mindfulness" className="menu-link" role="menuitem" onClick={handleLinkClick}>Mindfulness</Link>
-            <Link to="/journal" className="menu-link" role="menuitem" onClick={handleLinkClick}>Journal</Link>
+          {/* Navbar Links */}
+          <div className="navbar-links">
+            <Link to="/" className="menu-link" onClick={handleLinkClick}>About</Link>
+            <Link to="/home" className="menu-link" onClick={handleLinkClick}>Home</Link>
+            <Link to="/recipe" className="menu-link" onClick={handleLinkClick}>Recipes</Link>
+            <Link to="/cookbook" className="menu-link" onClick={handleLinkClick}>Cookbook</Link>
+            <Link to="/diet" className="menu-link" onClick={handleLinkClick}>Diet</Link>
+            <Link to="/mindfulness" className="menu-link" onClick={handleLinkClick}>Mindfulness</Link>
+            <Link to="/journal" className="menu-link" onClick={handleLinkClick}>Journal</Link>
           </div>
         </div>
 
@@ -74,7 +52,7 @@ const Navbar = ({ user, setUser }) => {
           >
             <span className="sr-only">Open user menu</span>
             <img 
-              src="/profile.gif" 
+              src="/lotus.gif" 
               alt="Account" 
               className="user-icon"
               style={{ width: '70px', height: '70px', borderRadius: '50%' }} 

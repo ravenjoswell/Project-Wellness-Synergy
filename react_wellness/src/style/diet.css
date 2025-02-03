@@ -1,3 +1,6 @@
+body{
+  background-color: #133156; 
+}
 .diet-outer-container {
     display: flex;
     justify-content: center;
@@ -5,7 +8,7 @@
     min-height: 100vh;
     width: 100%;
     padding: 50px;
-    background-color: white;
+    background-color: #133156; 
   }
   
   .diet-page-wrapper {
@@ -16,8 +19,7 @@
     justify-content: center;
     align-items: center;
     padding: 50px;
-    /* background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), #235ca1dd); */
-    /* box-shadow: 0 0px 40px rgba(0, 0, 0, 0.868); */
+    background-color: #133156; 
     border-radius: 20px;
   }
   
@@ -29,9 +31,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ffffff;
+    background-color: #133156; 
     border-radius: 15px;
-    /* box-shadow: 0 0px 40px rgba(0, 0, 0, 0.611); */
+   
     animation: fadeIn 1s ease-in-out;
   }
   
@@ -42,9 +44,8 @@
     min-height: 30vh;
     margin-top: 20px;
     padding: 10px;
-    background-color: white;
+    background-color: #133156; 
     border-radius: 15px;
-    /* box-shadow: 0 0px 40px rgba(0, 0, 0, 0.156); */
     margin-top: 150px;
     margin-bottom: 100px;
   }
@@ -53,12 +54,11 @@
     flex: 1;
     text-align: center;
     padding: 20px;
-    background: #235ca162;
-    color:  #1253a3;;
+    background: #cae1ff62;
+    color:  #ffffff;;
     font-weight: bold;
     border-radius: 10px;
     border: 1px solid #114184 ;
-    /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5), -2px -2px 10px rgba(255, 255, 255, 0.8); */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -72,18 +72,17 @@
   
   .day-section:hover {
     transform: scale(1.2);
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5), -4px -4px 20px rgba(255, 255, 255, 0.8);
-    z-index: 2;
+    box-shadow: 10px 10px 100px#64aaff;
   }
   
   .diet-page-title {
     font-size: calc(3rem + 2vw);
     font-weight: 600;
     margin-top: 30px;
-    color:#235ca1dd;
+    color:#ffffffdd;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     font-family: 'Playfair Display', Georgia, serif;
-    border-bottom: 1px solid #235ca1dd;
+    border-bottom: 1px solid #ffffffdd;
   }
   
   .day-section h3 {
@@ -130,7 +129,7 @@
   }
   
   .modal-content {
-    background-color: #ffffffd4;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
     width: 90%;
@@ -151,7 +150,7 @@
     padding: 10px;
     border-radius: 8px;
     background-color:#265691;
-    color: white;
+    color: rgb(255, 255, 255);
     text-align: left;
     font-size: 1.2rem;
     cursor: pointer;
