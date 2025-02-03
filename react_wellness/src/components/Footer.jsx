@@ -13,12 +13,12 @@ const Footer = () => {
         <div className="footer-right">
           <div className="footer-cube-container">
             <div className="footer-cube">
-              <div className="face front">Balance</div>
-              <div className="face back">Thrive</div>
-              <div className="face right">Sustain</div>
-              <div className="face left">Vitalize</div>
-              <div className="face top">Nourish</div>
-              <div className="face bottom">Nourish</div>
+              <div className="face front">Wellness</div>
+              <div className="face back">Wellness</div>
+              <div className="face right">WS</div>
+              <div className="face left">WS</div>
+              <div className="face top">Synergy</div>
+              <div className="face bottom">Synergy</div>
             </div>
           </div>
         </div>
