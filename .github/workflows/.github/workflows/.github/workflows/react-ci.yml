@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend  # Replace with your React directory
+        working-directory: ./react_wellness  # Replace with your React directory
 
     steps:
     - uses: actions/checkout@v4

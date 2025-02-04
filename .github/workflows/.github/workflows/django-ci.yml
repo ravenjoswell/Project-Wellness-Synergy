@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./backend  # Replace with your Django directory
+        working-directory: ./django_wellness  # Replace with your Django directory
 
     steps:
     - uses: actions/checkout@v4
