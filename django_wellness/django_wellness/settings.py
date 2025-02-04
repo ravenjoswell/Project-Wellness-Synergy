@@ -29,12 +29,12 @@ SECRET_KEY = 'django-insecure-q(=ejf7vyrce=1*5aqg=xwe+c%q50$i^7m1qwa*osx5#8t(p93
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = ["https://your-react-app.onrender.com"] 
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = ["https://your-react-app.onrender.com"] 
 
 
 
-ALLOWED_HOSTS = ['https://project-wellness-synergy-django.onrender.com']
+ALLOWED_HOSTS = ['project-wellness-synergy-django.onrender.com']
 
 
 
@@ -58,7 +58,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -112,6 +113,7 @@ DATABASES = {
 #     )
 # }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -153,6 +155,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 
@@ -173,4 +176,5 @@ load_dotenv()
 EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID')
 EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY')
 OPENAI_APP_KEY = os.getenv('OPENAI_APP_KEY')
-DATABASE_URL = os.getenv('DATABASE_URL')
+SECRET_KEY = os.getenv('SECRET_KEY')
+# DATABASE_URL = os.getenv('DATABASE_URL')
