@@ -32,7 +32,8 @@ DEBUG = False
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-ALLOWED_HOSTS = ['Project-Wellness-Synergy-Django.com']
+
+ALLOWED_HOSTS = ['https://project-wellness-synergy-django.onrender.com']
 
 
 
@@ -101,6 +102,13 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL')
     )
 }
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.environ.get('DATABASE_URL'),
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -142,7 +150,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
@@ -162,3 +171,4 @@ load_dotenv()
 EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID')
 EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY')
 OPENAI_APP_KEY = os.getenv('OPENAI_APP_KEY')
+DATABASE_URL = os.getenv('DATABASE_URL')
