@@ -30,11 +30,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = False
 
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = ["https://wellness-synergy-react.onrender.com"] 
 
 
 
-ALLOWED_HOSTS = ['project-wellness-synergy-django.onrender.com']
+
+ALLOWED_HOSTS = ['project-wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 
