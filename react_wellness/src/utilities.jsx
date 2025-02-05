@@ -10,8 +10,13 @@ import axios from "axios";
 //     : "https://wellness-synergy-django.onrender.com/api/"
 // });
 
+// const api = axios.create({
+//   baseURL: process.env.REACT_APP_API_BASE_URL,
+// });
+
+// export default api;
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
+  baseURL: 'https://wellness-synergy-django.onrender.com/api/',
 });
 
 export default api;
