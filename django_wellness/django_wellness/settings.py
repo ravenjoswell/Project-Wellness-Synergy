@@ -39,7 +39,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 
-ALLOWED_HOSTS = ['project-wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1']
 
 
 
