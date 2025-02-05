@@ -1,13 +1,14 @@
 import axios from "axios";
 
 
+// export const api = axios.create({
+//   baseURL: "http://127.0.0.1:8000/api/",
+// });
 const api = axios.create({
   baseURL: process.env.NODE_ENV === 'development' 
     ? "http://localhost:8000/api/" 
     : "https://wellness-synergy-django.onrender.com/api/"
 });
-
-
 
 export const signUp = async (fullName, email, password) => {
   let response = await api.post("users/signup/", {
