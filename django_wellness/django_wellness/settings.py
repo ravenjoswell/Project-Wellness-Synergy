@@ -100,12 +100,12 @@ WSGI_APPLICATION = 'django_wellness.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'wsproj_db',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wsproj_db',
+    }
+}
 # DATABASES = {
 #     'default': dj_database_url.config(
 #         default=os.environ.get('DATABASE_URL')
@@ -118,9 +118,9 @@ WSGI_APPLICATION = 'django_wellness.wsgi.application'
 #         ssl_require=True
 #     )
 # }
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -185,4 +185,4 @@ EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID')
 EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY')
 OPENAI_APP_KEY = os.getenv('OPENAI_APP_KEY')
 SECRET_KEY = os.getenv('SECRET_KEY')
-DATABASE_URL = os.getenv('DATABASE_URL')
+# DATABASE_URL = os.getenv('DATABASE_URL')
