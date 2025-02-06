@@ -4,7 +4,7 @@ from .settings import *
 from .settings import BASE_DIR
 
 ALLOWED_HOSTS = [os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
-CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('Rdpg-cuh85pjv2p9s73csiapg-a')]
+CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
