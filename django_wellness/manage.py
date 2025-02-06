@@ -6,8 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    settings_module = 'django_wellness.deployment_settings' if 'dpg-cuh85pjv2p9s73csiapg-a' in os.environ else 'django_wellness.settings'
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_wellness.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

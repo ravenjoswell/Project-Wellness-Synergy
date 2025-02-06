@@ -11,7 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-settings_module = 'django_wellness.deployment_settings' if 'dpg-cuh85pjv2p9s73csiapg-a' in os.environ else 'django_wellness.settings'
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_wellness.settings')
 
 application = get_wsgi_application()
