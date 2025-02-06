@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    settings_module = 'django_wellness.deployment_settings' if 'dpg-cuh85pjv2p9s73csiapg-a' in os.environ else 'django_wellness.settings'
+    settings_module = 'django_wellness.deployment_settings' if 'postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a/wellness_synergy_postgres_chvb' in os.environ else 'django_wellness.settings'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
     try:
         from django.core.management import execute_from_command_line
