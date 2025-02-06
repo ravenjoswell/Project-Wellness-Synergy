@@ -25,22 +25,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q(=ejf7vyrce=1*5aqg=xwe+c%q50$i^7m1qwa*osx5#8t(p93'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173'
-]
-# CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOWED_ORIGINS = [
-#     "https://wellness-synergy-react.onrender.com",  # Your React app's URL in production
-#     "http://localhost:5173",  # For local development
+#     'http://localhost:5173'
 # ]
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://wellness-synergy-react.onrender.com",  # Your React app's URL in production
+    "http://localhost:5173",  # For local development
+]
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1']
 
 
 
@@ -184,11 +184,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'user_app.User'
-
-
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-# ]
 
 load_dotenv()
 EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID')
