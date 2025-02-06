@@ -101,12 +101,12 @@ WSGI_APPLICATION = 'django_wellness.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'wsproj_db',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wsproj_db',
+    }
+}
 # DATABASES = {
 #     'default': dj_database_url.config(
 #         default=os.environ.get('DATABASE_URL')
