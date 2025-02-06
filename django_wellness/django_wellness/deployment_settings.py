@@ -36,15 +36,15 @@ STORAGES = {
     }
 }
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.environ['DATABASE_URL'],
-#         conn_max_age=600,
-#     )}
-
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
+    'default': dj_database_url.config(
+        default=os.environ['DATABASE_URL'],
+        conn_max_age=600,
+    )}
+
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# }
 
 AUTH_USER_MODEL = 'user_app.User'
 
