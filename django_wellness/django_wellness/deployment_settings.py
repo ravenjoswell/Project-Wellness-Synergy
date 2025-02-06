@@ -44,3 +44,5 @@ STORAGES = {
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
+
+AUTH_USER_MODEL = 'user_app.User'
