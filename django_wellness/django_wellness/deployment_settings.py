@@ -3,10 +3,10 @@ import dj_database_url
 from .settings import *
 from .settings import BASE_DIR
 
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
-CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+ALLOWED_HOSTS = [os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
+CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('Rdpg-cuh85pjv2p9s73csiapg-a')]
 
-DEBUG = True
+DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 MIDDLEWARE = [
