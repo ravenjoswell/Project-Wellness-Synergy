@@ -4,8 +4,9 @@ from .settings import *
 from .settings import BASE_DIR
 from dotenv import load_dotenv
 
-ALLOWED_HOSTS = [os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
-CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
+ALLOWED_HOSTS = [os.environ.get('postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a/wellness_synergy_postgres_chvb')]
+CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a/wellness_synergy_postgres_chvb')]
+
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
