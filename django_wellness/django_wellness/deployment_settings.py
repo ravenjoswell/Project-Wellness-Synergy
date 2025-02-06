@@ -2,6 +2,7 @@ import os
 import dj_database_url
 from .settings import *
 from .settings import BASE_DIR
+from dotenv import load_dotenv
 
 ALLOWED_HOSTS = [os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
 CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
@@ -46,3 +47,11 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'user_app.User'
+
+
+load_dotenv()
+EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID')
+EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY')
+OPENAI_APP_KEY = os.getenv('OPENAI_APP_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
+DATABASE_URL = os.getenv('DATABASE_URL')
