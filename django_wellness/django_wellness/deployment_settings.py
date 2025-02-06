@@ -4,9 +4,8 @@ from .settings import *
 from .settings import BASE_DIR
 from dotenv import load_dotenv
 
-ALLOWED_HOSTS = [os.environ.get('postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a/wellness_synergy_postgres_chvb')]
-CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a/wellness_synergy_postgres_chvb')]
-
+ALLOWED_HOSTS = [os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
+CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -36,12 +35,17 @@ STORAGES = {
         "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage"
     }
 }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ['DATABASE_URL'],
-        conn_max_age=600,
-    )}
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wsproj_db',
+    }
+}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.environ['DATABASE_URL'],
+#         conn_max_age=600,
+#     )}
 
 # DATABASES = {
 #     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
