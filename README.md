@@ -1,4 +1,4 @@
-Wellness Synergy – Full Stack Health App
+🌿 Wellness Synergy 🌿 – Full Stack Health App 
 
 Welcome to Wellness Synergy, a platform I built from personal experience and a deep desire to help others take control of their health. 
 As someone diagnosed with ulcerative colitis, I’ve learned firsthand how crucial diet and stress management are in managing symptoms. 
