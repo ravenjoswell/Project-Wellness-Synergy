@@ -1,4 +1,4 @@
-Wellness Synergy – Full Stack Health App
+<img width="2039" alt="Screenshot 2025-02-07 at 2 24 09 PM" src="https://github.com/user-attachments/assets/5c78a58b-ff4f-4b13-825c-5d0c7aa6971e" />Wellness Synergy – Full Stack Health App
 
 Welcome to Wellness Synergy, a platform I built from personal experience and a deep desire to help others take control of their health. 
 As someone diagnosed with ulcerative colitis, I’ve learned firsthand how crucial diet and stress management are in managing symptoms. 
@@ -9,11 +9,13 @@ That’s why I created this app: to offer a holistic, user-friendly tool to help
 <img width="2039" alt="Screenshot 2025-02-07 at 12 48 12 PM" src="https://github.com/user-attachments/assets/d3167f72-d36c-455f-88bc-04fb63814e09" />
 <img width="2039" alt="Screenshot 2025-02-07 at 12 48 29 PM" src="https://github.com/user-attachments/assets/f0e0d0bc-1266-45de-9056-8d05830f1eca" />
 <img width="2041" alt="Screenshot 2025-02-07 at 12 49 28 PM" src="https://github.com/user-attachments/assets/45a67bee-4f34-4a44-a7b5-b938abfd168a" />
-<img width="2042" alt="Screenshot 2025-02-07 at 12 52 48 PM" src="https://github.com/user-attachments/assets/57918e8d-5935-4af4-85d8-4daf4e032ac7" />
-<img width="2041" alt="Screenshot 2025-02-07 at 1 47 34 PM" src="https://github.com/user-attachments/assets/0555662d-5664-4545-8fe5-72e53d4feffc" />
-<img width="2044" alt="Screenshot 2025-02-07 at 12 54 43 PM" src="https://github.com/user-attachments/assets/787699a2-02a4-4569-b29b-08fdd1c7d4c6" />
-<img width="2041" alt="Screenshot 2025-02-07 at 12 56 40 PM" src="https://github.com/user-attachments/assets/b7e389a0-b05e-45ac-9611-f801e97537de" />
-<img width="2041" alt="Screenshot 2025-02-07 at 12 57 15 PM" src="https://github.com/user-attachments/assets/1adab1e2-51e7-4ba6-8405-ee95a43dea2c" />
+<img width="2041" alt="Screenshot 2025-02-07 at 2 23 54 PM" src="https://github.com/user-attachments/assets/be1c17ed-5cac-44de-80e4-c50d565baf69" />
+<img width="2039" alt="Screenshot 2025-02-07 at 2 24 09 PM" src="https://github.com/user-attachments/assets/c0163692-1e7f-4845-90d6-ab3e28fa2bbd" />
+<img width="1910" alt="Screenshot 2025-02-07 at 2 10 19 PM" src="https://github.com/user-attachments/assets/088a6055-2574-4ae6-a00d-336ab1670cdf" />
+<img width="2043" alt="Screenshot 2025-02-07 at 2 20 03 PM" src="https://github.com/user-attachments/assets/84f79689-3fa5-475b-87ff-46394b3c89dd" />
+<img width="2045" alt="Screenshot 2025-02-07 at 2 19 04 PM" src="https://github.com/user-attachments/assets/2d9d0835-cdc2-48ff-ac84-c00910b4ed09" />
+<img width="2041" alt="Screenshot 2025-02-07 at 2 22 18 PM" src="https://github.com/user-attachments/assets/8fdc432a-a06c-4cd4-a33d-91b811c36574" />
+<img width="2042" alt="Screenshot 2025-02-07 at 2 20 31 PM" src="https://github.com/user-attachments/assets/9c1f2782-9dd0-4337-9da1-4f63d979291f" />
 <img width="2042" alt="Screenshot 2025-02-07 at 12 57 28 PM" src="https://github.com/user-attachments/assets/93bb5dd7-aff1-4ca2-a06e-b046f99786cb" />
 <img width="2042" alt="Screenshot 2025-02-07 at 12 57 36 PM" src="https://github.com/user-attachments/assets/171bd2ae-ad39-4422-aaf7-9ca9b3f53c0c" />
 <img width="2045" alt="Screenshot 2025-02-07 at 12 59 43 PM" src="https://github.com/user-attachments/assets/d7cebc1d-c213-481b-8092-6abb11e4e15e" />
