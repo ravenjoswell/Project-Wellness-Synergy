@@ -1,5 +1,16 @@
 Wellness Synergy – Full Stack Health App
+
+<img width="2038" alt="Screenshot 2025-02-07 at 12 47 27 PM" src="https://github.com/user-attachments/assets/7b23e671-e97a-4aa2-8ae0-fb2603fa08cb" />
+
+Welcome to Wellness Synergy, a platform I built from personal experience and a deep desire to help others take control of their health. 
+As someone diagnosed with ulcerative colitis, I’ve learned firsthand how crucial diet and stress management are in managing symptoms. 
+That’s why I created this app: to offer a holistic, user-friendly tool to help you take charge of your well-being.
+
 <img width="2040" alt="Screenshot 2025-02-07 at 12 45 35 PM" src="https://github.com/user-attachments/assets/7b1e0c9c-7c0a-4b8c-b385-bef320ec17b3" />
+<img width="2038" alt="Screenshot 2025-02-07 at 12 47 27 PM" src="https://github.com/user-attachments/assets/b638d9a9-78f0-4eb5-a052-224e92a8f853" />
+<img width="2039" alt="Screenshot 2025-02-07 at 12 48 12 PM" src="https://github.com/user-attachments/assets/d3167f72-d36c-455f-88bc-04fb63814e09" />
+<img width="2039" alt="Screenshot 2025-02-07 at 12 48 29 PM" src="https://github.com/user-attachments/assets/f0e0d0bc-1266-45de-9056-8d05830f1eca" />
+
 
 Welcome to Wellness Synergy, a platform I built from personal experience and a deep desire to help others take control of their health. 
 As someone diagnosed with ulcerative colitis, I’ve learned firsthand how crucial diet and stress management are in managing symptoms. 
