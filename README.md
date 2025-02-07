@@ -54,7 +54,7 @@ CRUD functionality lets you easily add, edit, and delete entries, so you can mon
 
 Why Wellness Synergy?
 
-My journey with ulcerative colitis inspired the creation of this app. 
+My journey with ulcerative colitis inspired the design and development of this app. 
 I’ve found that managing symptoms is a delicate balance of diet and stress. 
 Wellness Synergy isn’t just an app—it's a tool designed to empower you with personalized insights and solutions, helping you navigate your wellness journey. 
 Whether you’re looking to improve your diet, reduce stress, or track your symptoms, this app adapts to your unique needs.
