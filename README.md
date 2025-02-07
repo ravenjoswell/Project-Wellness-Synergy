@@ -15,8 +15,8 @@ That’s why I created this app: to offer a holistic, user-friendly tool to help
 <img width="2043" alt="Screenshot 2025-02-07 at 2 20 03 PM" src="https://github.com/user-attachments/assets/84f79689-3fa5-475b-87ff-46394b3c89dd" />
 <img width="2045" alt="Screenshot 2025-02-07 at 2 19 04 PM" src="https://github.com/user-attachments/assets/2d9d0835-cdc2-48ff-ac84-c00910b4ed09" />
 <img width="2041" alt="Screenshot 2025-02-07 at 2 22 18 PM" src="https://github.com/user-attachments/assets/8fdc432a-a06c-4cd4-a33d-91b811c36574" />
-<img width="2042" alt="Screenshot 2025-02-07 at 2 20 31 PM" src="https://github.com/user-attachments/assets/9c1f2782-9dd0-4337-9da1-4f63d979291f" />
-<img width="2042" alt="Screenshot 2025-02-07 at 12 57 28 PM" src="https://github.com/user-attachments/assets/93bb5dd7-aff1-4ca2-a06e-b046f99786cb" />
+<img width="2043" alt="Screenshot 2025-02-07 at 2 32 00 PM" src="https://github.com/user-attachments/assets/7abd4e82-0a82-49cf-a3a2-f1b9ba99fed0" />
+<img width="2041" alt="Screenshot 2025-02-07 at 2 32 26 PM" src="https://github.com/user-attachments/assets/3eb679e4-e7fe-4458-b567-544a7f951ed9" />
 <img width="2045" alt="Screenshot 2025-02-07 at 12 59 43 PM" src="https://github.com/user-attachments/assets/d7cebc1d-c213-481b-8092-6abb11e4e15e" />
 <img width="2056" alt="Screenshot 2025-02-07 at 12 59 55 PM" src="https://github.com/user-attachments/assets/42bade67-c687-43f4-ae2a-218233b87bce" />
 <img width="2056" alt="Screenshot 2025-02-07 at 1 00 09 PM" src="https://github.com/user-attachments/assets/a444c96a-4308-46a8-b08f-b2bb5428b205" />
