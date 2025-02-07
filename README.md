@@ -10,6 +10,7 @@ That’s why I created this app: to offer a holistic, user-friendly tool to help
 <img width="2039" alt="Screenshot 2025-02-07 at 12 48 29 PM" src="https://github.com/user-attachments/assets/f0e0d0bc-1266-45de-9056-8d05830f1eca" />
 <img width="2041" alt="Screenshot 2025-02-07 at 12 49 28 PM" src="https://github.com/user-attachments/assets/45a67bee-4f34-4a44-a7b5-b938abfd168a" />
 <img width="2042" alt="Screenshot 2025-02-07 at 12 52 48 PM" src="https://github.com/user-attachments/assets/57918e8d-5935-4af4-85d8-4daf4e032ac7" />
+<img width="2041" alt="Screenshot 2025-02-07 at 1 47 34 PM" src="https://github.com/user-attachments/assets/0555662d-5664-4545-8fe5-72e53d4feffc" />
 <img width="2044" alt="Screenshot 2025-02-07 at 12 54 43 PM" src="https://github.com/user-attachments/assets/787699a2-02a4-4569-b29b-08fdd1c7d4c6" />
 <img width="2041" alt="Screenshot 2025-02-07 at 12 56 40 PM" src="https://github.com/user-attachments/assets/b7e389a0-b05e-45ac-9611-f801e97537de" />
 <img width="2041" alt="Screenshot 2025-02-07 at 12 57 15 PM" src="https://github.com/user-attachments/assets/1adab1e2-51e7-4ba6-8405-ee95a43dea2c" />
