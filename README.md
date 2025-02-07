@@ -35,6 +35,7 @@ Recipe Search for tailored meal ideas
 Diet Planning to manage symptoms
 Mindfulness Practices for stress relief
 Journaling to track daily progress
+Profile Dashboard to track recipes, journal entries, as well as a chart for mindfulness entries.
 
 🛡️ Secure Backend:
 Developed with Django, handling secure management of your personal data.
