@@ -1,4 +1,4 @@
-<img width="2039" alt="Screenshot 2025-02-07 at 2 24 09 PM" src="https://github.com/user-attachments/assets/5c78a58b-ff4f-4b13-825c-5d0c7aa6971e" />Wellness Synergy – Full Stack Health App
+Wellness Synergy – Full Stack Health App
 
 Welcome to Wellness Synergy, a platform I built from personal experience and a deep desire to help others take control of their health. 
 As someone diagnosed with ulcerative colitis, I’ve learned firsthand how crucial diet and stress management are in managing symptoms. 
@@ -17,7 +17,6 @@ That’s why I created this app: to offer a holistic, user-friendly tool to help
 <img width="2041" alt="Screenshot 2025-02-07 at 2 22 18 PM" src="https://github.com/user-attachments/assets/8fdc432a-a06c-4cd4-a33d-91b811c36574" />
 <img width="2042" alt="Screenshot 2025-02-07 at 2 20 31 PM" src="https://github.com/user-attachments/assets/9c1f2782-9dd0-4337-9da1-4f63d979291f" />
 <img width="2042" alt="Screenshot 2025-02-07 at 12 57 28 PM" src="https://github.com/user-attachments/assets/93bb5dd7-aff1-4ca2-a06e-b046f99786cb" />
-<img width="2042" alt="Screenshot 2025-02-07 at 12 57 36 PM" src="https://github.com/user-attachments/assets/171bd2ae-ad39-4422-aaf7-9ca9b3f53c0c" />
 <img width="2045" alt="Screenshot 2025-02-07 at 12 59 43 PM" src="https://github.com/user-attachments/assets/d7cebc1d-c213-481b-8092-6abb11e4e15e" />
 <img width="2056" alt="Screenshot 2025-02-07 at 12 59 55 PM" src="https://github.com/user-attachments/assets/42bade67-c687-43f4-ae2a-218233b87bce" />
 <img width="2056" alt="Screenshot 2025-02-07 at 1 00 09 PM" src="https://github.com/user-attachments/assets/a444c96a-4308-46a8-b08f-b2bb5428b205" />
