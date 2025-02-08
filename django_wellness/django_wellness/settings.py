@@ -40,7 +40,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1', 'https://wellness-synergy-react.onrender.com']
 
 
 
@@ -107,11 +107,11 @@ DATABASES = {
         'NAME': 'wsproj_db',
     }
 }
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.environ.get('DATABASE_URL')
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a/wellness_synergy_postgres_chvb'
+    )
+}
 # DATABASES = {
 #     'default': dj_database_url.config(
 #         default=os.environ.get('DATABASE_URL'),
