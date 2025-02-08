@@ -20,7 +20,7 @@ import axios from "axios";
 // });
 
 const api = axios.create({
-  baseURL: 'https://wellness-synergy-django.onrender.com/',
+  baseURL: 'https://wellness-synergy-react.onrender.com/api/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -45,7 +45,7 @@ export const signUp = async (fullName, email, password) => {
 };
 
 export const signIn = async (email, password) => {
-  let response = await api.post("api/users/login/", {
+  let response = await api.post("users/login/", {
     email: email,
     password: password,
   });

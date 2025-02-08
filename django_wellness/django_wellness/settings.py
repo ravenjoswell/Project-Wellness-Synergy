@@ -36,7 +36,6 @@ DEBUG = False
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "https://wellness-synergy-django.onrender.com",  # Your React app's URL in production
-    # "http://localhost:5173",  # For local development
 ]
 
 # ALLOWED_HOSTS = []
