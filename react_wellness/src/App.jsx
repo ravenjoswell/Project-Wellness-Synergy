@@ -241,7 +241,7 @@ function App() {
     const fetchCookbookRecipes = async () => {
       const token = localStorage.getItem('token')
       try {
-        const response = await axios.get(`https://wellness-synergy-react.onrender.com/api/recipes/cookbook/`, {
+        const response = await axios.get(`https://wellness-synergy-django.onrender.com/api/recipes/cookbook/`, {
           headers: { Authorization: `Token ${token}` },
         });
         setCookbookRecipes(response.data)
@@ -253,7 +253,7 @@ function App() {
     const fetchDietRecipes = async () => {
       const token = localStorage.getItem('token')
       try {
-        const response = await axios.get(`https://wellness-synergy-react.onrender.com/api/diet/diet-plans/`, {
+        const response = await axios.get(`https://wellness-synergy-django.onrender.com/api/diet/diet-plans/`, {
           headers: { Authorization: `Token ${token}` },
         });
         setDietRecipes(response.data)
@@ -271,7 +271,7 @@ function App() {
     setError(null)
     setNextPageUrl(null)
     try {
-      const response = await axios.get(`https://wellness-synergy-react.onrender.com/api/recipes/`, {
+      const response = await axios.get(`https://wellness-synergy-django.onrender.com/api/recipes/`, {
         params: { query, diet, allergies },
       });
       setRecipes(response.data.hits)
@@ -299,7 +299,7 @@ function App() {
   const handleAddToCookbook = async (recipe) => {
     const token = localStorage.getItem('token')
     try {
-      await axios.post(`https://wellness-synergy-react.onrender.com/api/recipes/add-to-cookbook/`, 
+      await axios.post(`https://wellness-synergy-django.onrender.com/api/recipes/add-to-cookbook/`, 
         { uri: recipe.uri }, 
         { headers: { Authorization: `Token ${token}` } }
       );
@@ -312,7 +312,7 @@ function App() {
   const handleRemoveFromCookbook = async (myCookbookId) => {
     const token = localStorage.getItem('token')
     try {
-      await axios.delete(`https://wellness-synergy-react.onrender.com/recipes/remove-from-cookbook/${myCookbookId}/`, {
+      await axios.delete(`https://wellness-synergy-django.onrender.com/recipes/remove-from-cookbook/${myCookbookId}/`, {
         headers: { Authorization: `Token ${token}` }
       });
       setCookbookRecipes(prevRecipes => 
@@ -332,7 +332,7 @@ function App() {
     }
 
     try {
-      await axios.post(`https://wellness-synergy-react.onrender.com/api/diet/add-to-diet/`, 
+      await axios.post(`https://wellness-synergy-django.onrender.com/api/diet/add-to-diet/`, 
         { 
           uri: recipe.uri,  //recipe.uri in AddToCookbookView
           meal_time: mealTime,  
@@ -351,7 +351,7 @@ function App() {
 const handleRemoveFromDiet = async (dietPlanMealId) => {
   const token = localStorage.getItem('token')
   try {
-      await axios.delete(`https://wellness-synergy-react.onrender.com/api/diet/remove-from-diet/${dietPlanMealId}/`, {
+      await axios.delete(`https://wellness-synergy-django.onrender.com/api/diet/remove-from-diet/${dietPlanMealId}/`, {
           headers: { Authorization: `Token ${token}` }
       });
 
