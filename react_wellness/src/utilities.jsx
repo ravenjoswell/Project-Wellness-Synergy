@@ -1,32 +1,18 @@
 import axios from "axios";
 
 
-// export const api = axios.create({
-//   baseURL: "http://127.0.0.1:8000/api/",
-// });
-// const api = axios.create({
-//   baseURL: process.env.NODE_ENV === 'development' 
-//     ? "http://localhost:8000/api/" 
-//     : "https://wellness-synergy-django.onrender.com/api/"
-// });
-
-// const api = axios.create({
-//   baseURL: process.env.REACT_APP_API_BASE_URL,
-// });
-
-// // export default api;
-// const api = axios.create({
-//   baseURL: 'https://wellness-synergy-django.onrender.com/api/',
-// });
-
-const api = axios.create({
-  baseURL: 'https://wellness-synergy-django.onrender.com/api/',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+export const api = axios.create({
+  baseURL: "http://127.0.0.1:8000/api/",
 });
 
-export default api;
+// const api = axios.create({
+//   baseURL: 'https://wellness-synergy-django.onrender.com/api/',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
+
+// export default api;
 
 export const signUp = async (fullName, email, password) => {
   let response = await api.post("users/signup/", {

@@ -28,19 +28,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173'
-# ]
-# CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://wellness-synergy-django.onrender.com",
-    "https://wellness-synergy-react.onrender.com",
+    'http://localhost:5173'
 ]
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = [
+#     "https://wellness-synergy-django.onrender.com",
+#     "https://wellness-synergy-react.onrender.com",
+# ]
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['https://wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1', 'https://wellness-synergy-react.onrender.com']
+# ALLOWED_HOSTS = ['https://wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1', 'https://wellness-synergy-react.onrender.com']
 
 
 
@@ -112,30 +112,7 @@ DATABASES = {
 #         default='postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a.oregon-postgres.render.com/wellness_synergy_postgres_chvb'
 #     )
 # }
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a/wellness_synergy_postgres_chvb'
-#     )
-# }
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.environ.get('DATABASE_URL'),
-#         conn_max_age=600,
-#         ssl_require=True
-#     )
-# }
-# DATABASES = {
-#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-# }
 
-# STORAGES = {
-#     "default":{
-#         "BACKEND" : "django.core.files.storage.FileSystemStorage",
-#     },
-#     "staticfiles": {
-#         "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage"
-#     }
-# }
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
