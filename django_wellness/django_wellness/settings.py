@@ -30,17 +30,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173'
-]
-# CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOWED_ORIGINS = [
-#     "https://wellness-synergy-django.onrender.com",
-#     "https://wellness-synergy-react.onrender.com",
+#     'http://localhost:5173'
 # ]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000'
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
-# ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['https://wellness-synergy-django.onrender.com', 'localhost', '127.0.0.1', 'https://wellness-synergy-react.onrender.com']
+ALLOWED_HOSTS = []
 
 
 
@@ -69,7 +67,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -101,17 +98,35 @@ WSGI_APPLICATION = 'django_wellness.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'wsproj_db',
+#     }
+# }
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+# }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgresql://wellness_user:wellness_password@db:5432/wsproj_db'
+#     )
+# }
+
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'wsproj_db',
+        'USER': 'wellness_user',
+        'PASSWORD': 'wellness_password',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://wellness_synergy_postgres_chvb_user:TJNPbY9EofMasyZ4tHLthaRRg83ZYD9p@dpg-cuh85pjv2p9s73csiapg-a.oregon-postgres.render.com/wellness_synergy_postgres_chvb'
-#     )
-# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -155,9 +170,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATIC_ROOT = BASE_DIR/'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -172,62 +187,4 @@ EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID')
 EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY')
 OPENAI_APP_KEY = os.getenv('OPENAI_APP_KEY')
 SECRET_KEY = os.getenv('SECRET_KEY')
-# DATABASE_URL = os.getenv('DATABASE_URL')
-
-# import os
-# import dj_database_url
-# from .settings import *
-# from .settings import BASE_DIR
-# from dotenv import load_dotenv
-
-# ALLOWED_HOSTS = [os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
-# CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('dpg-cuh85pjv2p9s73csiapg-a')]
-
-# DEBUG = False
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# MIDDLEWARE = [
-#     'corsheaders.middleware.CorsMiddleware',
-#     'django.middleware.security.SecurityMiddleware',
-#     'whitenoise.middleware.WhiteNoiseMiddleware', 
-#     'django.contrib.sessions.middleware.SessionMiddleware',
-#     'corsheaders.middleware.CorsMiddleware',
-#     'django.middleware.common.CommonMiddleware',
-#     'django.middleware.csrf.CsrfViewMiddleware',
-#     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#     'django.contrib.messages.middleware.MessageMiddleware',
-#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-# ]
-
-# # CORS_ALLOWED_ORIGINS = [
-# #     'https://wellness-synergy-react.onrender.com'
-# # ]
-
-# STORAGES = {
-#     "default":{
-#         "BACKEND" : "django.core.files.storage.FileSystemStorage",
-#     },
-#     "staticfiles": {
-#         "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage"
-#     }
-# }
-
-# # DATABASES = {
-# #     'default': dj_database_url.config(
-# #         default=os.environ['DATABASE_URL'],
-# #         conn_max_age=600,
-# #     )}
-
-# # DATABASES = {
-# #     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-# # }
-
-# AUTH_USER_MODEL = 'user_app.User'
-
-
-# load_dotenv()
-# EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID')
-# EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY')
-# OPENAI_APP_KEY = os.getenv('OPENAI_APP_KEY')
-# SECRET_KEY = os.getenv('SECRET_KEY')
-# DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv('DATABASE_URL')

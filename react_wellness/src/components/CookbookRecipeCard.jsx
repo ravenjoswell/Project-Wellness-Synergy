@@ -68,7 +68,7 @@ const CookbookRecipeCard = ({ recipe, onRemoveFromCookbook, onAddToDiet, onRemov
             </div>
             <img src={recipe.image} alt={recipe.name} className="recipe-image" />
             <div className="card-content">
-                <p>Calories: {Math.round(recipe.calories)} kcal</p>
+                {/* <p>Calories: {Math.round(recipe.calories)} kcal</p> */}
                 <p>Ingredients: {ingredients.length}</p>
             </div>
             <div className="meal-time-select">

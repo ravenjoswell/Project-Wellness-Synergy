@@ -1,6 +1,25 @@
-version: '3.8'
+
 
 services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: wsproj_db
+      POSTGRES_USER: wellness_user
+      POSTGRES_PASSWORD: wellness_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - wellness-net
+    # Healthcheck to verify that PostgreSQL is ready
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wellness_user -d wsproj_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   backend:
     build:
       context: ./django_wellness
@@ -11,6 +30,15 @@ services:
       - .env
     depends_on:
       - db
+    networks:
+      - wellness-net
+    # Optionally, if you experience connection issues because the DB isn't ready,
+    # you can modify your startup command to wait for the DB.
+    # For example, if you add a script called wait-for-it.sh in your container:
+    #
+    # command: ["./wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    #
+    # This script will pause until the database is accepting connections.
 
   frontend:
     build:
@@ -20,17 +48,11 @@ services:
       - "3000:80"  # Map host port 3000 to container port 80 (Nginx)
     depends_on:
       - backend
-
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: wellness_db
-      POSTGRES_USER: wellness_user
-      POSTGRES_PASSWORD: wellness_password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - wellness-net
 
 volumes:
   postgres_data:
+
+networks:
+  wellness-net:

@@ -19,8 +19,14 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the Django project code into /app/
+# **Copy the rest of the Django project code into /app/ BEFORE running migrations**
 COPY . /app/
+
+# # Run database migrations (optional, if you want to auto-migrate at build time)
+# RUN python manage.py migrate --noinput
+
+# Collect static files into the STATIC_ROOT directory
+RUN python manage.py collectstatic --noinput
 
 # Expose port 8000 (Django default)
 EXPOSE 8000
