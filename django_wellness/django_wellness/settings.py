@@ -28,19 +28,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173'
-# ]
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000'
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
+# # CORS_ALLOWED_ORIGINS = [
+# #     'http://localhost:5173'
+# # ]
+# # CORS_ALLOWED_ORIGINS = [
+# #     'http://localhost:3000'
+# # ]
+# CORS_ALLOW_ALL_ORIGINS = True
 
 ALLOWED_HOSTS = []
 
-
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1']
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -104,26 +106,15 @@ WSGI_APPLICATION = 'django_wellness.wsgi.application'
 #         'NAME': 'wsproj_db',
 #     }
 # }
-# DATABASES = {
-#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-# }
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://wellness_user:wellness_password@db:5432/wsproj_db'
-#     )
-# }
-
-
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wsproj_db',
-        'USER': 'wellness_user',
-        'PASSWORD': 'wellness_password',
-        'HOST': 'db',
-        'PORT': '5432',
+        'NAME': os.getenv('DATABASE_NAME', 'wsproj_db'),
+        'USER': os.getenv('DATABASE_USER', 'wellness_user'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'wellness_password'),
+        'HOST': os.getenv('DATABASE_HOST', 'db'),
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
 }
 
@@ -188,3 +179,4 @@ EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY')
 OPENAI_APP_KEY = os.getenv('OPENAI_APP_KEY')
 SECRET_KEY = os.getenv('SECRET_KEY')
 DATABASE_URL = os.getenv('DATABASE_URL')
+
