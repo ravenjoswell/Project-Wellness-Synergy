@@ -16,11 +16,13 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements file into the container and install Python dependencies
-COPY requirements.txt /app/
+# COPY requirements.txt /app/
+COPY django_wellness/requirements.txt /app/
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # **Copy the rest of the Django project code into /app/ BEFORE running migrations**
-COPY . /app/
+# COPY . /app/
+COPY django_wellness/ /app/
 
 # # Run database migrations (optional, if you want to auto-migrate at build time)
 # RUN python manage.py migrate --noinput
