@@ -38,6 +38,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # # ]
 # CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://wellness-synergy-react.onrender.com",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 ALLOWED_HOSTS = []
 
 SECRET_KEY = os.getenv('SECRET_KEY')
