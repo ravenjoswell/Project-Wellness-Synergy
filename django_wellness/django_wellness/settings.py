@@ -36,15 +36,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # # CORS_ALLOWED_ORIGINS = [
 # #     'http://localhost:3000'
 # # ]
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_ORIGINS = [
-    "https://wellness-synergy-react.onrender.com",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "https://wellness-synergy-react.onrender.com",
+# ]
 
 CORS_ALLOW_CREDENTIALS = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wellness-synergy-django.onrender.com']
+
+
+# ALLOWED_HOSTS = []
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1']
