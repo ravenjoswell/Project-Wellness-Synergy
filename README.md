@@ -1,4 +1,5 @@
 🌿 Wellness Synergy 🌿 – Full Stack Health App 
+
 Project Demonstration Video : https://youtu.be/DS8Hc5wQ81s![image](https://github.com/user-attachments/assets/2f92ca72-59d2-41e6-be2c-da7bf2a24393)
 
 Welcome to Wellness Synergy, a platform I built from personal experience and a deep desire to help others take control of their health. 
