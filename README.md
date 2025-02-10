@@ -74,5 +74,5 @@ I’ve found that managing symptoms is a delicate balance of diet and stress.
 Wellness Synergy isn’t just an app—it's a tool designed to empower you with personalized insights and solutions, helping you navigate your wellness journey. 
 Whether you’re looking to improve your diet, reduce stress, or track your symptoms, this app adapts to your unique needs.
 
-Project Demonstration Video : https://youtu.be/DS8Hc5wQ81s![image](https://github.com/user-attachments/assets/3a6f4e3d-163b-444e-9496-4562403640cd)
+Project Demonstration Video: https://youtu.be/DS8Hc5wQ81s![image](https://github.com/user-attachments/assets/3a6f4e3d-163b-444e-9496-4562403640cd)
 
